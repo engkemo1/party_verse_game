@@ -1446,5 +1446,5 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 7860;
 server.listen(PORT, () => logger.info("SYSTEM", `🎮 PartyVerse server on port ${PORT} — 25+ mini-games loaded!`));

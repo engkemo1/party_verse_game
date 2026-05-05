@@ -14,8 +14,8 @@ RUN npm install
 RUN cd client && npm install && npm run build
 RUN cd server && npm install
 
-# Expose the port (Render/HF usually use 7860 for Spaces or PORT env)
-EXPOSE 3001
+# Expose the port (Hugging Face Spaces default to 7860)
+EXPOSE 7860
 
 # Start the server
 CMD ["npm", "start"]
