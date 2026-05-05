@@ -1,0 +1,15 @@
+{
+  "name": "partyverse-monorepo",
+  "version": "1.0.0",
+  "description": "PartyVerse Multiplayer Game Engine",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "cd server && node index.js",
+    "build": "cd client && npm install && npm run build",
+    "install-server": "cd server && npm install",
+    "postinstall": "npm run install-server && npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

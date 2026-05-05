@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: partyverse
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18.16.0
+      - key: PORT
+        value: 3001
