@@ -78,16 +78,20 @@ function getChaosEvent(lang) {
 // 🤖 ENHANCED AI TEMPLATE ENGINE
 const ENTITIES = {
   ar: {
-    countries: ["فرنسا", "اليابان", "مصر", "البرازيل", "الصين", "ألمانيا", "الهند", "كندا", "أستراليا", "إسبانيا"],
-    cities: ["باريس", "طوكيو", "القاهرة", "ريو دي جانيرو", "بكين", "برلين", "نيودلهي", "أوتاوا", "كانبرا", "مدريد"],
-    animals: ["الأسد", "الفيل", "الزرافة", "القرش", "النسر", "النمر", "التمساح", "الباندا"],
-    planets: ["عطارد", "الزهرة", "الأرض", "المريخ", "المشتري", "زحل", "أورانوس", "نبتون"]
+    countries: ["فرنسا", "اليابان", "مصر", "البرازيل", "الصين", "ألمانيا", "الهند", "كندا", "أستراليا", "إسبانيا", "إيطاليا", "روسيا", "المكسيك", "السعودية", "المغرب"],
+    cities: ["باريس", "طوكيو", "القاهرة", "ريو دي جانيرو", "بكين", "برلين", "نيودلهي", "أوتاوا", "كانبرا", "مدريد", "روما", "موسكو", "مكسيكو سيتي", "الرياض", "الرباط"],
+    animals: ["الأسد", "الفيل", "الزرافة", "القرش", "النسر", "النمر", "التمساح", "الباندا", "الكنغر", "البطريق", "الذئب", "الثعلب"],
+    planets: ["عطارد", "الزهرة", "الأرض", "المريخ", "المشتري", "زحل", "أورانوس", "نبتون"],
+    inventions: ["المصباح", "الهاتف", "الإنترنت", "السيارة", "الطائرة", "الحاسوب"],
+    inventors: ["إديسون", "جراهام بيل", "تيم بيرنرز لي", "فورد", "الاخوة رايت", "تشارلز باباج"]
   },
   en: {
-    countries: ["France", "Japan", "Egypt", "Brazil", "China", "Germany", "India", "Canada", "Australia", "Spain"],
-    cities: ["Paris", "Tokyo", "Cairo", "Rio de Janeiro", "Beijing", "Berlin", "New Delhi", "Ottawa", "Canberra", "Madrid"],
-    animals: ["Lion", "Elephant", "Giraffe", "Shark", "Eagle", "Tiger", "Crocodile", "Panda"],
-    planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"]
+    countries: ["France", "Japan", "Egypt", "Brazil", "China", "Germany", "India", "Canada", "Australia", "Spain", "Italy", "Russia", "Mexico", "Saudi Arabia", "Morocco"],
+    cities: ["Paris", "Tokyo", "Cairo", "Rio de Janeiro", "Beijing", "Berlin", "New Delhi", "Ottawa", "Canberra", "Madrid", "Rome", "Moscow", "Mexico City", "Riyadh", "Rabat"],
+    animals: ["Lion", "Elephant", "Giraffe", "Shark", "Eagle", "Tiger", "Crocodile", "Panda", "Kangaroo", "Penguin", "Wolf", "Fox"],
+    planets: ["Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune"],
+    inventions: ["Light bulb", "Telephone", "Internet", "Car", "Airplane", "Computer"],
+    inventors: ["Edison", "Graham Bell", "Tim Berners-Lee", "Ford", "Wright Brothers", "Charles Babbage"]
   }
 };
 
@@ -95,12 +99,18 @@ const TEMPLATES = {
   ar: [
     { text: "ما هي عاصمة {country}؟", category: "countries", answerKey: "cities" },
     { text: "أي كوكب يرتيب في المركز {num} من الشمس؟", category: "planets", answerKey: "planets" },
-    { text: "أيهما يعتبر من فصيلة الثدييات؟", options: ["الحوت", "القرش", "التمساح", "الأفعى"], correct: 0 }
+    { text: "من هو مخترع {invention}؟", category: "inventions", answerKey: "inventors" },
+    { text: "أيهما يعتبر من فصيلة الثدييات؟", options: ["الحوت", "القرش", "التمساح", "الأفعى"], correct: 0 },
+    { text: "ما هو الرمز الكيميائي للماء؟", options: ["H2O", "CO2", "O2", "NaCl"], correct: 0 },
+    { text: "كم عدد القارات في العالم؟", options: ["5", "6", "7", "8"], correct: 2 }
   ],
   en: [
     { text: "What is the capital of {country}?", category: "countries", answerKey: "cities" },
     { text: "Which planet is {num} from the Sun?", category: "planets", answerKey: "planets" },
-    { text: "Which of these is a mammal?", options: ["Whale", "Shark", "Crocodile", "Snake"], correct: 0 }
+    { text: "Who invented the {invention}?", category: "inventions", answerKey: "inventors" },
+    { text: "Which of these is a mammal?", options: ["Whale", "Shark", "Crocodile", "Snake"], correct: 0 },
+    { text: "What is the chemical symbol for Water?", options: ["H2O", "CO2", "O2", "NaCl"], correct: 0 },
+    { text: "How many continents are there?", options: ["5", "6", "7", "8"], correct: 2 }
   ]
 };
 
@@ -121,9 +131,14 @@ async function generateProceduralQuestion(type, lang) {
       const others = shuffle(entities[t.answerKey].filter(x => x !== correct)).slice(0, 3);
       const answers = shuffle([correct, ...others]);
       
+      let questionText = t.text;
+      if (t.category === 'countries') questionText = questionText.replace('{country}', entity);
+      if (t.category === 'inventions') questionText = questionText.replace('{invention}', entity);
+      if (t.category === 'planets') questionText = questionText.replace('{num}', index + 1);
+      
       return {
         id,
-        text: t.text.replace(`{${t.category.slice(0, -1)}}`, entity).replace('{num}', index + 1),
+        text: questionText,
         answers,
         correctIndex: answers.indexOf(correct)
       };
@@ -149,12 +164,20 @@ async function generateProceduralQuestion(type, lang) {
       ar: [
         { t: "كم عدد سكان العالم بالمليار تقريباً؟", a: 8 },
         { t: "كم عدد أسنان الإنسان البالغ؟", a: 32 },
-        { t: "كم عدد ألوان قوس قزح؟", a: 7 }
+        { t: "كم عدد ألوان قوس قزح؟", a: 7 },
+        { t: "كم دقيقة في الأسبوع؟", a: 10080 },
+        { t: "كم عدد الدول في العالم تقريباً؟", a: 195 },
+        { t: "كم سنة استمرت حرب المائة عام؟", a: 116 },
+        { t: "كم عدد العظام في جسم الإنسان البالغ؟", a: 206 }
       ],
       en: [
         { t: "Approx world population in billions?", a: 8 },
         { t: "Number of teeth in an adult?", a: 32 },
-        { t: "Colors in a rainbow?", a: 7 }
+        { t: "Colors in a rainbow?", a: 7 },
+        { t: "How many minutes in a week?", a: 10080 },
+        { t: "How many countries are in the world?", a: 195 },
+        { t: "How many years did the 100 Years War last?", a: 116 },
+        { t: "How many bones in an adult human body?", a: 206 }
       ]
     };
     const item = pickRandom(data[lang] || data.en);

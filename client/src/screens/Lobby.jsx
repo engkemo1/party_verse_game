@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from 'react';
+import { useMemo, useEffect, useState } from 'react';
 import { useSocket } from '../SocketContext';
 import { Chat } from '../components/Chat';
 import { audioEngine } from '../utils/audioEngine';
@@ -39,6 +39,14 @@ function Confetti() {
 
 export default function Lobby() {
   const { room, myId, readyUp, startGame, updateSettings, lang, kickPlayer } = useSocket();
+  const [copied, setCopied] = useState(false);
+
+  const copyRoomCode = () => {
+    if (!room?.id) return;
+    navigator.clipboard.writeText(room.id);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   useEffect(() => {
     audioEngine.playMusic('lobby');
@@ -127,9 +135,12 @@ export default function Lobby() {
 
   return (
     <>
-      <div className="text-center mb-md">
+      <div className="text-center mb-md" onClick={copyRoomCode}>
         <span className="room-code-badge">ROOM CODE</span>
-        <div className="room-code-value">{room.id}</div>
+        <div className="room-code-value">
+          {room.id}
+          {copied && <span className="copied-tooltip">{lang === 'ar' ? 'تم النسخ!' : 'Copied!'}</span>}
+        </div>
       </div>
 
       {renderPodium()}

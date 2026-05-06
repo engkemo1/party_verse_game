@@ -53,6 +53,23 @@ async function makeCode() {
 
 const AVATARS = ["🦊", "🐸", "🐙", "🦄", "🐲", "🎃", "👾", "🤖", "🦁", "🐼"];
 const COLORS = ["#8A2BE2", "#00E5FF", "#FF007F", "#39FF14", "#FF6B35", "#FFD700", "#FF4500", "#1DB954", "#E040FB", "#00BCD4"];
+const pointTable = [1000, 800, 600, 400, 200];
+
+const SOCIAL_TRICKS = [
+  { type: 'FASTEST_ONLY', label: { en: "⚡ FASTEST ONLY", ar: "⚡ الأسرع فقط" }, icon: '🏎️' },
+  { type: 'LEAST_CHOSEN_WINS', label: { en: "🤏 LEAST CHOSEN WINS", ar: "🤏 الأقل اختياراً يفوز" }, icon: '📉' },
+  { type: 'POINT_SWAP', label: { en: "😱 POINT SWAP", ar: "😱 تبديل النقاط" }, icon: '🎭' },
+  { type: 'VOTE_FOR_POINTS', label: { en: "🗳️ VOTE FOR POINTS", ar: "🗳️ تصويت للنقاط" }, icon: '🤝' }
+];
+
+const MODIFIERS = [
+  { type: 'DOUBLE_POINTS', label: { en: "🔥 DOUBLE POINTS", ar: "🔥 نقاط مضاعفة" }, icon: '⚡' },
+  { type: 'HIDDEN_UI', label: { en: "😶 HIDDEN UI", ar: "😶 واجهة مخفية" }, icon: '🔇' },
+  { type: 'SPEED_BOOST', label: { en: "🚀 SPEED BOOST", ar: "🚀 دفعة سرعة" }, icon: '🏎️' },
+  { type: 'INVERT_COLORS', label: { en: "🌈 INVERT COLORS", ar: "🌈 ألوان معكوسة" }, icon: '🌀' },
+  { type: 'REVERSE_CONTROLS', label: { en: "🔁 REVERSED", ar: "🔁 تحكم معكوس" }, icon: '🌀' },
+  { type: 'SHRINK_UI', label: { en: "🤏 SHRINKING", ar: "🤏 تصغير الواجهة" }, icon: '📉' }
+];
 
 function ensureSet(v) {
   return v instanceof Set ? v : new Set(v || []);
@@ -123,19 +140,19 @@ const GAME_MODES = {
     id: "CHAOS",
     label: { en: "🔥 QUICK CHAOS", ar: "🔥 فوضى سريعة" },
     desc: { en: "Speed, Reaction & Traps", ar: "سرعة، رد فعل وفخاخ" },
-    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "FIND_THE_ODD"],
+    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "FIND_THE_ODD", "NEON_DASH", "SUDDEN_DEATH", "REVENGE_ROUND", "HEARTBEAT"],
   },
   MIND: {
     id: "MIND",
     label: { en: "🧠 MIND GAMES", ar: "🧠 ألعاب العقل" },
     desc: { en: "Logic Traps & Memory", ar: "ألغاز خادعة وذاكرة" },
-    collections: ["TRIVIA", "TRUE_FALSE", "EMOJI_GUESS", "MEMORY_FLASH", "SCRAMBLED_WORD", "ESTIMATION"],
+    collections: ["TRIVIA", "TRUE_FALSE", "EMOJI_GUESS", "MEMORY_FLASH", "SCRAMBLED_WORD", "ESTIMATION", "SPEED_MATH", "FAST_TYPE", "SIMON_SAYS", "INVISIBLE_MAZE"],
   },
   MADNESS: {
     id: "MADNESS",
     label: { en: "🎭 PARTY MADNESS", ar: "🎭 جنون الحفلة" },
     desc: { en: "Social Chaos & Betrayal", ar: "فوضى اجتماعية وخيانة" },
-    collections: ["SOCIAL_VOTE", "SECRET_CHOICE", "FAKE_BUTTONS", "FINISH_SENTENCE", "COLOR_MATCH"],
+    collections: ["SOCIAL_VOTE", "SECRET_CHOICE", "FAKE_BUTTONS", "FINISH_SENTENCE", "COLOR_MATCH", "DONT_PRESS", "ONE_VS_ALL", "BLIND_BID"],
   }
 };
 
@@ -144,6 +161,11 @@ const CHALLENGE_POOL = {
     type: "COLOR_GRID", duration: 15, difficultyScale: 0.8,
     label: { en: "SHARP EYE", ar: "العين الثاقبة" },
     description: { en: "Find the square with a different color!", ar: "ابحث عن المربع ذو اللون المختلف!" }
+  },
+  NEON_DASH: { 
+    type: "NEON_DASH", duration: 12, difficultyScale: 1.2,
+    label: { en: "NEON DASH", ar: "الوميض النيوني" },
+    description: { en: "Tap the moving NEON targets!", ar: "اضغط على الأهداف النيونية المتحركة!" }
   },
   REACTION_TIME: { 
     type: "REACTION_TIME", duration: 15, difficultyScale: 0.7,
@@ -215,6 +237,51 @@ const CHALLENGE_POOL = {
     label: { en: "SPAM & STOP", ar: "اضغط وقف" },
     description: { en: "Spam TAP, but STOP when it turns RED!", ar: "اضغط بسرعة، لكن توقف عندما يصبح اللون أحمر!" }
   },
+  FAST_TYPE: { 
+    type: "FAST_TYPE", duration: 12, difficultyScale: 0.9,
+    label: { en: "SPEED TYPE", ar: "كتابة سريعة" },
+    description: { en: "Type the word as fast as you can!", ar: "اكتب الكلمة بأسرع ما يمكن!" }
+  },
+  DONT_PRESS: { 
+    type: "DONT_PRESS", duration: 10, difficultyScale: 0.5,
+    label: { en: "DON'T PRESS!", ar: "لا تضغط!" },
+    description: { en: "Whatever you do, DON'T press the button!", ar: "مهما حصل، لا تضغط الزر!" }
+  },
+  SIMON_SAYS: { 
+    type: "SIMON_SAYS", duration: 15, difficultyScale: 0.9,
+    label: { en: "SIMON SAYS", ar: "سيمون يقول" },
+    description: { en: "Repeat the color sequence!", ar: "كرر تسلسل الألوان!" }
+  },
+  ONE_VS_ALL: { 
+    type: "ONE_VS_ALL", duration: 12, difficultyScale: 0.7,
+    label: { en: "FIRST TO ANSWER", ar: "الأسرع يفوز" },
+    description: { en: "The first player to answer correctly wins it all!", ar: "أول لاعب يجيب بشكل صحيح يفوز بالكل!" }
+  },
+  REVENGE_ROUND: { 
+    type: "REVENGE_ROUND", duration: 10, difficultyScale: 1.0,
+    label: { en: "REVENGE", ar: "الانتقام" },
+    description: { en: "The player in last place picks a lucky number!", ar: "اللاعب في المركز الأخير يختار رقم الحظ!" }
+  },
+  SUDDEN_DEATH: { 
+    type: "SUDDEN_DEATH", duration: 8, difficultyScale: 1.5,
+    label: { en: "SUDDEN DEATH", ar: "الموت المفاجئ" },
+    description: { en: "First one to tap wins!", ar: "أول واحد يضغط يكسب!" }
+  },
+  INVISIBLE_MAZE: {
+    type: "INVISIBLE_MAZE", duration: 15, difficultyScale: 1.5,
+    label: { en: "MEMORY MAZE", ar: "المسار المخفي" },
+    description: { en: "Memorize the path before it disappears! One wrong step = fail.", ar: "تذكر المسار قبل أن يختفي! خطأ واحد = خروج." }
+  },
+  BLIND_BID: {
+    type: "BLIND_BID", duration: 12, difficultyScale: 1.0,
+    label: { en: "BLIND BID", ar: "مزاد النقاط" },
+    description: { en: "Bid your points to win the prize. Highest unique bid wins, but everyone loses what they bid!", ar: "زايد بنقاطك لربح الجائزة الكبرى. أعلى عطاء يفوز، لكن الجميع يخسر ما دفعه!" }
+  },
+  HEARTBEAT: {
+    type: "HEARTBEAT", duration: 15, difficultyScale: 1.2,
+    label: { en: "BLIND RHYTHM", ar: "نبض القلب" },
+    description: { en: "Feel the beat! Tap exactly when the invisible pulses should happen.", ar: "اشعر بالإيقاع! اضغط بدقة متناهية في وقت النبضات المخفية." }
+  },
 };
 
 function generateColorGrid(level) {
@@ -239,22 +306,6 @@ function generateColorGrid(level) {
     level
   };
 }
-
-const SOCIAL_TRICKS = [
-  { type: 'LEAST_CHOSEN_WINS', label: '🤫 الأقل اختياراً يفوز!', icon: '📉' },
-  { type: 'FASTEST_ONLY', label: '⚡ الأسرع فقط يسجل!', icon: '🏎️' },
-  { type: 'VOTE_FOR_POINTS', label: '🤝 صوت للأكثر ذكاءً!', icon: '🗳️' },
-  { type: 'POINT_SWAP', label: '🔄 تبديل نقاط عشوائي!', icon: '🎭' }
-];
-
-const MODIFIERS = [
-  { type: 'DOUBLE_POINTS', label: '🔥 DOUBLE POINTS', icon: '💰' },
-  { type: 'REVERSE_CONTROLS', label: '🔁 REVERSED', icon: '🌀' },
-  { type: 'SHRINK_UI', label: '🤏 SHRINKING', icon: '📉' },
-  { type: 'FAST_MODE', label: '⚡ FAST MODE', icon: '🏃' },
-  { type: 'LOW_VISIBILITY', label: '👻 GHOST MODE', icon: '🌑' },
-  { type: 'CHAOS_RANDOM', label: '🌪️ CHAOS', icon: '💥' }
-];
 
 // ─── AI Content System ───
 const AI_PROMPT_TEMPLATES = {
@@ -309,11 +360,19 @@ async function generateAdaptiveRound(room) {
   // Dynamic Playlist Count: 3 to 7 based on difficulty
   const challengeCount = 3 + Math.floor(baseDifficulty / 1.5);
   
-  const availableChallenges = primaryMode.collections.map(id => CHALLENGE_POOL[id]);
-  const selection = shuffle(availableChallenges).slice(0, Math.min(challengeCount, 7));
+  // Mixed mode variety: 20% chance to pull a challenge from another pool
+  const allChallengeIds = Object.keys(CHALLENGE_POOL);
+  const selection = [];
+  for (let i = 0; i < challengeCount; i++) {
+    if (Math.random() < 0.2) {
+      selection.push(CHALLENGE_POOL[pickRandom(allChallengeIds)]);
+    } else {
+      selection.push(CHALLENGE_POOL[pickRandom(primaryMode.collections)]);
+    }
+  }
 
   return {
-    selection,
+    selection: selection.slice(0, 7),
     modifiers: shuffle(MODIFIERS).slice(0, roundIdx > 5 ? 2 : 1),
     globalModifier,
     difficulty: baseDifficulty,
@@ -420,7 +479,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     case "TRUE_FALSE": {
       const q = await getUnused(TRUE_FALSE, room.usedQuestionIds, room.lang, "TRUE_FALSE");
       base.questionText = q.text;
-      base.correctAnswer = q.correctAnswer;
+      base.correctAnswer = q.answer; // questions.js uses 'answer', not 'correctAnswer'
       base.playerAnswers = {};
       return base;
     }
@@ -437,7 +496,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     case "ESTIMATION": {
       const q = await getUnused(ESTIMATION, room.usedQuestionIds, room.lang, "ESTIMATION");
       base.questionText = q.text;
-      base.correctAnswer = q.correctAnswer;
+      base.correctAnswer = q.correctAnswer ?? q.answer; // bank uses 'answer', AI uses 'correctAnswer'
       base.playerGuesses = {};
       return base;
     }
@@ -471,26 +530,28 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     }
 
     case "MEMORY_FLASH": {
-      // Show a sequence of emojis for a few seconds, then ask what was shown
-      const emojiPool = ["🍎", "🍕", "🎸", "⚽", "🌈", "🔥", "💎", "🎯", "🐱", "🌙", "⭐", "🎲"];
-      const seq = shuffle(emojiPool).slice(0, 4);
+      const emojiPool = ["🍎", "🍕", "🎸", "⚽", "🌈", "🔥", "💎", "🎯", "🐱", "🌙", "⭐", "🎲", "🦋", "🎪", "🍩"];
+      const seq = shuffle(emojiPool).slice(0, 5);
       base.sequence = seq;
-      base.showPhase = true; // true = showing, false = guessing
-      base.showDuration = 4; // seconds to show
-      base.allOptions = shuffle(emojiPool).slice(0, 8);
-      if (!base.allOptions.includes(seq[0])) base.allOptions[0] = seq[0];
-      // Ask which one WAS in the sequence
-      const askIndex = Math.floor(Math.random() * seq.length);
-      base.askIndex = askIndex;
-      base.taskText = room.lang === 'ar' ? 'أي إيموجي كان موجوداً؟' : 'Which emoji was present?';
+      base.showPhase = true;
+      base.showDuration = 4;
+      // Ask which emoji was NOT shown (harder than asking which WAS shown)
+      const notInSeq = emojiPool.filter(e => !seq.includes(e));
+      const decoy = pickRandom(notInSeq);
+      // Mix the decoy with some from the sequence
+      const options = shuffle([...seq.slice(0, 3), decoy, ...shuffle(notInSeq).slice(0, 4)]).slice(0, 8);
+      if (!options.includes(decoy)) options[0] = decoy;
+      base.allOptions = shuffle(options);
+      base.correctAnswer = decoy; // The one NOT in the sequence
+      base.taskText = room.lang === 'ar' ? 'أي إيموجي لم يكن موجوداً؟' : 'Which emoji was NOT shown?';
       base.playerAnswers = {};
       return base;
     }
 
     case "WHACK_A_MOLE": {
-      base.moles = []; // Positions for moles
-      base.whacks = {};
-      playerIds.forEach(id => base.whacks[id] = 0);
+      base.moles = [];
+      base.clicks = {};
+      playerIds.forEach(id => base.clicks[id] = 0);
       return base;
     }
 
@@ -500,7 +561,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
         en: ["PARTYVERSE", "ROCKET", "ADVENTURE", "CHALLENGE", "VELOCITY"]
       };
       base.targetWord = pickRandom(words[room.lang] || words.en);
-      base.playerInput = {};
+      base.playerAnswers = {};
       return base;
     }
 
@@ -514,9 +575,21 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
 
     case "FIND_THE_ODD": {
       const sets = [
-        { items: ["🍎", "🍎", "🍎", "🍐", "🍎", "🍎"], oddIndex: 3 },
-        { items: ["🐱", "🐶", "🐱", "🐱", "🐱", "🐱"], oddIndex: 1 },
-        { items: ["⚽", "⚽", "🏀", "⚽", "⚽", "⚽"], oddIndex: 2 }
+        { items: ["🍎", "🍎", "🍎", "🍐", "🍎", "🍎", "🍎", "🍎", "🍎"], oddIndex: 3 },
+        { items: ["🐱", "🐱", "🐱", "🐱", "🐶", "🐱", "🐱", "🐱", "🐱"], oddIndex: 4 },
+        { items: ["⚽", "⚽", "⚽", "⚽", "⚽", "⚽", "🏀", "⚽", "⚽"], oddIndex: 6 },
+        { items: ["😊", "😊", "😊", "😊", "😊", "😊", "😊", "🙂", "😊"], oddIndex: 7 },
+        { items: ["🔵", "🔵", "🔵", "🟦", "🔵", "🔵", "🔵", "🔵", "🔵"], oddIndex: 3 },
+        { items: ["🌸", "🌸", "🌺", "🌸", "🌸", "🌸", "🌸", "🌸", "🌸"], oddIndex: 2 },
+        { items: ["🐸", "🐸", "🐸", "🐸", "🐸", "🐢", "🐸", "🐸", "🐸"], oddIndex: 5 },
+        { items: ["🎵", "🎵", "🎵", "🎵", "🎶", "🎵", "🎵", "🎵", "🎵"], oddIndex: 4 },
+        { items: ["🥝", "🥝", "🥝", "🥝", "🥝", "🥝", "🥝", "🥝", "🥑"], oddIndex: 8 },
+        { items: ["🌙", "🌙", "🌙", "🌛", "🌙", "🌙", "🌙", "🌙", "🌙"], oddIndex: 3 },
+        { items: ["🔴", "🔴", "🔴", "🔴", "🔴", "🟠", "🔴", "🔴", "🔴"], oddIndex: 5 },
+        { items: ["👁️", "👁️", "👁️", "👁️", "👁️", "👁️", "👀", "👁️", "👁️"], oddIndex: 6 },
+        { items: ["🐻", "🐻", "🐻", "🧸", "🐻", "🐻", "🐻", "🐻", "🐻"], oddIndex: 3 },
+        { items: ["☀️", "☀️", "🌟", "☀️", "☀️", "☀️", "☀️", "☀️", "☀️"], oddIndex: 2 },
+        { items: ["🦋", "🦋", "🦋", "🦋", "🦋", "🦋", "🦋", "🐛", "🦋"], oddIndex: 7 },
       ];
       const set = pickRandom(sets);
       base.items = set.items;
@@ -527,7 +600,8 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
 
     case "SIMON_SAYS": {
       const colors = ["RED", "BLUE", "GREEN", "YELLOW"];
-      base.sequence = [pickRandom(colors), pickRandom(colors), pickRandom(colors)];
+      const seqLength = 5 + Math.min(4, Math.floor(difficulty / 2));
+      base.sequence = Array.from({ length: seqLength }).map(() => pickRandom(colors));
       base.playerProgress = {}; // id -> current index in sequence
       playerIds.forEach(id => base.playerProgress[id] = 0);
       return base;
@@ -543,16 +617,23 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     }
 
     case "ONE_VS_ALL": {
-      const q = getUnused(TRIVIA, room.usedQuestionIds, room.lang);
+      const q = await getUnused(TRIVIA, room.usedQuestionIds, room.lang, "TRIVIA");
       base.questionText = q.text;
       base.answers = q.answers;
       base.correctIndex = q.correctIndex;
       base.winnerId = null;
+      base.playerAnswers = {};
       return base;
     }
 
     case "SECRET_CHOICE": {
-      base.options = ["🍎", "🍌", "🍒", "🍇"];
+      const optionSets = [
+        ["🍎", "🍌", "🍒", "🍇", "🥝", "🍑", "🫐", "🥭"],
+        ["🐶", "🐱", "🐸", "🦊", "🐼", "🐨", "🦁", "🐯"],
+        ["⚽", "🏀", "🎾", "🏐", "🎱", "🏓", "🥊", "⛷️"],
+        ["🌍", "🌙", "⭐", "☀️", "🪐", "🌈", "❄️", "🔥"]
+      ];
+      base.options = pickRandom(optionSets);
       base.playerChoices = {};
       return base;
     }
@@ -564,8 +645,8 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     }
 
     case "FAKE_BUTTONS": {
-      base.totalButtons = 12;
-      base.correctIndex = Math.floor(Math.random() * 12);
+      base.totalButtons = 9;
+      base.correctIndex = Math.floor(Math.random() * 9);
       base.playerAnswers = {};
       return base;
     }
@@ -586,18 +667,83 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
       return base;
     }
 
+    case "INVISIBLE_MAZE": {
+      const size = difficulty > 3 ? 4 : 3;
+      const pathLength = size === 3 ? 4 : 6;
+      const path = [];
+      let current = Math.floor(Math.random() * (size * size));
+      path.push(current);
+      
+      for (let i = 1; i < pathLength; i++) {
+        const moves = [];
+        const r = Math.floor(current / size);
+        const c = current % size;
+        if (r > 0) moves.push(current - size); // Up
+        if (r < size - 1) moves.push(current + size); // Down
+        if (c > 0) moves.push(current - 1); // Left
+        if (c < size - 1) moves.push(current + 1); // Right
+        
+        const validMoves = moves.filter(m => !path.includes(m));
+        if (validMoves.length === 0) break; // Dead end fallback
+        current = pickRandom(validMoves);
+        path.push(current);
+      }
+      base.size = size;
+      base.path = path;
+      base.playerProgress = {};
+      base.failed = new Set();
+      playerIds.forEach(id => base.playerProgress[id] = 0);
+      return base;
+    }
+
+    case "BLIND_BID": {
+      base.prize = 1000 + (difficulty * 500); // 1500 to 3500 points
+      base.bids = {};
+      return base;
+    }
+
+    case "HEARTBEAT": {
+      const bpm = 60 + Math.floor(Math.random() * 60); // 60 to 120 BPM
+      const msPerBeat = 60000 / bpm;
+      base.msPerBeat = msPerBeat;
+      // Target beats: 4th, 5th, 6th beat after start
+      base.targetBeats = [msPerBeat * 4, msPerBeat * 5, msPerBeat * 6];
+      base.playerTaps = {};
+      playerIds.forEach(id => base.playerTaps[id] = []);
+      return base;
+    }
+
     case "SOCIAL_VOTE": {
       const questions = {
-        ar: ["من هو الأكثر ذكاءً؟", "من هو الأكثر جنوناً؟", "من سيفوز بهذا الجيم؟"],
-        en: ["Who is the smartest?", "Who is the craziest?", "Who will win this game?"]
+        ar: [
+          "من هو الأكثر ذكاءً؟", "من هو الأكثر جنوناً؟", "من سيفوز بهذا الجيم؟",
+          "من هو الأكثر حظاً؟", "من سيكون آخر واحد يجيب؟", "من يستحق لقب ملك الحفلة؟",
+          "من هو الأسرع رد فعل؟", "من هو الأكثر غموضاً؟", "من هو الأفضل تحت الضغط؟",
+          "من سيغش لو قدر؟", "من الأكثر تنافسية؟", "من سيستسلم أولاً؟"
+        ],
+        en: [
+          "Who is the smartest?", "Who is the craziest?", "Who will win this game?",
+          "Who is the luckiest?", "Who will answer last?", "Who deserves Party King?",
+          "Who has the fastest reflexes?", "Who is the most mysterious?", "Who performs best under pressure?",
+          "Who would cheat if they could?", "Who is the most competitive?", "Who will give up first?"
+        ]
       };
       base.question = pickRandom(questions[room.lang] || questions.en);
-      base.votes = {}; // voterId -> targetId
+      base.votes = {};
       return base;
     }
 
     case "DONT_PRESS": {
       base.pressed = {}; // id -> timePressed
+      base.bombTimer = 3000 + Math.floor(Math.random() * 5000); // bomb explodes at 3-8s
+      base.exploded = false;
+      return base;
+    }
+
+    case "NEON_DASH": {
+      base.targets = [];
+      base.clicks = {};
+      playerIds.forEach(id => base.clicks[id] = 0);
       return base;
     }
 
@@ -615,6 +761,9 @@ function calcRoundScores(room) {
   const pointTable = [500, 350, 250, 200, 150, 100, 75, 50, 50, 50];
   const trick = activeChallenge.trick;
   let ranked = [];
+  
+  // Track winners for streaks
+  let roundWinners = new Set();
 
   // Special Trick: LEAST_CHOSEN_WINS (for Trivia/Answers)
   if (trick?.type === 'LEAST_CHOSEN_WINS' && activeChallenge.playerAnswers) {
@@ -672,7 +821,9 @@ function calcRoundScores(room) {
   switch (activeChallenge.type) {
     case "COLOR_GRID":
     case "CLICK_FAST":
-    case "CHAOS_TAP": {
+    case "CHAOS_TAP":
+    case "WHACK_A_MOLE":
+    case "NEON_DASH": {
       const isReverse = activeChallenge.trick?.type === 'LEAST_CHOSEN_WINS';
       ranked = Object.entries(activeChallenge.clicks || activeChallenge.scores || {})
         .map(([id, c]) => ({ id, val: c }))
@@ -683,18 +834,29 @@ function calcRoundScores(room) {
       ranked.forEach((entry, idx) => {
         if (entry.val > 0 && room.players[entry.id]) {
           room.players[entry.id].score += (pointTable[idx] || 50) * multiplier;
+          if (idx === 0) roundWinners.add(entry.id);
         }
       });
       break;
     }
 
+
+
     case "REACTION_TIME": {
       ranked = Object.entries(activeChallenge.playerTimes || {})
+        .filter(([id, t]) => t < 9999) // Exclude false starts
         .map(([id, t]) => ({ id, val: t }))
         .sort((a, b) => a.val - b.val); // fastest first
       ranked.forEach((entry, idx) => {
         if (room.players[entry.id]) {
           room.players[entry.id].score += pointTable[idx] || 50;
+          if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      // Penalize false starts
+      Object.entries(activeChallenge.playerTimes || {}).forEach(([id, t]) => {
+        if (t === 9999 && room.players[id]) {
+          room.players[id].score -= 200;
         }
       });
       break;
@@ -706,14 +868,18 @@ function calcRoundScores(room) {
     case "COLOR_MATCH":
     case "TRUE_FALSE":
     case "FIND_THE_ODD":
-    case "FAKE_BUTTONS": {
-      const correctAns = activeChallenge.correctIndex !== undefined ? activeChallenge.answers[activeChallenge.correctIndex] : activeChallenge.correctAnswer;
+    case "FAKE_BUTTONS":
+    case "FAST_TYPE": {
+      const correctAns = activeChallenge.correctIndex !== undefined ? activeChallenge.answers?.[activeChallenge.correctIndex] : activeChallenge.correctAnswer;
       const oddIdx = activeChallenge.oddIndex;
+      const targetWord = activeChallenge.targetWord;
       
       // Filter players who answered correctly
       const correctPlayers = Object.entries(activeChallenge.playerAnswers || {})
         .filter(([id, ans]) => {
           if (activeChallenge.type === "FIND_THE_ODD") return Number(ans) === oddIdx;
+          if (activeChallenge.type === "FAKE_BUTTONS") return Number(ans) === activeChallenge.correctIndex;
+          if (activeChallenge.type === "FAST_TYPE") return ans === targetWord;
           if (activeChallenge.type === "TRUE_FALSE") return (ans === "TRUE" || ans === true) === activeChallenge.correctAnswer;
           return ans === correctAns;
         })
@@ -725,16 +891,18 @@ function calcRoundScores(room) {
           // Speed Bonus: 1st gets 800, 2nd 700, 3rd 600, etc. (min 400)
           const bonus = Math.max(400, 800 - (idx * 100));
           room.players[entry.id].score += bonus;
+          if (idx === 0) roundWinners.add(entry.id);
         }
       });
       break;
     }
 
     case "MEMORY_FLASH": {
-      const correctAns = activeChallenge.sequence[activeChallenge.askIndex];
+      const correctAns = activeChallenge.correctAnswer; // The emoji NOT in sequence
       Object.entries(activeChallenge.playerAnswers || {}).forEach(([id, ans]) => {
         if (ans === correctAns && room.players[id]) {
-          room.players[id].score += 1000; // Memory is hard!
+          room.players[id].score += 1000;
+          roundWinners.add(id);
         }
       });
       break;
@@ -747,21 +915,13 @@ function calcRoundScores(room) {
       break;
     }
 
-    case "TRUE_FALSE": {
-      Object.entries(activeChallenge.playerAnswers || {}).forEach(([id, ans]) => {
-        const correct = (ans === "TRUE" || ans === true) === activeChallenge.correctAnswer;
-        if (correct && room.players[id]) {
-          room.players[id].score += 500;
-        }
-      });
-      break;
-    }
+
 
     case "ESTIMATION": {
       const correct = activeChallenge.correctAnswer;
       Object.entries(activeChallenge.playerGuesses || {}).forEach(([id, val]) => {
         const diff = Math.abs(val - correct);
-        const errorPct = diff / correct;
+        const errorPct = correct === 0 ? (val === 0 ? 0 : 1) : diff / correct;
         if (errorPct < 0.1) room.players[id].score += 1000;
         else if (errorPct < 0.25) room.players[id].score += 500;
         else if (errorPct < 0.5) room.players[id].score += 200;
@@ -772,7 +932,7 @@ function calcRoundScores(room) {
 
     case "SOCIAL_VOTE": {
       const counts = {};
-      Object.values(game.votes).forEach(targetId => {
+      Object.values(activeChallenge.votes || {}).forEach(targetId => {
         counts[targetId] = (counts[targetId] || 0) + 1;
       });
       Object.entries(counts).forEach(([id, count]) => {
@@ -782,14 +942,222 @@ function calcRoundScores(room) {
     }
 
     case "DONT_PRESS": {
-      Object.keys(room.players).forEach(id => {
-        if (!game.pressed[id]) {
-          room.players[id].score += 500; // Reward for NOT pressing
-        } else {
-          room.players[id].score -= 200; // Penalty for pressing
+      // Chicken game: press the button for points, but if the bomb explodes while you hold it, you lose!
+      // If NOBODY presses, everyone loses points (cowards!)
+      const pressers = Object.entries(activeChallenge.pressed || {});
+      if (pressers.length === 0) {
+        Object.keys(room.players).forEach(id => {
+          room.players[id].score -= 100;
+        });
+      } else {
+        pressers.sort((a, b) => a[1] - b[1]);
+        const startTime = activeChallenge.startTime || Date.now();
+        const bombTime = activeChallenge.bombTimer || 5000;
+        pressers.forEach(([id, time], idx) => {
+          const elapsed = time - startTime;
+          if (elapsed > bombTime) {
+            // Pressed AFTER bomb = big penalty
+            if (room.players[id]) room.players[id].score -= 300;
+          } else {
+            // Reward based on risk: pressing closer to bomb = more points
+            const riskBonus = Math.floor((elapsed / bombTime) * 800);
+            if (room.players[id]) {
+              room.players[id].score += Math.max(100, riskBonus);
+              if (idx === pressers.length - 1) roundWinners.add(id);
+            }
+          }
+        });
+      }
+      break;
+    }
+
+    case "SPAM_STOP": {
+      const failedSet = ensureSet(activeChallenge.failed);
+      ranked = Object.entries(activeChallenge.clicks || {})
+        .filter(([id]) => !failedSet.has(id))
+        .map(([id, c]) => ({ id, val: c }))
+        .sort((a, b) => b.val - a.val);
+      ranked.forEach((entry, idx) => {
+        if (entry.val > 0 && room.players[entry.id]) {
+          room.players[entry.id].score += pointTable[idx] || 50;
+          if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      // Penalize those who failed
+      failedSet.forEach(id => {
+        if (room.players[id]) room.players[id].score -= 100;
+      });
+      break;
+    }
+
+    case "SECRET_CHOICE": {
+      // Players who picked the LEAST chosen option win
+      const choiceCounts = {};
+      Object.values(activeChallenge.playerChoices || {}).forEach(c => {
+        choiceCounts[c] = (choiceCounts[c] || 0) + 1;
+      });
+      const minCount = Math.min(...Object.values(choiceCounts));
+      Object.entries(activeChallenge.playerChoices || {}).forEach(([id, choice]) => {
+        if (choiceCounts[choice] === minCount && room.players[id]) {
+          room.players[id].score += 800;
         }
       });
       break;
+    }
+
+    case "FINISH_SENTENCE": {
+      // Speed bonus: fastest submitters get more points
+      const submissions = Object.entries(activeChallenge.playerAnswers || {})
+        .map(([id]) => ({ id, time: activeChallenge.answerTimes?.[id] || Infinity }))
+        .sort((a, b) => a.time - b.time);
+      submissions.forEach((entry, idx) => {
+        if (room.players[entry.id]) {
+          room.players[entry.id].score += Math.max(200, 600 - (idx * 100));
+          if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      break;
+    }
+
+    case "SIMON_SAYS": {
+      Object.entries(activeChallenge.playerProgress || {}).forEach(([id, prog]) => {
+        if (prog === activeChallenge.sequence.length && room.players[id]) {
+          room.players[id].score += 1000;
+          roundWinners.add(id);
+        }
+      });
+      break;
+    }
+
+    case "ONE_VS_ALL":
+    case "SUDDEN_DEATH": {
+      if (activeChallenge.winnerId && room.players[activeChallenge.winnerId]) {
+        room.players[activeChallenge.winnerId].score += 1500;
+        roundWinners.add(activeChallenge.winnerId);
+      }
+      break;
+    }
+
+    case "REVENGE_ROUND": {
+      const target = activeChallenge.targetAnswer;
+      Object.entries(activeChallenge.playerGuesses || {}).forEach(([id, val]) => {
+        if (Number(val) === target && room.players[id]) {
+          room.players[id].score += 2000; // Massive comeback
+          roundWinners.add(id);
+        }
+      });
+      break;
+    }
+
+    case "SCRAMBLED_WORD": {
+      const correctWord = activeChallenge.correct;
+      const solvers = Object.entries(activeChallenge.playerAnswers || {})
+        .filter(([id, ans]) => ans?.toUpperCase() === correctWord?.toUpperCase())
+        .map(([id]) => ({ id, time: activeChallenge.answerTimes?.[id] || 0 }))
+        .sort((a, b) => a.time - b.time);
+      solvers.forEach((entry, idx) => {
+        if (room.players[entry.id]) {
+          room.players[entry.id].score += Math.max(400, 800 - (idx * 100));
+          if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      break;
+    }
+
+    case "INVISIBLE_MAZE": {
+      const pathLength = activeChallenge.path.length;
+      Object.entries(activeChallenge.playerProgress || {}).forEach(([id, progress]) => {
+        if (progress === pathLength && room.players[id]) {
+          room.players[id].score += 1000;
+          roundWinners.add(id);
+        } else if (activeChallenge.failed?.has(id) && room.players[id]) {
+          room.players[id].score -= 200; // Penalty for failing
+        }
+      });
+      break;
+    }
+
+    case "BLIND_BID": {
+      const bids = Object.entries(activeChallenge.bids || {});
+      if (bids.length > 0) {
+        // Find unique bids
+        const bidCounts = {};
+        bids.forEach(([_, amount]) => {
+          bidCounts[amount] = (bidCounts[amount] || 0) + 1;
+        });
+        
+        // Find highest unique bid
+        let highestUniqueBid = -1;
+        let winnerId = null;
+        
+        bids.forEach(([id, amount]) => {
+          if (room.players[id]) {
+            room.players[id].score -= amount; // Everyone loses their bid
+            if (bidCounts[amount] === 1 && amount > highestUniqueBid) {
+              highestUniqueBid = amount;
+              winnerId = id;
+            }
+          }
+        });
+
+        if (winnerId) {
+          room.players[winnerId].score += activeChallenge.prize;
+          roundWinners.add(winnerId);
+        }
+      }
+      break;
+    }
+
+    case "HEARTBEAT": {
+      const targetBeats = activeChallenge.targetBeats || [];
+      const results = [];
+      Object.entries(activeChallenge.playerTaps || {}).forEach(([id, taps]) => {
+        if (taps.length === 3) {
+          let totalDev = 0;
+          for (let i = 0; i < 3; i++) {
+            totalDev += Math.abs(taps[i] - targetBeats[i]);
+          }
+          results.push({ id, dev: totalDev / 3 });
+        }
+      });
+
+      results.sort((a, b) => a.dev - b.dev);
+      const heartbeatPoints = [1000, 750, 500, 300];
+      results.forEach((entry, idx) => {
+        if (room.players[entry.id]) {
+          // Bonus based on accuracy and rank
+          let bonus = heartbeatPoints[idx] || 100;
+          if (entry.dev < 150) bonus += 500; // Perfect rhythm bonus
+          room.players[entry.id].score += bonus;
+          if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      break;
+    }
+  }
+
+  // Update Win Streaks & Generate Highlights
+  Object.keys(room.players).forEach(id => {
+    const p = room.players[id];
+    if (roundWinners.has(id)) {
+      p.winStreak = (p.winStreak || 0) + 1;
+      if (p.winStreak >= 3) {
+        room.viralHighlights.push(room.lang === 'ar' 
+          ? `🔥 ${p.name} على النار! ${p.winStreak} فوز متتالي!` 
+          : `🔥 ${p.name} IS ON FIRE! ${p.winStreak} wins in a row!`);
+      }
+    } else if (activeChallenge.type !== "SOCIAL_VOTE") { 
+      p.winStreak = 0;
+    }
+  });
+
+  // Narrow Victory Highlight
+  if (ranked.length >= 2) {
+    const diff = Math.abs(ranked[0].val - ranked[1].val);
+    if (activeChallenge.type === "REACTION_TIME" && diff < 50) {
+      room.viralHighlights.push(room.lang === 'ar'
+        ? `😱 يا له من تقارب! ${room.players[ranked[0].id].name} هزم ${room.players[ranked[1].id].name} بفارق ضئيل جداً!`
+        : `😱 SO CLOSE! ${room.players[ranked[0].id].name} beat ${room.players[ranked[1].id].name} by a hair!`);
     }
   }
 
@@ -857,6 +1225,8 @@ async function startNextRound(roomId) {
     type: playlist[0].type,
     label: playlist[0].label,
   };
+  
+  room.game.playlist[0].startTime = Date.now();
 
   room.phase = "PLAYING";
   io.to(roomId).emit("room_update", serializeRoom(room));
@@ -891,6 +1261,24 @@ async function startNextRound(roomId) {
         io.to(roomId).emit("room_update", serializeRoom(r));
       }
     }
+    // REACTION_TIME: trigger GO phase after delay
+    if (currentChallenge.type === 'REACTION_TIME') {
+      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+      if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
+        currentChallenge.reactPhase = 'GO';
+        currentChallenge.goTime = Date.now();
+        io.to(roomId).emit("room_update", serializeRoom(r));
+      }
+    }
+    // DONT_PRESS: bomb timer
+    if (currentChallenge.type === 'DONT_PRESS') {
+      if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
+      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+      if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
+        currentChallenge.exploded = true;
+        io.to(roomId).emit("room_update", serializeRoom(r));
+      }
+    }
 
     if (r.game.timeLeft <= 0) {
       // Calculate scores for the challenge that just ended
@@ -900,6 +1288,7 @@ async function startNextRound(roomId) {
       if (r.game.activeIndex < r.game.playlist.length - 1) {
         r.game.activeIndex++;
         const next = r.game.playlist[r.game.activeIndex];
+        next.startTime = Date.now();
         r.game.timeLeft = next.duration;
         r.game.type = next.type;
         r.game.label = next.label;
@@ -1191,6 +1580,20 @@ io.on("connection", (socket) => {
             break;
           }
           case "answer": {
+            if (activeGame.type === "SIMON_SAYS") {
+              const currentIdx = activeGame.playerProgress[socket.id];
+              if (payload === activeGame.sequence[currentIdx]) {
+                activeGame.playerProgress[socket.id]++;
+                if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
+                  activeGame.answerTimes[socket.id] = Date.now();
+                }
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              } else {
+                activeGame.playerProgress[socket.id] = 0; // Reset on fail
+                io.to(socket.id).emit("wrong_answer");
+              }
+              break;
+            }
             if (activeGame.type === "ONE_VS_ALL" && !activeGame.winnerId) {
               if (payload === activeGame.answers[activeGame.correctIndex]) {
                 activeGame.winnerId = socket.id;
@@ -1235,11 +1638,55 @@ io.on("connection", (socket) => {
             }
             break;
           }
-          case "react_tap": {
-            if (activeGame.type === "REACTION_TIME" && activeGame.reactPhase === "GO" && !activeGame.playerTimes[socket.id]) {
-              if (!activeGame.goTime) return;
-              activeGame.playerTimes[socket.id] = Date.now() - activeGame.goTime;
+          case "maze_step": {
+            if (activeGame.type === "INVISIBLE_MAZE" && !activeGame.failed.has(socket.id)) {
+              const currentIdx = activeGame.playerProgress[socket.id] || 0;
+              if (currentIdx < activeGame.path.length) {
+                if (payload === activeGame.path[currentIdx]) {
+                  activeGame.playerProgress[socket.id]++;
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                } else {
+                  activeGame.failed.add(socket.id);
+                  io.to(socket.id).emit("wrong_answer");
+                  io.to(roomId).emit("fail_click", { playerId: socket.id });
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                }
+              }
+            }
+            break;
+          }
+          case "blind_bid": {
+            if (activeGame.type === "BLIND_BID" && !activeGame.bids[socket.id]) {
+              // Ensure bid doesn't exceed current score
+              const maxBid = Math.max(0, room.players[socket.id].score);
+              activeGame.bids[socket.id] = Math.min(Number(payload), maxBid);
               io.to(roomId).emit("room_update", serializeRoom(room));
+            }
+            break;
+          }
+          case "heartbeat_tap": {
+            if (activeGame.type === "HEARTBEAT") {
+              if (!activeGame.playerTaps[socket.id]) activeGame.playerTaps[socket.id] = [];
+              if (activeGame.playerTaps[socket.id].length < 3) {
+                if (!activeGame.startTime) activeGame.startTime = Date.now();
+                const elapsed = Date.now() - activeGame.startTime;
+                activeGame.playerTaps[socket.id].push(elapsed);
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+            }
+            break;
+          }
+          case "react_tap": {
+            if (activeGame.type === "REACTION_TIME") {
+              if (activeGame.reactPhase === "WAIT" && !activeGame.playerTimes[socket.id]) {
+                activeGame.playerTimes[socket.id] = 9999; // Penalty time
+                io.to(roomId).emit("fail_click", { playerId: socket.id });
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              } else if (activeGame.reactPhase === "GO" && !activeGame.playerTimes[socket.id]) {
+                if (!activeGame.goTime) return;
+                activeGame.playerTimes[socket.id] = Date.now() - activeGame.goTime;
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
             }
             break;
           }
@@ -1263,6 +1710,7 @@ io.on("connection", (socket) => {
             if (activeGame.type === "COLOR_MATCH" && !activeGame.playerAnswers[socket.id]) {
               activeGame.playerAnswers[socket.id] = payload;
               activeGame.answerTimes[socket.id] = Date.now();
+              // Points are calculated in calcRoundScores, so we don't add them here
               io.to(roomId).emit("room_update", serializeRoom(room));
             }
             break;
@@ -1279,15 +1727,8 @@ io.on("connection", (socket) => {
             if (activeGame.type === "BIG_RED_BUTTON" && !activeGame.winnerId) {
               activeGame.winnerId = socket.id;
               io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "color_answer": {
-            if (activeGame.type === "COLOR_MATCH" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              if (payload === activeGame.correctAnswer) {
-                activeGame.scores[socket.id] = (activeGame.scores[socket.id] || 0) + 1;
-              }
+            } else if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
+              activeGame.pressed[socket.id] = Date.now();
               io.to(roomId).emit("room_update", serializeRoom(room));
             }
             break;
@@ -1306,7 +1747,6 @@ io.on("connection", (socket) => {
               if (payload === grid.targetIndex) {
                 // Correct
                 activeGame.scores[socket.id] = (activeGame.scores[socket.id] || 0) + 1;
-                if (room.players[socket.id]) room.players[socket.id].score += 50; // Instant reward!
                 activeGame.playerGrids[socket.id] = generateColorGrid(grid.level + 1);
                 io.to(roomId).emit("room_update", serializeRoom(room));
               } else {
@@ -1320,13 +1760,6 @@ io.on("connection", (socket) => {
             if (activeGame.type === "SOCIAL_VOTE" && !activeGame.votes[socket.id]) {
               activeGame.votes[socket.id] = payload;
               activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "press": {
-            if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
-              activeGame.pressed[socket.id] = Date.now();
               io.to(roomId).emit("room_update", serializeRoom(room));
             }
             break;
@@ -1360,6 +1793,9 @@ io.on("connection", (socket) => {
       case "TRUE_FALSE":
       case "FAKE_BUTTONS":
       case "FINISH_SENTENCE":
+      case "SCRAMBLED_WORD":
+      case "FIND_THE_ODD":
+      case "FAST_TYPE":
         if (activeGame.playerAnswers && Object.keys(activeGame.playerAnswers).length === playerCount) {
           allDone = true;
         }
@@ -1389,6 +1825,37 @@ io.on("connection", (socket) => {
       case "SOCIAL_VOTE":
         if (activeGame.votes && Object.keys(activeGame.votes).length === playerCount) {
           allDone = true;
+        }
+        break;
+      case "SIMON_SAYS":
+        if (activeGame.playerProgress && Object.values(activeGame.playerProgress).every(p => p === activeGame.sequence.length)) {
+          allDone = true;
+        }
+        break;
+      case "REVENGE_ROUND":
+        if (activeGame.playerGuesses && activeGame.playerGuesses[activeGame.lastPlaceId]) {
+          allDone = true;
+        }
+        break;
+      case "INVISIBLE_MAZE":
+        if (activeGame.playerProgress && activeGame.failed) {
+          const completedCount = Object.values(activeGame.playerProgress).filter(p => p === activeGame.path.length).length;
+          if (completedCount + activeGame.failed.size === playerCount) {
+            allDone = true;
+          }
+        }
+        break;
+      case "BLIND_BID":
+        if (activeGame.bids && Object.keys(activeGame.bids).length === playerCount) {
+          allDone = true;
+        }
+        break;
+      case "HEARTBEAT":
+        if (activeGame.playerTaps) {
+          const finishedCount = Object.values(activeGame.playerTaps).filter(taps => taps.length === 3).length;
+          if (finishedCount === playerCount) {
+            allDone = true;
+          }
         }
         break;
     }
@@ -1430,7 +1897,13 @@ io.on("connection", (socket) => {
           if (room.game) {
             if (room.game.clicks) delete room.game.clicks[socket.id];
             if (room.game.playerAnswers) delete room.game.playerAnswers[socket.id];
-            if (room.game.failed) room.game.failed.delete(socket.id);
+            if (room.game.failed) {
+              const failedSet = ensureSet(room.game.failed);
+              failedSet.delete(socket.id);
+              room.game.failed = failedSet;
+            }
+            // Check if remaining players have finished
+            checkEarlyFinish(room);
           }
           io.to(roomId).emit("room_update", serializeRoom(room));
         }
