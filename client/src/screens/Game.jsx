@@ -350,7 +350,7 @@ function MemoryFlashGame({ game, myId, sendAction }) {
           <div className="flex-row gap-md justify-center flex-wrap">
             {game.sequence.map((e, i) => (
               <span key={i} style={{ 
-                fontSize: 'clamp(4rem, 20vw, 6rem)', 
+                fontSize: 'clamp(3rem, 12vw, 5rem)', 
                 animation: `pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) ${i * 0.15}s forwards`,
                 opacity: 0,
                 filter: 'drop-shadow(0 0 10px rgba(255,255,255,0.3))'

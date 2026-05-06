@@ -49,6 +49,8 @@ export function ReactionsOverlay() {
   const { reactions, sendReaction, room } = useSocket();
   const EMOJIS = ['😂', '🔥', '😱', '👏', '😡', '🤯'];
 
+  if (room && room.phase !== 'LOBBY') return null;
+
   return (
     <>
       {/* Floating Emojis */}
@@ -82,7 +84,7 @@ export function QuickChat() {
   };
   const list = phrases[lang] || phrases.en;
 
-  if (room?.phase !== 'PLAYING') return null;
+  if (room?.phase !== 'LOBBY') return null;
 
   return (
     <div className="quick-chat-bar">

@@ -1718,6 +1718,7 @@ io.on("connection", (socket) => {
           case "fake_press": {
             if (activeGame.type === "FAKE_BUTTONS" && !activeGame.playerAnswers[socket.id]) {
               activeGame.playerAnswers[socket.id] = payload;
+              if (!activeGame.answerTimes) activeGame.answerTimes = {};
               activeGame.answerTimes[socket.id] = Date.now();
               io.to(roomId).emit("room_update", serializeRoom(room));
             }
