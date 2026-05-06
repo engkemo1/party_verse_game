@@ -325,8 +325,8 @@ function ColorMatchGame({ game, myId, sendAction }) {
               color: '#000',
               fontWeight: 900,
               border: myAns === opt ? '5px solid white' : '2px solid rgba(255,255,255,0.2)',
-              height: '85px',
-              fontSize: '1.5rem',
+              minHeight: '70px',
+              fontSize: 'clamp(1rem, 4vw, 1.5rem)',
               boxShadow: '0 4px 15px rgba(0,0,0,0.3)'
             }} 
             onClick={() => sendAction('color_answer', opt)} 
@@ -427,9 +427,17 @@ function ScrambledWordGame({ game, myId, sendAction }) {
 function FindOddGame({ game, myId, sendAction }) {
   const myAns = game.playerAnswers?.[myId];
   return (
-    <div className="grid-3 gap-sm">
+    <div className="grid-3 gap-sm w-full">
       {game.items.map((e, i) => (
-        <button key={i} className="btn btn--secondary" style={{ fontSize: '3rem', height: '100px' }} onClick={() => sendAction('answer', i)} disabled={myAns !== undefined}>{e}</button>
+        <button 
+          key={i} 
+          className="btn btn--secondary" 
+          style={{ fontSize: 'clamp(1.5rem, 6vw, 3rem)', aspectRatio: '1/1' }} 
+          onClick={() => sendAction('answer', i)} 
+          disabled={myAns !== undefined}
+        >
+          {e}
+        </button>
       ))}
     </div>
   );
@@ -444,7 +452,7 @@ function SimonSaysGame({ game, myId, sendAction }) {
       </div>
       <div className="grid-2 gap-md w-full">
         {['RED', 'BLUE', 'GREEN', 'YELLOW'].map(c => (
-          <button key={c} className="btn" style={{ background: c, height: 80, border: '4px solid rgba(255,255,255,0.2)' }} onClick={() => sendAction('answer', c)}></button>
+          <button key={c} className="btn" style={{ background: c, aspectRatio: '2/1', border: '4px solid rgba(255,255,255,0.2)' }} onClick={() => sendAction('answer', c)}></button>
         ))}
       </div>
     </div>
@@ -538,8 +546,19 @@ function SecretChoiceGame({ game, myId, sendAction }) {
       <div className="trivia-question">{game.lang === 'ar' ? 'اختر شيئاً فريداً!' : 'Pick something unique!'}</div>
       <div className="grid-4 gap-sm w-full">
         {game.options.map(opt => (
-          <button key={opt} className={`btn ${myAns === opt ? 'btn--primary' : 'btn--secondary'}`} 
-                  style={{ fontSize: '2.5rem', height: '100px', background: myAns === opt ? 'var(--theme-primary)' : '' }} onClick={() => sendAction('secret_choice', opt)} disabled={!!myAns}>{opt}</button>
+          <button 
+            key={opt} 
+            className={`btn ${myAns === opt ? 'btn--primary' : 'btn--secondary'}`} 
+            style={{ 
+              fontSize: 'clamp(1.2rem, 5vw, 2.5rem)', 
+              aspectRatio: '1/1', 
+              background: myAns === opt ? 'var(--theme-primary)' : '' 
+            }} 
+            onClick={() => sendAction('secret_choice', opt)} 
+            disabled={!!myAns}
+          >
+            {opt}
+          </button>
         ))}
       </div>
       {myAns && <div className="badge badge--green mt-sm" style={{ alignSelf: 'center' }}>{game.lang === 'ar' ? 'تم الاختيار! ✅' : 'Choice locked! ✅'}</div>}
