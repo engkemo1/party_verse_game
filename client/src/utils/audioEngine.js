@@ -30,9 +30,9 @@ class AudioEngine {
     }
 
     const musicMap = {
-      lobby: "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3",
-      playing: "http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3",
-      final: "http://codeskulptor-demos.commondatastorage.googleapis.com/descent/got_item.mp3"
+      lobby: "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3",
+      playing: "https://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3",
+      final: "https://codeskulptor-demos.commondatastorage.googleapis.com/descent/got_item.mp3"
     };
 
     try {
