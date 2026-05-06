@@ -1861,7 +1861,11 @@ io.on("connection", (socket) => {
     }
 
     if (allDone) {
-      room.game.timeLeft = 0; // Trigger tick logic to end challenge immediately
+      // Small delay before finishing to let players see feedback
+      setTimeout(() => {
+        const r = rooms[room.id];
+        if (r && r.game) r.game.timeLeft = 0;
+      }, 1500);
     }
   }
 

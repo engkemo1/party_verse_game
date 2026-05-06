@@ -366,7 +366,11 @@ function MemoryFlashGame({ game, myId, sendAction }) {
               <button 
                 key={e} 
                 className={`btn ${myAns === e ? 'btn--primary' : 'btn--secondary'}`} 
-                style={{ fontSize: '3rem', height: '110px', background: myAns === e ? 'var(--theme-primary)' : '' }} 
+                style={{ 
+                  fontSize: 'clamp(1.5rem, 6vw, 3rem)', 
+                  aspectRatio: '1/1',
+                  background: myAns === e ? 'var(--theme-primary)' : '' 
+                }} 
                 onClick={() => sendAction('memory_answer', e)} 
                 disabled={!!myAns}
               >
@@ -566,7 +570,7 @@ function FakeButtonsGame({ game, myId, sendAction }) {
   return (
     <div className="flex-col gap-md items-center">
       <div className="trivia-question" style={{ fontSize: '1.2rem', opacity: 0.8 }}>{game.lang === 'ar' ? 'واحد منهم حقيقي...' : 'One of these is real...'}</div>
-      <div className="grid-3 gap-sm">
+      <div className="grid-3 gap-sm w-full" style={{ maxWidth: '350px' }}>
         {Array.from({ length: 9 }).map((_, i) => {
           const isReal = i === correctIdx;
           return (
@@ -574,9 +578,9 @@ function FakeButtonsGame({ game, myId, sendAction }) {
               key={i} 
               className={`btn ${myAns === i ? (isReal ? 'btn--success' : 'btn--danger') : 'btn--secondary'}`} 
               style={{ 
-                height: '100px',
-                width: '100px',
-                fontSize: '2rem',
+                aspectRatio: '1/1',
+                width: '100%',
+                fontSize: 'clamp(1.5rem, 5vw, 2.5rem)',
                 boxShadow: isReal ? '0 0 8px rgba(255,255,255,0.2)' : 'none',
                 background: myAns === i ? (isReal ? 'var(--neon-green)' : 'var(--hot-pink)') : '',
                 color: myAns === i ? 'black' : 'white'

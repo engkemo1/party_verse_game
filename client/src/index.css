@@ -87,25 +87,19 @@ body {
 /* ─── Main Container ─── */
 .main-container {
   width: 100%;
-  max-width: clamp(320px, 90vw, 420px);
+  max-width: 420px;
   min-height: 100dvh;
-  padding: clamp(16px, 4vw, 24px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-}
+  padding: 16px;
+  margin: 0 auto;
 
 /* ─── Premium Buttons ─── */
 .btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
   width: 100%;
-  padding: clamp(16px, 4vw, 20px) clamp(24px, 6vw, 36px);
+  padding: 14px 20px;
   border: 1px solid var(--glass-border);
   border-radius: 20px;
   font-family: 'Outfit', sans-serif;
@@ -390,19 +384,9 @@ body {
   margin-bottom: 24px;
 }
 
-.grid-2 {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  width: 100%;
-}
-
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  width: 100%;
-}
+.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; width: 100%; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; width: 100%; }
 
 @media (max-width: 380px) {
   .player-grid, .grid-3 {
@@ -1057,7 +1041,7 @@ body {
 .items-center { align-items: center; }
 .justify-center { justify-content: center; }
 
-.grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); }
+
 .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); }
 .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); }
 
