@@ -1,20 +1,16 @@
 # Use Node.js 18 as the base image
-FROM node:18-slim
+FROM node:18
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the root package.json
-COPY package.json ./
-
-# Install dependencies for both client and server
-# We use a custom script to handle the monorepo structure
+# Copy everything
 COPY . .
-RUN npm install
-RUN cd client && npm install && npm run build
-RUN cd server && npm install
 
-# Expose the port (Hugging Face Spaces default to 7860)
+# Install dependencies (this automatically triggers the postinstall script in package.json to build the client and install server dependencies)
+RUN npm install
+
+# Expose the port (Railway will use its own PORT env var, but we keep 7860 as fallback)
 EXPOSE 7860
 
 # Start the server
