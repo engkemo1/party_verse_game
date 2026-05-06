@@ -672,8 +672,8 @@ function calcRoundScores(room) {
   switch (activeChallenge.type) {
     case "COLOR_GRID":
     case "CLICK_FAST":
-    case "CHAOS_TAP":
-    case "COLOR_GRID": {
+    case "CHAOS_TAP": {
+      const isReverse = activeChallenge.trick?.type === 'LEAST_CHOSEN_WINS';
       ranked = Object.entries(activeChallenge.clicks || activeChallenge.scores || {})
         .map(([id, c]) => ({ id, val: c }))
         .sort((a, b) => isReverse ? a.val - b.val : b.val - a.val);
