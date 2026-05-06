@@ -360,15 +360,38 @@ async function generateAdaptiveRound(room) {
   // Dynamic Playlist Count: 3 to 7 based on difficulty
   const challengeCount = 3 + Math.floor(baseDifficulty / 1.5);
   
-  // Mixed mode variety: 20% chance to pull a challenge from another pool
-  const allChallengeIds = Object.keys(CHALLENGE_POOL);
+  const contentHeavyGames = ["TRIVIA", "TRUE_FALSE", "SCRAMBLED_WORD", "SPEED_MATH", "FIND_THE_ODD", "FINISH_SENTENCE", "EMOJI_GUESS", "ONE_VS_ALL", "ESTIMATION"];
+  const repetitiveGames = ["DONT_PRESS", "SPAM_STOP", "FAKE_BUTTONS", "REACTION_TIME", "WHACK_A_MOLE", "CLICK_FAST", "CHAOS_TAP", "NEON_DASH", "COLOR_GRID", "SIMON_SAYS"];
+
   const selection = [];
+  
+  // Get available games for this mode that haven't been played yet
+  let modeAvailable = primaryMode.collections.filter(id => !room.playedTypes.has(id) || contentHeavyGames.includes(id));
+  
   for (let i = 0; i < challengeCount; i++) {
-    if (Math.random() < 0.2) {
-      selection.push(CHALLENGE_POOL[pickRandom(allChallengeIds)]);
+    let chosenId;
+    
+    // 70% chance to pick a content-heavy game if available, to increase variety and challenge
+    const modeContentGames = modeAvailable.filter(id => contentHeavyGames.includes(id));
+    const modeActionGames = modeAvailable.filter(id => repetitiveGames.includes(id));
+
+    if (Math.random() < 0.7 && modeContentGames.length > 0) {
+      chosenId = pickRandom(modeContentGames);
+    } else if (modeActionGames.length > 0) {
+      chosenId = pickRandom(modeActionGames);
+    } else if (modeAvailable.length > 0) {
+      chosenId = pickRandom(modeAvailable);
     } else {
-      selection.push(CHALLENGE_POOL[pickRandom(primaryMode.collections)]);
+      // Fallback if everything is played: just pick any content game
+      chosenId = pickRandom(contentHeavyGames);
     }
+
+    // If it's a repetitive game, remove it from available pool so it doesn't appear again
+    if (repetitiveGames.includes(chosenId)) {
+      modeAvailable = modeAvailable.filter(id => id !== chosenId);
+    }
+
+    selection.push(CHALLENGE_POOL[chosenId]);
   }
 
   return {
