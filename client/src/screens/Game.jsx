@@ -673,9 +673,6 @@ function ColorGridGame({ game, myId, sendAction }) {
     </div>
   );
 }
-    </div>
-  );
-}
 
 function InvisibleMazeGame({ game, myId, sendAction }) {
   const [showPath, setShowPath] = useState(true);

@@ -9,7 +9,10 @@ const TRIVIA = {
     { id: "t5", text: "كم كمية التراب الموجودة في حفرة عمقها 3 أمتار وعرضها 6 أمتار؟", answers: ["18 متر", "لا يوجد", "54 متر", "حسب نوع التربة"], correctIndex: 1, difficulty: 5 },
     { id: "t6", text: "أيهما أثقل: طن من الذهب أم طن من الريش؟", answers: ["الذهب", "الريش", "متساويان", "حسب الحجم"], correctIndex: 2, difficulty: 5 },
     { id: "t7", text: "ما هي إجابة هذا السؤال؟", answers: ["هذه", "لا، هذه", "خطأ", "صح"], correctIndex: 3, difficulty: 5 },
-    { id: "t8", text: "إذا كانت 3 قطط تصطاد 3    { id: "t11", text: "كم عدد أرجل العنكبوت؟", answers: ["6", "8", "10", "12"], correctIndex: 1 },
+    { id: "t8", text: "إذا كانت 3 قطط تصطاد 3 فئران في 3 دقائق، كم قطة نحتاج لاصطياد 100 فأر في 100 دقيقة؟", answers: ["100", "3", "33", "1"], correctIndex: 1, difficulty: 5 },
+    { id: "t9", text: "اقسم 30 على 1/2 واجمع 10. ما هي النتيجة؟", answers: ["25", "70", "40", "15"], correctIndex: 1, difficulty: 5 },
+    { id: "t10", text: "ما هو أعلى جبل في العالم قبل اكتشاف قمة إيفرست؟", answers: ["K2", "فوجي", "إيفرست", "كليمنجارو"], correctIndex: 2, difficulty: 5 },
+    { id: "t11", text: "كم عدد أرجل العنكبوت؟", answers: ["6", "8", "10", "12"], correctIndex: 1 },
     { id: "t12", text: "ما هو الكوكب الأحمر؟", answers: ["الزهرة", "المريخ", "المشتري", "عطارد"], correctIndex: 1 },
     { id: "t13", text: "ما هو أسرع حيوان بري؟", answers: ["الأسد", "الفهد", "النمر", "الحصان"], correctIndex: 1 },
     { id: "t14", text: "ما هو لون الزمرد؟", answers: ["أزرق", "أحمر", "أخضر", "أصفر"], correctIndex: 2 },
@@ -41,12 +44,6 @@ const TRIVIA = {
     { id: "t18", text: "In which continent is Egypt located?", answers: ["Asia", "Africa", "Europe", "North America"], correctIndex: 1 },
     { id: "t19", text: "Who painted the Mona Lisa?", answers: ["Van Gogh", "Picasso", "Leonardo da Vinci", "Michelangelo"], correctIndex: 2 },
     { id: "t20", text: "What is the smallest planet in our solar system?", answers: ["Mars", "Mercury", "Venus", "Neptune"], correctIndex: 1 }
-  ]vered?", answers: ["K2", "Mount Fuji", "Mount Everest", "Kilimanjaro"], correctIndex: 2, difficulty: 5 },
-    { id: "t11", text: "How many legs does a spider have?", answers: ["6", "8", "10", "12"], correctIndex: 1 },
-    { id: "t12", text: "What is the red planet?", answers: ["Venus", "Mars", "Jupiter", "Mercury"], correctIndex: 1 },
-    { id: "t13", text: "What is the fastest land animal?", answers: ["Lion", "Cheetah", "Tiger", "Horse"], correctIndex: 1 },
-    { id: "t14", text: "What color is an emerald?", answers: ["Blue", "Red", "Green", "Yellow"], correctIndex: 2 },
-    { id: "t15", text: "How many colors are in a rainbow?", answers: ["5", "6", "7", "8"], correctIndex: 2 }
   ],
 };
 
