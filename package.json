@@ -10,6 +10,6 @@
     "postinstall": "npm run install-server && npm run build"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.19.0"
   }
 }
