@@ -55,8 +55,8 @@ export function RewardedAd({ onComplete, lang }) {
           <div className="ad-timer">15s</div>
         </div>
         
-        {/* AdSense Rewarded Unit would go here */}
-        <AdSense slot="REWARDED_PLACEHOLDER" format="fluid" style={{ display: 'block', width: '300px', height: '250px' }} />
+        {/* Multiplex / Interstitial Ad Unit */}
+        <AdSense slot="8689341553" format="autorelaxed" style={{ display: 'block', width: '100%', minHeight: '250px' }} />
 
         <div className="ad-footer">
           <p>{lang === 'ar' ? 'شاهد الإعلان للحصول على مكافأة في الجولة القادمة!' : 'Watch to get a bonus in the next round!'}</p>
