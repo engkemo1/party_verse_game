@@ -1269,8 +1269,7 @@ async function startNextRound(roomId) {
     room.lastResults = Object.values(room.players)
       .sort((a, b) => b.score - a.score)
       .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
-    Object.values(room.players).forEach(p => p.ready = (p.id === room.hostId));
-    room.phase = "LOBBY";
+    room.phase = "FINAL_RESULT";
     room.game = null;
     io.to(roomId).emit("room_update", serializeRoom(room));
     return;
@@ -1578,8 +1577,7 @@ io.on("connection", (socket) => {
             .sort((a, b) => b.score - a.score)
             .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
 
-          Object.values(room.players).forEach(p => p.ready = (p.id === room.hostId));
-          room.phase = "LOBBY";
+          room.phase = "FINAL_RESULT";
           room.game = null;
           io.to(roomId).emit("room_update", serializeRoom(room));
         } else {
