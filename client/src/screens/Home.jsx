@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSocket } from '../SocketContext';
+import AdSense from '../components/AdSense';
 
 export default function Home({ onShowRules }) {
   const { createRoom, joinRoom, error, lang, setLang } = useSocket();
