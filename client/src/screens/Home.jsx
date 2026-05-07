@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useSocket } from '../SocketContext';
 
-export default function Home() {
+export default function Home({ onShowRules }) {
   const { createRoom, joinRoom, error, lang, setLang } = useSocket();
   const [tab, setTab] = useState('join'); // 'join' or 'create'
+
   const [name, setName] = useState('');
   const [code, setCode] = useState('');
 
@@ -106,6 +107,15 @@ export default function Home() {
           </button>
         </div>
       </div>
+      
+      {/* How to Play Button */}
+      <button 
+        className="btn btn--secondary btn--small" 
+        onClick={onShowRules}
+        style={{ marginTop: '16px', background: 'transparent', border: 'none', textDecoration: 'underline' }}
+      >
+        {isRtl ? '📖 كيف تلعب؟' : '📖 How to Play?'}
+      </button>
     </div>
   );
 }
