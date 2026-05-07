@@ -157,107 +157,107 @@ const GAME_MODES = {
 };
 
 const CHALLENGE_POOL = {
-  COLOR_GRID: { 
+  COLOR_GRID: {
     type: "COLOR_GRID", duration: 15, difficultyScale: 0.8,
     label: { en: "SHARP EYE", ar: "العين الثاقبة" },
     description: { en: "Find the square with a different color!", ar: "ابحث عن المربع ذو اللون المختلف!" }
   },
-  NEON_DASH: { 
+  NEON_DASH: {
     type: "NEON_DASH", duration: 12, difficultyScale: 1.2,
     label: { en: "NEON DASH", ar: "الوميض النيوني" },
     description: { en: "Tap the moving NEON targets!", ar: "اضغط على الأهداف النيونية المتحركة!" }
   },
-  REACTION_TIME: { 
+  REACTION_TIME: {
     type: "REACTION_TIME", duration: 15, difficultyScale: 0.7,
     label: { en: "REACTION TEST", ar: "اختبار رد الفعل" },
     description: { en: "Tap as soon as it turns BLUE!", ar: "اضغط فور أن يتحول اللون إلى الأزرق!" }
   },
-  SPEED_MATH: { 
+  SPEED_MATH: {
     type: "SPEED_MATH", duration: 12, difficultyScale: 0.9,
     label: { en: "FAST MATH", ar: "الحساب السريع" },
     description: { en: "Solve the equation before time runs out!", ar: "حل المعادلة قبل انتهاء الوقت!" }
   },
-  WHACK_A_MOLE: { 
+  WHACK_A_MOLE: {
     type: "WHACK_A_MOLE", duration: 12, difficultyScale: 0.8,
     label: { en: "MOLE HUNTER", ar: "صياد الخلد" },
     description: { en: "Tap the moles as they appear!", ar: "اضغط على الخلد فور ظهوره!" }
   },
-  TRIVIA: { 
+  TRIVIA: {
     type: "TRIVIA", duration: 12, difficultyScale: 0.6,
     label: { en: "TRIVIA TIME", ar: "وقت المعلومات" },
     description: { en: "Choose the correct answer!", ar: "اختر الإجابة الصحيحة!" }
   },
-  TRUE_FALSE: { 
+  TRUE_FALSE: {
     type: "TRUE_FALSE", duration: 10, difficultyScale: 0.6,
     label: { en: "TRUE OR FALSE", ar: "صح أم خطأ" },
     description: { en: "Decide if the statement is true!", ar: "قرر ما إذا كانت العبارة صحيحة!" }
   },
-  EMOJI_GUESS: { 
+  EMOJI_GUESS: {
     type: "EMOJI_GUESS", duration: 12, difficultyScale: 0.7,
     label: { en: "EMOJI GUESS", ar: "خمن الإيموجي" },
     description: { en: "What does this emoji set represent?", ar: "ماذا تمثل هذه المجموعة من الإيموجي؟" }
   },
-  ESTIMATION: { 
+  ESTIMATION: {
     type: "ESTIMATION", duration: 15, difficultyScale: 0.8,
     label: { en: "GUESS IT", ar: "خمن العدد" },
     description: { en: "Estimate the correct number!", ar: "خمن العدد الصحيح!" }
   },
-  SCRAMBLED_WORD: { 
+  SCRAMBLED_WORD: {
     type: "SCRAMBLED_WORD", duration: 15, difficultyScale: 1.0,
     label: { en: "WORD SCRAMBLE", ar: "كلمات مبعثرة" },
     description: { en: "Unscramble the letters to form a word!", ar: "رتب الحروف لتكوين كلمة صحيحة!" }
   },
-  CHAOS_TAP: { 
+  CHAOS_TAP: {
     type: "CHAOS_TAP", duration: 10, difficultyScale: 0.9,
     label: { en: "CHAOS CLICKER", ar: "ناقر الفوضى" },
     description: { en: "Tap as fast as you can!", ar: "اضغط بأسرع ما يمكن!" }
   },
-  COLOR_MATCH: { 
+  COLOR_MATCH: {
     type: "COLOR_MATCH", duration: 12, difficultyScale: 0.8,
     label: { en: "COLOR MATCH", ar: "تطابق الألوان" },
     description: { en: "Tap the WORD, not the color you see!", ar: "اضغط على الكلمة، وليس اللون الذي تراه!" }
   },
-  MEMORY_FLASH: { 
+  MEMORY_FLASH: {
     type: "MEMORY_FLASH", duration: 15, difficultyScale: 1.1,
     label: { en: "MEMORY TEST", ar: "اختبار الذاكرة" },
     description: { en: "Memorize the sequence!", ar: "احفظ التسلسل الظاهر!" }
   },
-  FAKE_BUTTONS: { 
+  FAKE_BUTTONS: {
     type: "FAKE_BUTTONS", duration: 10, difficultyScale: 1.0,
     label: { en: "FAKE OUT", ar: "الفخ" },
     description: { en: "Find the ONLY real button!", ar: "ابحث عن الزر الحقيقي الوحيد!" }
   },
-  SPAM_STOP: { 
+  SPAM_STOP: {
     type: "SPAM_STOP", duration: 12, difficultyScale: 1.0,
     label: { en: "SPAM & STOP", ar: "اضغط وقف" },
     description: { en: "Spam TAP, but STOP when it turns RED!", ar: "اضغط بسرعة، لكن توقف عندما يصبح اللون أحمر!" }
   },
-  FAST_TYPE: { 
+  FAST_TYPE: {
     type: "FAST_TYPE", duration: 12, difficultyScale: 0.9,
     label: { en: "SPEED TYPE", ar: "كتابة سريعة" },
     description: { en: "Type the word as fast as you can!", ar: "اكتب الكلمة بأسرع ما يمكن!" }
   },
-  DONT_PRESS: { 
+  DONT_PRESS: {
     type: "DONT_PRESS", duration: 10, difficultyScale: 0.5,
     label: { en: "DON'T PRESS!", ar: "لا تضغط!" },
     description: { en: "Whatever you do, DON'T press the button!", ar: "مهما حصل، لا تضغط الزر!" }
   },
-  SIMON_SAYS: { 
+  SIMON_SAYS: {
     type: "SIMON_SAYS", duration: 15, difficultyScale: 0.9,
     label: { en: "SIMON SAYS", ar: "سيمون يقول" },
     description: { en: "Repeat the color sequence!", ar: "كرر تسلسل الألوان!" }
   },
-  ONE_VS_ALL: { 
+  ONE_VS_ALL: {
     type: "ONE_VS_ALL", duration: 12, difficultyScale: 0.7,
     label: { en: "FIRST TO ANSWER", ar: "الأسرع يفوز" },
     description: { en: "The first player to answer correctly wins it all!", ar: "أول لاعب يجيب بشكل صحيح يفوز بالكل!" }
   },
-  REVENGE_ROUND: { 
+  REVENGE_ROUND: {
     type: "REVENGE_ROUND", duration: 10, difficultyScale: 1.0,
     label: { en: "REVENGE", ar: "الانتقام" },
     description: { en: "The player in last place picks a lucky number!", ar: "اللاعب في المركز الأخير يختار رقم الحظ!" }
   },
-  SUDDEN_DEATH: { 
+  SUDDEN_DEATH: {
     type: "SUDDEN_DEATH", duration: 8, difficultyScale: 1.5,
     label: { en: "SUDDEN DEATH", ar: "الموت المفاجئ" },
     description: { en: "First one to tap wins!", ar: "أول واحد يضغط يكسب!" }
@@ -345,7 +345,7 @@ const GLOBAL_MODIFIERS = [
 async function generateAdaptiveRound(room) {
   const roundIdx = room.currentRound;
   const baseDifficulty = Math.min(1 + Math.floor(roundIdx / 3), 5);
-  
+
   // Seed for AI Consistency
   const seed = `${room.id}_${roundIdx}_${new Date().toISOString().split('T')[0]}`;
 
@@ -364,18 +364,18 @@ async function generateAdaptiveRound(room) {
 
   // Dynamic Playlist Count: 3 to 7 based on difficulty
   const challengeCount = 3 + Math.floor(baseDifficulty / 1.5);
-  
+
   const contentHeavyGames = ["TRIVIA", "TRUE_FALSE", "SCRAMBLED_WORD", "SPEED_MATH", "FINISH_SENTENCE", "EMOJI_GUESS", "ONE_VS_ALL", "ESTIMATION", "PATTERN_MASTER"];
   const repetitiveGames = ["DONT_PRESS", "SPAM_STOP", "FAKE_BUTTONS", "REACTION_TIME", "WHACK_A_MOLE", "CLICK_FAST", "CHAOS_TAP", "NEON_DASH", "SIMON_SAYS", "ARROW_DASH"];
 
   const selection = [];
-  
+
   // Get available games for this mode that haven't been played yet
   let modeAvailable = primaryMode.collections.filter(id => !room.playedTypes.has(id) || contentHeavyGames.includes(id));
-  
+
   for (let i = 0; i < challengeCount; i++) {
     let chosenId;
-    
+
     // 70% chance to pick a content-heavy game if available, to increase variety and challenge
     const modeContentGames = modeAvailable.filter(id => contentHeavyGames.includes(id));
     const modeActionGames = modeAvailable.filter(id => repetitiveGames.includes(id));
@@ -412,7 +412,7 @@ async function generateAdaptiveRound(room) {
 
 function getUnused(bank, usedIds, lang, type = null) {
   const langBank = bank[lang] || bank.ar;
-  
+
   // Filter for category variety if possible
   const available = langBank.filter((q) => !usedIds.has(q.id) && !globalUsedIds.has(q.id));
 
@@ -439,7 +439,7 @@ function getUnused(bank, usedIds, lang, type = null) {
     globalUsedIds.clear();
     saveAIMemory();
   }
-  
+
   usedIds.clear();
   return pickRandom(langBank);
 }
@@ -711,7 +711,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
       const path = [];
       let current = Math.floor(Math.random() * (size * size));
       path.push(current);
-      
+
       for (let i = 1; i < pathLength; i++) {
         const moves = [];
         const r = Math.floor(current / size);
@@ -720,7 +720,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
         if (r < size - 1) moves.push(current + size); // Down
         if (c > 0) moves.push(current - 1); // Left
         if (c < size - 1) moves.push(current + 1); // Right
-        
+
         const validMoves = moves.filter(m => !path.includes(m));
         if (validMoves.length === 0) break; // Dead end fallback
         current = pickRandom(validMoves);
@@ -818,7 +818,7 @@ function calcRoundScores(room) {
   const pointTable = [500, 350, 250, 200, 150, 100, 75, 50, 50, 50];
   const trick = activeChallenge.trick;
   let ranked = [];
-  
+
   // Track winners for streaks
   let roundWinners = new Set();
 
@@ -858,9 +858,9 @@ function calcRoundScores(room) {
       const temp = room.players[id1].score;
       room.players[id1].score = room.players[id2].score;
       room.players[id2].score = temp;
-      io.to(room.id).emit("chaos_event", { 
-        type: 'BETRAYAL', 
-        message: room.lang === 'ar' 
+      io.to(room.id).emit("chaos_event", {
+        type: 'BETRAYAL',
+        message: room.lang === 'ar'
           ? `😱 خيانة! تم تبديل نقاط ${room.players[id1].name} و ${room.players[id2].name}!`
           : `😱 BETRAYAL! ${room.players[id1].name} and ${room.players[id2].name} swapped scores!`
       });
@@ -894,7 +894,7 @@ function calcRoundScores(room) {
           const pointsPerAction = activeChallenge.type === "COLOR_GRID" ? 40 : 15; // Color grid is harder than clicking
           const basePoints = entry.val * pointsPerAction;
           const rankBonus = [500, 300, 200, 100, 50][idx] || 0;
-          
+
           room.players[entry.id].score += (basePoints + rankBonus) * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
         }
@@ -935,7 +935,7 @@ function calcRoundScores(room) {
       const correctAns = activeChallenge.correctIndex !== undefined ? activeChallenge.answers?.[activeChallenge.correctIndex] : activeChallenge.correctAnswer;
       const oddIdx = activeChallenge.oddIndex;
       const targetWord = activeChallenge.targetWord;
-      
+
       // Filter players who answered correctly
       const correctPlayers = Object.entries(activeChallenge.playerAnswers || {})
         .filter(([id, ans]) => {
@@ -1168,11 +1168,11 @@ function calcRoundScores(room) {
         bids.forEach(([_, amount]) => {
           bidCounts[amount] = (bidCounts[amount] || 0) + 1;
         });
-        
+
         // Find highest unique bid
         let highestUniqueBid = -1;
         let winnerId = null;
-        
+
         bids.forEach(([id, amount]) => {
           if (room.players[id]) {
             room.players[id].score -= amount; // Everyone loses their bid
@@ -1225,11 +1225,11 @@ function calcRoundScores(room) {
     if (roundWinners.has(id)) {
       p.winStreak = (p.winStreak || 0) + 1;
       if (p.winStreak >= 3) {
-        room.viralHighlights.push(room.lang === 'ar' 
-          ? `🔥 ${p.name} على النار! ${p.winStreak} فوز متتالي!` 
+        room.viralHighlights.push(room.lang === 'ar'
+          ? `🔥 ${p.name} على النار! ${p.winStreak} فوز متتالي!`
           : `🔥 ${p.name} IS ON FIRE! ${p.winStreak} wins in a row!`);
       }
-    } else if (activeChallenge.type !== "SOCIAL_VOTE") { 
+    } else if (activeChallenge.type !== "SOCIAL_VOTE") {
       p.winStreak = 0;
     }
   });
@@ -1310,7 +1310,7 @@ async function startNextRound(roomId) {
     label: playlist[0].label,
     startTime: Date.now()
   };
-  
+
   room.game.playlist[0].startTime = Date.now();
 
   room.phase = "PLAYING";
@@ -1320,708 +1320,709 @@ async function startNextRound(roomId) {
   localTimers.set(roomId, {});
   const timers = localTimers.get(roomId);
 
-    try {
-      const r = rooms[roomId];
-      if (!r || r.phase !== "PLAYING" || !r.game) {
-        clearRoomTimers(roomId);
-        return;
-      }
+  try {
+    const r = rooms[roomId];
+    if (!r || r.phase !== "PLAYING" || !r.game) {
+      clearRoomTimers(roomId);
+      return;
+    }
 
-      r.game.timeLeft--;
-      const currentChallenge = r.game.playlist[r.game.activeIndex];
-      currentChallenge.timeLeft = r.game.timeLeft;
+    r.game.timeLeft--;
+    const currentChallenge = r.game.playlist[r.game.activeIndex];
+    currentChallenge.timeLeft = r.game.timeLeft;
 
-      // Special per-tick game logic
-      if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
-        const elapsed = currentChallenge.duration - r.game.timeLeft;
-        if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
-          currentChallenge.showPhase = false;
-          io.to(roomId).emit("room_update", serializeRoom(r));
-        }
+    // Special per-tick game logic
+    if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
+      const elapsed = currentChallenge.duration - r.game.timeLeft;
+      if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
+        currentChallenge.showPhase = false;
+        io.to(roomId).emit("room_update", serializeRoom(r));
       }
-      if (currentChallenge.type === 'SPAM_STOP') {
-        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-        if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
-          currentChallenge.isStopped = true;
-          io.to(roomId).emit("room_update", serializeRoom(r));
-        }
+    }
+    if (currentChallenge.type === 'SPAM_STOP') {
+      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+      if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
+        currentChallenge.isStopped = true;
+        io.to(roomId).emit("room_update", serializeRoom(r));
       }
-      // REACTION_TIME: trigger GO phase after delay
-      if (currentChallenge.type === 'REACTION_TIME') {
-        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-        if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
-          currentChallenge.reactPhase = 'GO';
-          currentChallenge.goTime = Date.now();
-          io.to(roomId).emit("room_update", serializeRoom(r));
-        }
+    }
+    // REACTION_TIME: trigger GO phase after delay
+    if (currentChallenge.type === 'REACTION_TIME') {
+      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+      if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
+        currentChallenge.reactPhase = 'GO';
+        currentChallenge.goTime = Date.now();
+        io.to(roomId).emit("room_update", serializeRoom(r));
       }
-      // DONT_PRESS: bomb timer
-      if (currentChallenge.type === 'DONT_PRESS') {
-        if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
-        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-        if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
-          currentChallenge.exploded = true;
-          io.to(roomId).emit("room_update", serializeRoom(r));
-        }
+    }
+    // DONT_PRESS: bomb timer
+    if (currentChallenge.type === 'DONT_PRESS') {
+      if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
+      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+      if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
+        currentChallenge.exploded = true;
+        io.to(roomId).emit("room_update", serializeRoom(r));
       }
+    }
 
-      if (r.game.timeLeft <= 0) {
-        calcRoundScores(r);
-        if (r.game.activeIndex < r.game.playlist.length - 1) {
-          r.game.activeIndex++;
-          const next = r.game.playlist[r.game.activeIndex];
-          next.startTime = Date.now();
-          r.game.timeLeft = next.duration;
-          r.game.type = next.type;
-          r.game.label = next.label;
-          io.to(roomId).emit("room_update", serializeRoom(r));
-        } else {
-          clearInterval(timers.tickInterval);
-          finishRound(roomId);
-        }
+    if (r.game.timeLeft <= 0) {
+      calcRoundScores(r);
+      if (r.game.activeIndex < r.game.playlist.length - 1) {
+        r.game.activeIndex++;
+        const next = r.game.playlist[r.game.activeIndex];
+        next.startTime = Date.now();
+        r.game.timeLeft = next.duration;
+        r.game.type = next.type;
+        r.game.label = next.label;
+        io.to(roomId).emit("room_update", serializeRoom(r));
       } else {
-        io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
+        clearInterval(timers.tickInterval);
+        finishRound(roomId);
       }
-    } catch (e) {
-      logger.error("LOOP", `Error in tick interval for ${roomId}: ${e.message}`);
-      // Don't clear timers, just log and hope it recovers next tick
+    } else {
+      io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
     }
-  }, 1000);
-}
-
-function finishRound(roomId) {
-  const r = rooms[roomId];
-  if (!r) return;
-
-  if (r.currentRound >= r.totalRounds) {
-    // Game truly finished
-    r.lastResults = Object.values(r.players)
-      .sort((a, b) => b.score - a.score)
-      .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
-
-    // Reset for next game
-    Object.values(r.players).forEach(p => {
-      p.score = 0;
-      p.ready = (p.id === r.hostId);
-    });
-    
-    r.phase = "LOBBY";
-    r.currentRound = 0;
-    r.game = null;
-    io.to(roomId).emit("room_update", serializeRoom(r));
-  } else {
-    r.phase = "ROUND_RESULT";
-    r.game = null;
-    r.isNextRoundTriggered = false;
-    io.to(roomId).emit("room_update", serializeRoom(r));
+  } catch (e) {
+    logger.error("LOOP", `Error in tick interval for ${roomId}: ${e.message}`);
+    // Don't clear timers, just log and hope it recovers next tick
   }
-}
 
-// ─── Rate Limiter (Anti-Spam) ───
-const rateLimits = new Map();
-function checkRateLimit(socketId) {
-  const now = Date.now();
-  if (!rateLimits.has(socketId)) {
-    rateLimits.set(socketId, { count: 1, lastTime: now });
+
+
+  function finishRound(roomId) {
+    const r = rooms[roomId];
+    if (!r) return;
+
+    if (r.currentRound >= r.totalRounds) {
+      // Game truly finished
+      r.lastResults = Object.values(r.players)
+        .sort((a, b) => b.score - a.score)
+        .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
+
+      // Reset for next game
+      Object.values(r.players).forEach(p => {
+        p.score = 0;
+        p.ready = (p.id === r.hostId);
+      });
+
+      r.phase = "LOBBY";
+      r.currentRound = 0;
+      r.game = null;
+      io.to(roomId).emit("room_update", serializeRoom(r));
+    } else {
+      r.phase = "ROUND_RESULT";
+      r.game = null;
+      r.isNextRoundTriggered = false;
+      io.to(roomId).emit("room_update", serializeRoom(r));
+    }
+  }
+
+  // ─── Rate Limiter (Anti-Spam) ───
+  const rateLimits = new Map();
+  function checkRateLimit(socketId) {
+    const now = Date.now();
+    if (!rateLimits.has(socketId)) {
+      rateLimits.set(socketId, { count: 1, lastTime: now });
+      return true;
+    }
+    const data = rateLimits.get(socketId);
+    if (now - data.lastTime > 1000) {
+      data.count = 1;
+      data.lastTime = now;
+      return true;
+    }
+    data.count++;
+    if (data.count > 10) return false; // Max 10 actions per second
     return true;
   }
-  const data = rateLimits.get(socketId);
-  if (now - data.lastTime > 1000) {
-    data.count = 1;
-    data.lastTime = now;
-    return true;
-  }
-  data.count++;
-  if (data.count > 10) return false; // Max 10 actions per second
-  return true;
-}
 
-// ──────────────────────
-// Socket Handlers
-// ──────────────────────
-io.on("connection", (socket) => {
-  logger.info("SOCKET", `Connected: ${socket.id}`);
+  // ──────────────────────
+  // Socket Handlers
+  // ──────────────────────
+  io.on("connection", (socket) => {
+    logger.info("SOCKET", `Connected: ${socket.id}`);
 
-  socket.on("create_room", async ({ playerName, lang, totalRounds }, cb) => {
-    const code = await makeCode();
-    rooms[code] = {
-      id: code,
-      hostId: socket.id,
-      lang: lang || "ar",
-      players: {
-        [socket.id]: {
-          id: socket.id,
-          name: playerName || "Host",
-          avatar: AVATARS[0],
-          color: COLORS[0],
-          score: 0,
-          ready: true,
+    socket.on("create_room", async ({ playerName, lang, totalRounds }, cb) => {
+      const code = await makeCode();
+      rooms[code] = {
+        id: code,
+        hostId: socket.id,
+        lang: lang || "ar",
+        players: {
+          [socket.id]: {
+            id: socket.id,
+            name: playerName || "Host",
+            avatar: AVATARS[0],
+            color: COLORS[0],
+            score: 0,
+            ready: true,
+          },
         },
-      },
-      phase: "LOBBY",
-      currentRound: 0,
-      totalRounds: 5,
-      durationMode: "MEDIUM", // SHORT, MEDIUM, LONG
-      gameMode: "NORMAL", // QUICK, NORMAL, CHAOS
-      selectedModes: [],
-      viralHighlights: [],
-      game: null,
-      previousCategory: null,
-      playedTypes: new Set(),
-      usedQuestionIds: new Set(),
-    };
-    socket.join(code);
-    cb({ success: true, roomId: code, lang: rooms[code].lang });
-    io.to(code).emit("room_update", serializeRoom(rooms[code]));
-  });
+        phase: "LOBBY",
+        currentRound: 0,
+        totalRounds: 5,
+        durationMode: "MEDIUM", // SHORT, MEDIUM, LONG
+        gameMode: "NORMAL", // QUICK, NORMAL, CHAOS
+        selectedModes: [],
+        viralHighlights: [],
+        game: null,
+        previousCategory: null,
+        playedTypes: new Set(),
+        usedQuestionIds: new Set(),
+      };
+      socket.join(code);
+      cb({ success: true, roomId: code, lang: rooms[code].lang });
+      io.to(code).emit("room_update", serializeRoom(rooms[code]));
+    });
 
-  socket.on("join_room", ({ roomId, playerName }, cb) => {
-    const room = rooms[roomId?.toUpperCase()];
-    if (!room) return cb({ success: false, message: "Room not found" });
-    if (room.phase !== "LOBBY") return cb({ success: false, message: "Game already started" });
-    if (Object.keys(room.players).length >= 10) return cb({ success: false, message: "Room is full" });
+    socket.on("join_room", ({ roomId, playerName }, cb) => {
+      const room = rooms[roomId?.toUpperCase()];
+      if (!room) return cb({ success: false, message: "Room not found" });
+      if (room.phase !== "LOBBY") return cb({ success: false, message: "Game already started" });
+      if (Object.keys(room.players).length >= 10) return cb({ success: false, message: "Room is full" });
 
-    const idx = Object.keys(room.players).length;
-    room.players[socket.id] = {
-      id: socket.id,
-      name: playerName || `Player ${idx + 1}`,
-      avatar: AVATARS[idx % AVATARS.length],
-      color: COLORS[idx % COLORS.length],
-      score: 0,
-      ready: false,
-    };
-    socket.join(room.id);
-    cb({ success: true });
-    io.to(room.id).emit("room_update", serializeRoom(room));
-  });
+      const idx = Object.keys(room.players).length;
+      room.players[socket.id] = {
+        id: socket.id,
+        name: playerName || `Player ${idx + 1}`,
+        avatar: AVATARS[idx % AVATARS.length],
+        color: COLORS[idx % COLORS.length],
+        score: 0,
+        ready: false,
+      };
+      socket.join(room.id);
+      cb({ success: true });
+      io.to(room.id).emit("room_update", serializeRoom(room));
+    });
 
-  socket.on("ready_up", ({ roomId }) => {
-    const room = rooms[roomId];
-    if (room && room.players[socket.id]) {
-      room.players[socket.id].ready = !room.players[socket.id].ready;
-      io.to(roomId).emit("room_update", serializeRoom(room));
-    }
-  });
-
-  socket.on("update_settings", ({ roomId, totalRounds, durationMode, gameMode, selectedModes }) => {
-    const room = rooms[roomId];
-    if (room && room.hostId === socket.id) {
-      if (totalRounds) room.totalRounds = totalRounds;
-      if (durationMode) room.durationMode = durationMode;
-      if (selectedModes) room.selectedModes = selectedModes;
-      if (gameMode) {
-        room.gameMode = gameMode;
-        if (gameMode === "QUICK") { room.totalRounds = 10; room.durationMode = "SHORT"; }
-        if (gameMode === "NORMAL") { room.totalRounds = 15; room.durationMode = "MEDIUM"; }
-        if (gameMode === "CHAOS") { room.totalRounds = 20; room.durationMode = "SHORT"; }
+    socket.on("ready_up", ({ roomId }) => {
+      const room = rooms[roomId];
+      if (room && room.players[socket.id]) {
+        room.players[socket.id].ready = !room.players[socket.id].ready;
+        io.to(roomId).emit("room_update", serializeRoom(room));
       }
-      io.to(roomId).emit("room_update", serializeRoom(room));
-    }
-  });
+    });
+
+    socket.on("update_settings", ({ roomId, totalRounds, durationMode, gameMode, selectedModes }) => {
+      const room = rooms[roomId];
+      if (room && room.hostId === socket.id) {
+        if (totalRounds) room.totalRounds = totalRounds;
+        if (durationMode) room.durationMode = durationMode;
+        if (selectedModes) room.selectedModes = selectedModes;
+        if (gameMode) {
+          room.gameMode = gameMode;
+          if (gameMode === "QUICK") { room.totalRounds = 10; room.durationMode = "SHORT"; }
+          if (gameMode === "NORMAL") { room.totalRounds = 15; room.durationMode = "MEDIUM"; }
+          if (gameMode === "CHAOS") { room.totalRounds = 20; room.durationMode = "SHORT"; }
+        }
+        io.to(roomId).emit("room_update", serializeRoom(room));
+      }
+    });
 
 
-  socket.on("chat_message", ({ roomId, text }) => {
-    if (!checkRateLimit(socket.id)) return;
-    const room = rooms[roomId];
-    if (room && text) {
-      // Logic: Only allow full chat in LOBBY, ROUND_RESULT, FINAL_RESULT
-      const allowedPhases = ["LOBBY", "ROUND_RESULT", "FINAL_RESULT"];
-      if (allowedPhases.includes(room.phase)) {
+    socket.on("chat_message", ({ roomId, text }) => {
+      if (!checkRateLimit(socket.id)) return;
+      const room = rooms[roomId];
+      if (room && text) {
+        // Logic: Only allow full chat in LOBBY, ROUND_RESULT, FINAL_RESULT
+        const allowedPhases = ["LOBBY", "ROUND_RESULT", "FINAL_RESULT"];
+        if (allowedPhases.includes(room.phase)) {
+          const msg = {
+            id: Date.now() + Math.random(),
+            senderId: socket.id,
+            senderName: room.players[socket.id]?.name || "Player",
+            text: text.substring(0, 100),
+            time: new Date().toLocaleTimeString(),
+          };
+          io.to(roomId).emit("new_chat_message", msg);
+        }
+      }
+    });
+
+    socket.on("send_reaction", ({ roomId, emoji }) => {
+      if (!checkRateLimit(socket.id)) return;
+      const room = rooms[roomId];
+      if (room) {
+        io.to(roomId).emit("new_reaction", {
+          playerId: socket.id,
+          emoji,
+          x: Math.random() * 80 + 10, // Random horizontal pos
+        });
+      }
+    });
+
+    socket.on("quick_chat", ({ roomId, phrase }) => {
+      const room = rooms[roomId];
+      if (room) {
         const msg = {
-          id: Date.now() + Math.random(),
+          id: Date.now(),
           senderId: socket.id,
           senderName: room.players[socket.id]?.name || "Player",
-          text: text.substring(0, 100),
-          time: new Date().toLocaleTimeString(),
+          text: phrase,
+          isQuick: true
         };
         io.to(roomId).emit("new_chat_message", msg);
       }
-    }
-  });
+    });
 
-  socket.on("send_reaction", ({ roomId, emoji }) => {
-    if (!checkRateLimit(socket.id)) return;
-    const room = rooms[roomId];
-    if (room) {
-      io.to(roomId).emit("new_reaction", {
-        playerId: socket.id,
-        emoji,
-        x: Math.random() * 80 + 10, // Random horizontal pos
-      });
-    }
-  });
-
-  socket.on("quick_chat", ({ roomId, phrase }) => {
-    const room = rooms[roomId];
-    if (room) {
-      const msg = {
-        id: Date.now(),
-        senderId: socket.id,
-        senderName: room.players[socket.id]?.name || "Player",
-        text: phrase,
-        isQuick: true
-      };
-      io.to(roomId).emit("new_chat_message", msg);
-    }
-  });
-
-  socket.on("start_game", ({ roomId }) => {
-    const room = rooms[roomId];
-    if (!room || room.hostId !== socket.id) return;
-    const playerCount = Object.keys(room.players).length;
-    if (playerCount < 2) return; // Minimum 2 players required
-    const allReady = Object.values(room.players).every((p) => p.ready);
-    if (!allReady) return;
-    startNextRound(roomId);
-  });
-
-  socket.on("skip_round", ({ roomId }) => {
-    const room = rooms[roomId];
-    if (room && room.hostId === socket.id && room.phase === "PLAYING") {
-      clearRoomTimers(room);
-      calcRoundScores(room);
-      if (room.currentRound >= room.totalRounds) {
-        room.lastResults = Object.values(room.players)
-          .sort((a, b) => b.score - a.score)
-          .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
-
-        Object.values(room.players).forEach(p => p.ready = (p.id === room.hostId));
-        room.phase = "LOBBY";
-        room.game = null;
-        io.to(roomId).emit("room_update", serializeRoom(room));
-      } else {
-        room.phase = "ROUND_RESULT";
-        room.game = null;
-        room.isNextRoundTriggered = false;
-        io.to(roomId).emit("room_update", serializeRoom(room));
-      }
-    }
-  });
-
-  // Host triggers next round manually
-  socket.on("next_round", ({ roomId }) => {
-    const room = rooms[roomId];
-    if (!room || room.hostId !== socket.id) return;
-    if (room.phase !== "ROUND_RESULT") return;
-    startNextRound(roomId);
-  });
-
-  socket.on("kick_player", ({ roomId, playerId }) => {
-    const room = rooms[roomId];
-    if (room && room.hostId === socket.id && playerId !== socket.id) {
-      const playerSocket = io.sockets.sockets.get(playerId);
-      if (playerSocket) {
-        playerSocket.leave(roomId);
-        playerSocket.emit("kicked");
-      }
-      delete room.players[playerId];
-      io.to(roomId).emit("room_update", serializeRoom(room));
-    }
-  });
-
-  socket.on("game_action", async ({ roomId, action, payload }) => {
-    if (!checkRateLimit(socket.id)) return; // Rate Limiter
-
-    ActionQueue.push(roomId, async () => {
-      // NOTE: In the future when RoomStore is pure Redis, we use:
-      // const room = await RoomStore.get(roomId);
-      // For now, we still read from memory cache for the queue
+    socket.on("start_game", ({ roomId }) => {
       const room = rooms[roomId];
-      if (!room || room.phase !== "PLAYING" || !room.game) return;
+      if (!room || room.hostId !== socket.id) return;
+      const playerCount = Object.keys(room.players).length;
+      if (playerCount < 2) return; // Minimum 2 players required
+      const allReady = Object.values(room.players).every((p) => p.ready);
+      if (!allReady) return;
+      startNextRound(roomId);
+    });
 
-      try {
-        const activeGame = room.game.playlist[room.game.activeIndex];
+    socket.on("skip_round", ({ roomId }) => {
+      const room = rooms[roomId];
+      if (room && room.hostId === socket.id && room.phase === "PLAYING") {
+        clearRoomTimers(room);
+        calcRoundScores(room);
+        if (room.currentRound >= room.totalRounds) {
+          room.lastResults = Object.values(room.players)
+            .sort((a, b) => b.score - a.score)
+            .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
 
-        switch (action) {
-          case "click": {
-            if (activeGame.type === "ARROW_DASH") {
-              const currentIdx = activeGame.playerProgress[socket.id] || 0;
-              const expected = activeGame.sequence[currentIdx];
-              if (payload.direction === expected) {
-                activeGame.playerProgress[socket.id]++;
-                if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
-                  // Done!
-                  io.to(roomId).emit("room_update", serializeRoom(room));
+          Object.values(room.players).forEach(p => p.ready = (p.id === room.hostId));
+          room.phase = "LOBBY";
+          room.game = null;
+          io.to(roomId).emit("room_update", serializeRoom(room));
+        } else {
+          room.phase = "ROUND_RESULT";
+          room.game = null;
+          room.isNextRoundTriggered = false;
+          io.to(roomId).emit("room_update", serializeRoom(room));
+        }
+      }
+    });
+
+    // Host triggers next round manually
+    socket.on("next_round", ({ roomId }) => {
+      const room = rooms[roomId];
+      if (!room || room.hostId !== socket.id) return;
+      if (room.phase !== "ROUND_RESULT") return;
+      startNextRound(roomId);
+    });
+
+    socket.on("kick_player", ({ roomId, playerId }) => {
+      const room = rooms[roomId];
+      if (room && room.hostId === socket.id && playerId !== socket.id) {
+        const playerSocket = io.sockets.sockets.get(playerId);
+        if (playerSocket) {
+          playerSocket.leave(roomId);
+          playerSocket.emit("kicked");
+        }
+        delete room.players[playerId];
+        io.to(roomId).emit("room_update", serializeRoom(room));
+      }
+    });
+
+    socket.on("game_action", async ({ roomId, action, payload }) => {
+      if (!checkRateLimit(socket.id)) return; // Rate Limiter
+
+      ActionQueue.push(roomId, async () => {
+        // NOTE: In the future when RoomStore is pure Redis, we use:
+        // const room = await RoomStore.get(roomId);
+        // For now, we still read from memory cache for the queue
+        const room = rooms[roomId];
+        if (!room || room.phase !== "PLAYING" || !room.game) return;
+
+        try {
+          const activeGame = room.game.playlist[room.game.activeIndex];
+
+          switch (action) {
+            case "click": {
+              if (activeGame.type === "ARROW_DASH") {
+                const currentIdx = activeGame.playerProgress[socket.id] || 0;
+                const expected = activeGame.sequence[currentIdx];
+                if (payload.direction === expected) {
+                  activeGame.playerProgress[socket.id]++;
+                  if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
+                    // Done!
+                    io.to(roomId).emit("room_update", serializeRoom(room));
+                  }
+                } else {
+                  // Mistake penalty or reset?
+                  activeGame.playerProgress[socket.id] = 0; // Reset progress on mistake
                 }
-              } else {
-                // Mistake penalty or reset?
-                activeGame.playerProgress[socket.id] = 0; // Reset progress on mistake
+                return;
               }
-              return;
-            }
-            if (activeGame.type === "SPAM_STOP") {
-              activeGame.failed = ensureSet(activeGame.failed);
-              if (activeGame.isStopped) {
-                activeGame.failed.add(socket.id);
-                io.to(roomId).emit("fail_click", { playerId: socket.id });
-              } else {
-                activeGame.clicks[socket.id] = (activeGame.clicks[socket.id] || 0) + 1;
+              if (activeGame.type === "SPAM_STOP") {
+                activeGame.failed = ensureSet(activeGame.failed);
+                if (activeGame.isStopped) {
+                  activeGame.failed.add(socket.id);
+                  io.to(roomId).emit("fail_click", { playerId: socket.id });
+                } else {
+                  activeGame.clicks[socket.id] = (activeGame.clicks[socket.id] || 0) + 1;
+                  io.to(roomId).emit("score_tick", { playerId: socket.id, clicks: activeGame.clicks });
+                }
+                break;
+              }
+              if (activeGame.clicks && typeof activeGame.clicks[socket.id] !== "undefined") {
+                activeGame.clicks[socket.id]++;
                 io.to(roomId).emit("score_tick", { playerId: socket.id, clicks: activeGame.clicks });
               }
               break;
             }
-            if (activeGame.clicks && typeof activeGame.clicks[socket.id] !== "undefined") {
-              activeGame.clicks[socket.id]++;
-              io.to(roomId).emit("score_tick", { playerId: socket.id, clicks: activeGame.clicks });
-            }
-            break;
-          }
-          case "answer": {
-            if (activeGame.type === "SIMON_SAYS") {
-              const currentIdx = activeGame.playerProgress[socket.id];
-              if (payload === activeGame.sequence[currentIdx]) {
-                activeGame.playerProgress[socket.id]++;
-                if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
-                  activeGame.answerTimes[socket.id] = Date.now();
+            case "answer": {
+              if (activeGame.type === "SIMON_SAYS") {
+                const currentIdx = activeGame.playerProgress[socket.id];
+                if (payload === activeGame.sequence[currentIdx]) {
+                  activeGame.playerProgress[socket.id]++;
+                  if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
+                    activeGame.answerTimes[socket.id] = Date.now();
+                  }
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                } else {
+                  activeGame.playerProgress[socket.id] = 0; // Reset on fail
+                  io.to(socket.id).emit("wrong_answer");
                 }
+                break;
+              }
+              if (activeGame.type === "ONE_VS_ALL" && !activeGame.winnerId) {
+                if (payload === activeGame.answers[activeGame.correctIndex]) {
+                  activeGame.winnerId = socket.id;
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                }
+                break;
+              }
+              if (activeGame.type === "PATTERN_MASTER") {
+                if (activeGame.showPhase) return;
+                activeGame.playerAnswers[socket.id] = payload;
                 io.to(roomId).emit("room_update", serializeRoom(room));
-              } else {
-                activeGame.playerProgress[socket.id] = 0; // Reset on fail
-                io.to(socket.id).emit("wrong_answer");
+                return;
+              }
+              if (activeGame.playerAnswers && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
               }
               break;
             }
-            if (activeGame.type === "ONE_VS_ALL" && !activeGame.winnerId) {
-              if (payload === activeGame.answers[activeGame.correctIndex]) {
+            case "secret_choice": {
+              if (activeGame.type === "SECRET_CHOICE" && !activeGame.playerChoices[socket.id]) {
+                activeGame.playerChoices[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
+            case "finish_sentence": {
+              if (activeGame.type === "FINISH_SENTENCE" && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
+            case "revenge_guess": {
+              if (activeGame.type === "REVENGE_ROUND" && socket.id === activeGame.lastPlaceId && !activeGame.playerGuesses[socket.id]) {
+                activeGame.playerGuesses[socket.id] = Number(payload);
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
+            case "sudden_tap": {
+              if (activeGame.type === "SUDDEN_DEATH" && !activeGame.winnerId) {
                 activeGame.winnerId = socket.id;
                 io.to(roomId).emit("room_update", serializeRoom(room));
               }
               break;
             }
-            if (activeGame.type === "PATTERN_MASTER") {
-              if (activeGame.showPhase) return;
-              activeGame.playerAnswers[socket.id] = payload;
-              io.to(roomId).emit("room_update", serializeRoom(room));
-              return;
+            case "maze_step": {
+              if (activeGame.type === "INVISIBLE_MAZE" && !activeGame.failed.has(socket.id)) {
+                const currentIdx = activeGame.playerProgress[socket.id] || 0;
+                if (currentIdx < activeGame.path.length) {
+                  if (payload === activeGame.path[currentIdx]) {
+                    activeGame.playerProgress[socket.id]++;
+                    io.to(roomId).emit("room_update", serializeRoom(room));
+                  } else {
+                    activeGame.failed.add(socket.id);
+                    io.to(socket.id).emit("wrong_answer");
+                    io.to(roomId).emit("fail_click", { playerId: socket.id });
+                    io.to(roomId).emit("room_update", serializeRoom(room));
+                  }
+                }
+              }
+              break;
             }
-            if (activeGame.playerAnswers && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
+            case "blind_bid": {
+              if (activeGame.type === "BLIND_BID" && !activeGame.bids[socket.id]) {
+                // Ensure bid doesn't exceed current score
+                const maxBid = Math.max(0, room.players[socket.id].score);
+                activeGame.bids[socket.id] = Math.min(Number(payload), maxBid);
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
             }
-            break;
-          }
-          case "secret_choice": {
-            if (activeGame.type === "SECRET_CHOICE" && !activeGame.playerChoices[socket.id]) {
-              activeGame.playerChoices[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "finish_sentence": {
-            if (activeGame.type === "FINISH_SENTENCE" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "revenge_guess": {
-            if (activeGame.type === "REVENGE_ROUND" && socket.id === activeGame.lastPlaceId && !activeGame.playerGuesses[socket.id]) {
-              activeGame.playerGuesses[socket.id] = Number(payload);
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "sudden_tap": {
-            if (activeGame.type === "SUDDEN_DEATH" && !activeGame.winnerId) {
-              activeGame.winnerId = socket.id;
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "maze_step": {
-            if (activeGame.type === "INVISIBLE_MAZE" && !activeGame.failed.has(socket.id)) {
-              const currentIdx = activeGame.playerProgress[socket.id] || 0;
-              if (currentIdx < activeGame.path.length) {
-                if (payload === activeGame.path[currentIdx]) {
-                  activeGame.playerProgress[socket.id]++;
-                  io.to(roomId).emit("room_update", serializeRoom(room));
-                } else {
-                  activeGame.failed.add(socket.id);
-                  io.to(socket.id).emit("wrong_answer");
-                  io.to(roomId).emit("fail_click", { playerId: socket.id });
+            case "heartbeat_tap": {
+              if (activeGame.type === "HEARTBEAT") {
+                if (!activeGame.playerTaps[socket.id]) activeGame.playerTaps[socket.id] = [];
+                if (activeGame.playerTaps[socket.id].length < 3) {
+                  if (!activeGame.startTime) activeGame.startTime = Date.now();
+                  const elapsed = Date.now() - activeGame.startTime;
+                  activeGame.playerTaps[socket.id].push(elapsed);
                   io.to(roomId).emit("room_update", serializeRoom(room));
                 }
               }
+              break;
             }
-            break;
-          }
-          case "blind_bid": {
-            if (activeGame.type === "BLIND_BID" && !activeGame.bids[socket.id]) {
-              // Ensure bid doesn't exceed current score
-              const maxBid = Math.max(0, room.players[socket.id].score);
-              activeGame.bids[socket.id] = Math.min(Number(payload), maxBid);
-              io.to(roomId).emit("room_update", serializeRoom(room));
+            case "react_tap": {
+              if (activeGame.type === "REACTION_TIME") {
+                if (activeGame.reactPhase === "WAIT" && !activeGame.playerTimes[socket.id]) {
+                  activeGame.playerTimes[socket.id] = 9999; // Penalty time
+                  io.to(roomId).emit("fail_click", { playerId: socket.id });
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                } else if (activeGame.reactPhase === "GO" && !activeGame.playerTimes[socket.id]) {
+                  if (!activeGame.goTime) return;
+                  activeGame.playerTimes[socket.id] = Date.now() - activeGame.goTime;
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                }
+              }
+              break;
             }
-            break;
-          }
-          case "heartbeat_tap": {
-            if (activeGame.type === "HEARTBEAT") {
-              if (!activeGame.playerTaps[socket.id]) activeGame.playerTaps[socket.id] = [];
-              if (activeGame.playerTaps[socket.id].length < 3) {
-                if (!activeGame.startTime) activeGame.startTime = Date.now();
-                const elapsed = Date.now() - activeGame.startTime;
-                activeGame.playerTaps[socket.id].push(elapsed);
+            case "estimate": {
+              if (activeGame.playerGuesses && !activeGame.playerGuesses[socket.id]) {
+                activeGame.playerGuesses[socket.id] = Number(payload) || 0;
+                activeGame.answerTimes[socket.id] = Date.now();
                 io.to(roomId).emit("room_update", serializeRoom(room));
               }
+              break;
             }
-            break;
-          }
-          case "react_tap": {
-            if (activeGame.type === "REACTION_TIME") {
-              if (activeGame.reactPhase === "WAIT" && !activeGame.playerTimes[socket.id]) {
-                activeGame.playerTimes[socket.id] = 9999; // Penalty time
-                io.to(roomId).emit("fail_click", { playerId: socket.id });
-                io.to(roomId).emit("room_update", serializeRoom(room));
-              } else if (activeGame.reactPhase === "GO" && !activeGame.playerTimes[socket.id]) {
-                if (!activeGame.goTime) return;
-                activeGame.playerTimes[socket.id] = Date.now() - activeGame.goTime;
+            case "math_answer": {
+              if (activeGame.type === "SPEED_MATH" && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
                 io.to(roomId).emit("room_update", serializeRoom(room));
               }
+              break;
             }
-            break;
-          }
-          case "estimate": {
-            if (activeGame.playerGuesses && !activeGame.playerGuesses[socket.id]) {
-              activeGame.playerGuesses[socket.id] = Number(payload) || 0;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "math_answer": {
-            if (activeGame.type === "SPEED_MATH" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "color_answer": {
-            if (activeGame.type === "COLOR_MATCH" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              // Points are calculated in calcRoundScores, so we don't add them here
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "fake_press": {
-            if (activeGame.type === "FAKE_BUTTONS" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              if (!activeGame.answerTimes) activeGame.answerTimes = {};
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "press": {
-            if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
-              activeGame.pressed[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "memory_answer": {
-            if (activeGame.type === "MEMORY_FLASH" && !activeGame.playerAnswers[socket.id]) {
-              activeGame.playerAnswers[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            }
-            break;
-          }
-          case "color_grid_tap": {
-            if (activeGame.type === "COLOR_GRID") {
-              const grid = activeGame.playerGrids[socket.id];
-              if (payload === grid.targetIndex) {
-                // Correct
-                activeGame.scores[socket.id] = (activeGame.scores[socket.id] || 0) + 1;
-                activeGame.playerGrids[socket.id] = generateColorGrid(grid.level + 1);
+            case "color_answer": {
+              if (activeGame.type === "COLOR_MATCH" && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                // Points are calculated in calcRoundScores, so we don't add them here
                 io.to(roomId).emit("room_update", serializeRoom(room));
-              } else {
-                // Wrong
-                io.to(socket.id).emit("wrong_answer");
               }
+              break;
             }
-            break;
-          }
-          case "vote": {
-            if (activeGame.type === "SOCIAL_VOTE" && !activeGame.votes[socket.id]) {
-              activeGame.votes[socket.id] = payload;
-              activeGame.answerTimes[socket.id] = Date.now();
-              io.to(roomId).emit("room_update", serializeRoom(room));
+            case "fake_press": {
+              if (activeGame.type === "FAKE_BUTTONS" && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                if (!activeGame.answerTimes) activeGame.answerTimes = {};
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
             }
-            break;
+            case "press": {
+              if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
+                activeGame.pressed[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
+            case "memory_answer": {
+              if (activeGame.type === "MEMORY_FLASH" && !activeGame.playerAnswers[socket.id]) {
+                activeGame.playerAnswers[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
+            case "color_grid_tap": {
+              if (activeGame.type === "COLOR_GRID") {
+                const grid = activeGame.playerGrids[socket.id];
+                if (payload === grid.targetIndex) {
+                  // Correct
+                  activeGame.scores[socket.id] = (activeGame.scores[socket.id] || 0) + 1;
+                  activeGame.playerGrids[socket.id] = generateColorGrid(grid.level + 1);
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                } else {
+                  // Wrong
+                  io.to(socket.id).emit("wrong_answer");
+                }
+              }
+              break;
+            }
+            case "vote": {
+              if (activeGame.type === "SOCIAL_VOTE" && !activeGame.votes[socket.id]) {
+                activeGame.votes[socket.id] = payload;
+                activeGame.answerTimes[socket.id] = Date.now();
+                io.to(roomId).emit("room_update", serializeRoom(room));
+              }
+              break;
+            }
           }
+
+          // Check if everyone has finished to end challenge early
+          checkEarlyFinish(room);
+
+        } catch (e) {
+          console.error("Action error:", e);
         }
+        // Future Redis update: await RoomStore.set(roomId, room);
+      });
+    });
 
-        // Check if everyone has finished to end challenge early
-        checkEarlyFinish(room);
+    function checkEarlyFinish(room) {
+      if (!room.game) return;
+      const activeGame = room.game.playlist[room.game.activeIndex];
+      const playerIds = Object.keys(room.players);
+      const playerCount = playerIds.length;
 
-      } catch (e) {
-        console.error("Action error:", e);
+      let allDone = false;
+
+      switch (activeGame.type) {
+        case "TRIVIA":
+        case "SPEED_MATH":
+        case "EMOJI_GUESS":
+        case "COLOR_MATCH":
+        case "MEMORY_FLASH":
+        case "TRUE_FALSE":
+        case "FAKE_BUTTONS":
+        case "FINISH_SENTENCE":
+        case "SCRAMBLED_WORD":
+        case "FIND_THE_ODD":
+        case "FAST_TYPE":
+          if (activeGame.playerAnswers && Object.keys(activeGame.playerAnswers).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "ESTIMATION":
+          if (activeGame.playerGuesses && Object.keys(activeGame.playerGuesses).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "REACTION_TIME":
+          if (activeGame.playerTimes && Object.keys(activeGame.playerTimes).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "ONE_VS_ALL":
+        case "SUDDEN_DEATH":
+          if (activeGame.winnerId) {
+            allDone = true;
+          }
+          break;
+        case "SECRET_CHOICE":
+          if (activeGame.playerChoices && Object.keys(activeGame.playerChoices).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "SOCIAL_VOTE":
+          if (activeGame.votes && Object.keys(activeGame.votes).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "SIMON_SAYS":
+          if (activeGame.playerProgress && Object.values(activeGame.playerProgress).every(p => p === activeGame.sequence.length)) {
+            allDone = true;
+          }
+          break;
+        case "REVENGE_ROUND":
+          if (activeGame.playerGuesses && activeGame.playerGuesses[activeGame.lastPlaceId]) {
+            allDone = true;
+          }
+          break;
+        case "INVISIBLE_MAZE":
+          if (activeGame.playerProgress && activeGame.failed) {
+            const completedCount = Object.values(activeGame.playerProgress).filter(p => p === activeGame.path.length).length;
+            if (completedCount + activeGame.failed.size === playerCount) {
+              allDone = true;
+            }
+          }
+          break;
+        case "BLIND_BID":
+          if (activeGame.bids && Object.keys(activeGame.bids).length === playerCount) {
+            allDone = true;
+          }
+          break;
+        case "HEARTBEAT":
+          if (activeGame.playerTaps) {
+            const finishedCount = Object.values(activeGame.playerTaps).filter(taps => taps.length === 3).length;
+            if (finishedCount === playerCount) {
+              allDone = true;
+            }
+          }
+          break;
       }
-      // Future Redis update: await RoomStore.set(roomId, room);
+
+      if (allDone) {
+        // Safety: Don't end instantly (prevents "flicker" skips)
+        const elapsed = Date.now() - (activeGame.startTime || 0);
+        if (elapsed < 1500) return;
+
+        // Small delay before finishing to let players see feedback
+        setTimeout(() => {
+          const r = rooms[room.id];
+          if (r && r.game) {
+            const currentIdx = r.game.activeIndex;
+            // Only set timeLeft to 0 if we are still on the SAME challenge
+            if (r.game.playlist[currentIdx] === activeGame) {
+              r.game.timeLeft = 0;
+            }
+          }
+        }, 1200);
+      }
+    }
+
+    socket.on("play_again", ({ roomId }) => {
+      const room = rooms[roomId];
+      if (!room || room.hostId !== socket.id) return;
+      Object.values(room.players).forEach((p) => {
+        p.score = 0;
+        p.ready = p.id === room.hostId;
+      });
+      room.phase = "LOBBY";
+      room.currentRound = 0;
+      room.game = null;
+      room.previousCategory = null;
+      room.playedTypes = new Set();
+      room.usedQuestionIds = new Set();
+      io.to(roomId).emit("room_update", serializeRoom(room));
+    });
+
+    socket.on("disconnect", () => {
+      logger.info("SOCKET", `Disconnected: ${socket.id}`);
+      rateLimits.delete(socket.id);
+      for (const [roomId, room] of Object.entries(rooms)) {
+        if (room.players[socket.id]) {
+          delete room.players[socket.id];
+          if (Object.keys(room.players).length === 0) {
+            clearRoomTimers(room);
+            delete rooms[roomId];
+          } else {
+            if (room.hostId === socket.id) {
+              room.hostId = Object.keys(room.players)[0];
+            }
+            if (room.game) {
+              if (room.game.clicks) delete room.game.clicks[socket.id];
+              if (room.game.playerAnswers) delete room.game.playerAnswers[socket.id];
+              if (room.game.failed) {
+                const failedSet = ensureSet(room.game.failed);
+                failedSet.delete(socket.id);
+                room.game.failed = failedSet;
+              }
+              // Check if remaining players have finished
+              checkEarlyFinish(room);
+            }
+            io.to(roomId).emit("room_update", serializeRoom(room));
+          }
+          break;
+        }
+      }
     });
   });
 
-  function checkEarlyFinish(room) {
-    if (!room.game) return;
-    const activeGame = room.game.playlist[room.game.activeIndex];
-    const playerIds = Object.keys(room.players);
-    const playerCount = playerIds.length;
-
-    let allDone = false;
-
-    switch (activeGame.type) {
-      case "TRIVIA":
-      case "SPEED_MATH":
-      case "EMOJI_GUESS":
-      case "COLOR_MATCH":
-      case "MEMORY_FLASH":
-      case "TRUE_FALSE":
-      case "FAKE_BUTTONS":
-      case "FINISH_SENTENCE":
-      case "SCRAMBLED_WORD":
-      case "FIND_THE_ODD":
-      case "FAST_TYPE":
-        if (activeGame.playerAnswers && Object.keys(activeGame.playerAnswers).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "ESTIMATION":
-        if (activeGame.playerGuesses && Object.keys(activeGame.playerGuesses).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "REACTION_TIME":
-        if (activeGame.playerTimes && Object.keys(activeGame.playerTimes).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "ONE_VS_ALL":
-      case "SUDDEN_DEATH":
-        if (activeGame.winnerId) {
-          allDone = true;
-        }
-        break;
-      case "SECRET_CHOICE":
-        if (activeGame.playerChoices && Object.keys(activeGame.playerChoices).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "SOCIAL_VOTE":
-        if (activeGame.votes && Object.keys(activeGame.votes).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "SIMON_SAYS":
-        if (activeGame.playerProgress && Object.values(activeGame.playerProgress).every(p => p === activeGame.sequence.length)) {
-          allDone = true;
-        }
-        break;
-      case "REVENGE_ROUND":
-        if (activeGame.playerGuesses && activeGame.playerGuesses[activeGame.lastPlaceId]) {
-          allDone = true;
-        }
-        break;
-      case "INVISIBLE_MAZE":
-        if (activeGame.playerProgress && activeGame.failed) {
-          const completedCount = Object.values(activeGame.playerProgress).filter(p => p === activeGame.path.length).length;
-          if (completedCount + activeGame.failed.size === playerCount) {
-            allDone = true;
-          }
-        }
-        break;
-      case "BLIND_BID":
-        if (activeGame.bids && Object.keys(activeGame.bids).length === playerCount) {
-          allDone = true;
-        }
-        break;
-      case "HEARTBEAT":
-        if (activeGame.playerTaps) {
-          const finishedCount = Object.values(activeGame.playerTaps).filter(taps => taps.length === 3).length;
-          if (finishedCount === playerCount) {
-            allDone = true;
-          }
-        }
-        break;
-    }
-
-    if (allDone) {
-      // Safety: Don't end instantly (prevents "flicker" skips)
-      const elapsed = Date.now() - (activeGame.startTime || 0);
-      if (elapsed < 1500) return; 
-
-      // Small delay before finishing to let players see feedback
-      setTimeout(() => {
-        const r = rooms[room.id];
-        if (r && r.game) {
-          const currentIdx = r.game.activeIndex;
-          // Only set timeLeft to 0 if we are still on the SAME challenge
-          if (r.game.playlist[currentIdx] === activeGame) {
-            r.game.timeLeft = 0;
-          }
-        }
-      }, 1200);
-    }
-  }
-
-  socket.on("play_again", ({ roomId }) => {
-    const room = rooms[roomId];
-    if (!room || room.hostId !== socket.id) return;
-    Object.values(room.players).forEach((p) => {
-      p.score = 0;
-      p.ready = p.id === room.hostId;
-    });
-    room.phase = "LOBBY";
-    room.currentRound = 0;
-    room.game = null;
-    room.previousCategory = null;
-    room.playedTypes = new Set();
-    room.usedQuestionIds = new Set();
-    io.to(roomId).emit("room_update", serializeRoom(room));
+  // The "catchall" handler: for any request that doesn't
+  // match one above, send back React's index.html file.
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
   });
 
-  socket.on("disconnect", () => {
-    logger.info("SOCKET", `Disconnected: ${socket.id}`);
-    rateLimits.delete(socket.id);
-    for (const [roomId, room] of Object.entries(rooms)) {
-      if (room.players[socket.id]) {
-        delete room.players[socket.id];
-        if (Object.keys(room.players).length === 0) {
-          clearRoomTimers(room);
-          delete rooms[roomId];
-        } else {
-          if (room.hostId === socket.id) {
-            room.hostId = Object.keys(room.players)[0];
-          }
-          if (room.game) {
-            if (room.game.clicks) delete room.game.clicks[socket.id];
-            if (room.game.playerAnswers) delete room.game.playerAnswers[socket.id];
-            if (room.game.failed) {
-              const failedSet = ensureSet(room.game.failed);
-              failedSet.delete(socket.id);
-              room.game.failed = failedSet;
-            }
-            // Check if remaining players have finished
-            checkEarlyFinish(room);
-          }
-          io.to(roomId).emit("room_update", serializeRoom(room));
-        }
-        break;
-      }
-    }
-  });
-});
-
-// The "catchall" handler: for any request that doesn't
-// match one above, send back React's index.html file.
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
-
-const PORT = process.env.PORT || 7860;
-server.listen(PORT, () => logger.info("SYSTEM", `🎮 PartyVerse server on port ${PORT} — 25+ mini-games loaded!`));
+  const PORT = process.env.PORT || 7860;
+  server.listen(PORT, () => logger.info("SYSTEM", `🎮 PartyVerse server on port ${PORT} — 25+ mini-games loaded!`));
+}
