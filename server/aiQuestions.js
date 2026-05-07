@@ -222,13 +222,35 @@ async function generateProceduralQuestion(type, lang) {
   }
 
   if (type === 'SPEED_MATH') {
-    const a = Math.floor(Math.random() * 50) + 10;
-    const b = Math.floor(Math.random() * 20) + 5;
-    const ops = ['+', '-', '*'];
-    const op = pickRandom(ops);
-    let ans = op === '+' ? a + b : op === '-' ? a - b : a * b;
-    const options = shuffle([ans, ans + 2, ans - 5, ans + 10]);
-    return { id, text: `${a} ${op === '*' ? '×' : op} ${b} = ?`, answers: options.map(String), correctIndex: options.indexOf(ans) };
+    const level = Math.floor(Math.random() * 3); // 0: Easy, 1: Med, 2: Hard
+    let a, b, op, ans;
+    const ops = ['+', '-', '*', '/'];
+    op = pickRandom(ops);
+
+    if (level === 0) {
+      a = Math.floor(Math.random() * 50) + 10;
+      b = Math.floor(Math.random() * 20) + 5;
+    } else if (level === 1) {
+      a = Math.floor(Math.random() * 100) + 50;
+      b = Math.floor(Math.random() * 50) + 10;
+    } else {
+      a = Math.floor(Math.random() * 200) + 100;
+      b = Math.floor(Math.random() * 100) + 20;
+    }
+
+    if (op === '/') {
+      // Ensure clean division: (a*b) / a = b
+      const factor1 = Math.floor(Math.random() * 12) + 2;
+      const factor2 = Math.floor(Math.random() * 12) + 2;
+      ans = factor1;
+      const dividend = factor1 * factor2;
+      return { id, text: `${dividend} ÷ ${factor2} = ?`, answers: shuffle([ans, ans + 2, ans - 1, ans + 5]).map(String), correctIndex: 0 }; // shuffle will fix index
+    }
+
+    ans = op === '+' ? a + b : op === '-' ? a - b : a * b;
+    const options = shuffle([ans, ans + (Math.random() > 0.5 ? 2 : -2), ans + 10, ans - 5]);
+    const finalAnswers = options.map(String);
+    return { id, text: `${a} ${op === '*' ? '×' : op} ${b} = ?`, answers: finalAnswers, correctIndex: finalAnswers.indexOf(String(ans)) };
   }
 
   return { 

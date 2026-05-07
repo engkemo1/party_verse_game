@@ -39,7 +39,7 @@ export default function Game() {
   const sortedPlayers = Object.values(room.players).sort((a, b) => b.score - a.score);
 
   // Determine theme and effects
-  const mode = game.modeLabel === 'الفوضى' || game.modeLabel === 'CHAOS' ? 'chaos' : (game.modeLabel === 'العقل' || game.modeLabel === 'MIND' ? 'mind' : 'madness');
+  const mode = game.modeId?.toLowerCase() || 'chaos';
   const isVortex = game.globalModifier?.type === 'CHAOS_RANDOM' || (timeLeft <= 5 && mode === 'chaos');
   const isGlitched = !!twist || game.globalModifier?.type === 'GHOST_MODE';
 

@@ -404,6 +404,7 @@ async function generateAdaptiveRound(room) {
     modifiers: shuffle(MODIFIERS).slice(0, roundIdx > 5 ? 2 : 1),
     globalModifier,
     difficulty: baseDifficulty,
+    modeId: primaryMode.id,
     modeLabel: primaryMode.label[room.lang] || primaryMode.label.en,
     aiMeta: aiContent
   };
@@ -969,9 +970,10 @@ function calcRoundScores(room) {
       break;
     }
 
-    case "BIG_RED_BUTTON": {
+    case "SUDDEN_DEATH": {
       if (activeChallenge.winnerId && room.players[activeChallenge.winnerId]) {
-        room.players[activeChallenge.winnerId].score += 1000 * multiplier;
+        room.players[activeChallenge.winnerId].score += 1500;
+        roundWinners.add(activeChallenge.winnerId);
       }
       break;
     }
@@ -1090,8 +1092,7 @@ function calcRoundScores(room) {
       break;
     }
 
-    case "ONE_VS_ALL":
-    case "SUDDEN_DEATH": {
+    case "ONE_VS_ALL": {
       if (activeChallenge.winnerId && room.players[activeChallenge.winnerId]) {
         room.players[activeChallenge.winnerId].score += 1500;
         roundWinners.add(activeChallenge.winnerId);
@@ -1302,10 +1303,12 @@ async function startNextRound(roomId) {
     activeIndex: 0,
     modifiers,
     difficulty,
+    modeId,
     modeLabel,
     timeLeft: playlist[0].duration,
     type: playlist[0].type,
     label: playlist[0].label,
+    startTime: Date.now()
   };
   
   room.game.playlist[0].startTime = Date.now();
@@ -1317,71 +1320,71 @@ async function startNextRound(roomId) {
   localTimers.set(roomId, {});
   const timers = localTimers.get(roomId);
 
-  timers.tickInterval = setInterval(() => {
-    const r = rooms[roomId];
-    if (!r || r.phase !== "PLAYING") {
-      if (r) clearRoomTimers(roomId);
-      return;
-    }
-
-    r.game.timeLeft--;
-    const currentChallenge = r.game.playlist[r.game.activeIndex];
-    currentChallenge.timeLeft = r.game.timeLeft;
-
-    // Special per-tick game logic
-    if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
-      const elapsed = currentChallenge.duration - r.game.timeLeft;
-      if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
-        currentChallenge.showPhase = false;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+    try {
+      const r = rooms[roomId];
+      if (!r || r.phase !== "PLAYING" || !r.game) {
+        clearRoomTimers(roomId);
+        return;
       }
-    }
-    if (currentChallenge.type === 'SPAM_STOP') {
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
-        currentChallenge.isStopped = true;
-        io.to(roomId).emit("room_update", serializeRoom(r));
-      }
-    }
-    // REACTION_TIME: trigger GO phase after delay
-    if (currentChallenge.type === 'REACTION_TIME') {
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
-        currentChallenge.reactPhase = 'GO';
-        currentChallenge.goTime = Date.now();
-        io.to(roomId).emit("room_update", serializeRoom(r));
-      }
-    }
-    // DONT_PRESS: bomb timer
-    if (currentChallenge.type === 'DONT_PRESS') {
-      if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
-        currentChallenge.exploded = true;
-        io.to(roomId).emit("room_update", serializeRoom(r));
-      }
-    }
 
-    if (r.game.timeLeft <= 0) {
-      // Calculate scores for the challenge that just ended
-      calcRoundScores(r);
+      r.game.timeLeft--;
+      const currentChallenge = r.game.playlist[r.game.activeIndex];
+      currentChallenge.timeLeft = r.game.timeLeft;
 
-      // Move to next challenge or finish round
-      if (r.game.activeIndex < r.game.playlist.length - 1) {
-        r.game.activeIndex++;
-        const next = r.game.playlist[r.game.activeIndex];
-        next.startTime = Date.now();
-        r.game.timeLeft = next.duration;
-        r.game.type = next.type;
-        r.game.label = next.label;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      // Special per-tick game logic
+      if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
+        const elapsed = currentChallenge.duration - r.game.timeLeft;
+        if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
+          currentChallenge.showPhase = false;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
+      }
+      if (currentChallenge.type === 'SPAM_STOP') {
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
+          currentChallenge.isStopped = true;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
+      }
+      // REACTION_TIME: trigger GO phase after delay
+      if (currentChallenge.type === 'REACTION_TIME') {
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
+          currentChallenge.reactPhase = 'GO';
+          currentChallenge.goTime = Date.now();
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
+      }
+      // DONT_PRESS: bomb timer
+      if (currentChallenge.type === 'DONT_PRESS') {
+        if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
+          currentChallenge.exploded = true;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
+      }
+
+      if (r.game.timeLeft <= 0) {
+        calcRoundScores(r);
+        if (r.game.activeIndex < r.game.playlist.length - 1) {
+          r.game.activeIndex++;
+          const next = r.game.playlist[r.game.activeIndex];
+          next.startTime = Date.now();
+          r.game.timeLeft = next.duration;
+          r.game.type = next.type;
+          r.game.label = next.label;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        } else {
+          clearInterval(timers.tickInterval);
+          finishRound(roomId);
+        }
       } else {
-        // Round truly over
-        clearInterval(timers.tickInterval);
-        finishRound(roomId);
+        io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
       }
-    } else {
-      io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
+    } catch (e) {
+      logger.error("LOOP", `Error in tick interval for ${roomId}: ${e.message}`);
+      // Don't clear timers, just log and hope it recovers next tick
     }
   }, 1000);
 }
@@ -1516,19 +1519,6 @@ io.on("connection", (socket) => {
     }
   });
 
-  socket.on("play_again", ({ roomId }) => {
-    const r = rooms[roomId];
-    if (r && r.hostId === socket.id) {
-      r.phase = "LOBBY";
-      r.currentRound = 0;
-      r.viralHighlights = [];
-      Object.values(r.players).forEach(p => {
-        p.score = 0;
-        p.ready = (p.id === r.hostId);
-      });
-      io.to(roomId).emit("room_update", serializeRoom(r));
-    }
-  });
 
   socket.on("chat_message", ({ roomId, text }) => {
     if (!checkRateLimit(socket.id)) return;
@@ -1828,10 +1818,7 @@ io.on("connection", (socket) => {
             break;
           }
           case "press": {
-            if (activeGame.type === "BIG_RED_BUTTON" && !activeGame.winnerId) {
-              activeGame.winnerId = socket.id;
-              io.to(roomId).emit("room_update", serializeRoom(room));
-            } else if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
+            if (activeGame.type === "DONT_PRESS" && !activeGame.pressed[socket.id]) {
               activeGame.pressed[socket.id] = Date.now();
               io.to(roomId).emit("room_update", serializeRoom(room));
             }
@@ -1916,7 +1903,6 @@ io.on("connection", (socket) => {
         break;
       case "ONE_VS_ALL":
       case "SUDDEN_DEATH":
-      case "BIG_RED_BUTTON":
         if (activeGame.winnerId) {
           allDone = true;
         }
@@ -1965,11 +1951,21 @@ io.on("connection", (socket) => {
     }
 
     if (allDone) {
+      // Safety: Don't end instantly (prevents "flicker" skips)
+      const elapsed = Date.now() - (activeGame.startTime || 0);
+      if (elapsed < 1500) return; 
+
       // Small delay before finishing to let players see feedback
       setTimeout(() => {
         const r = rooms[room.id];
-        if (r && r.game) r.game.timeLeft = 0;
-      }, 1500);
+        if (r && r.game) {
+          const currentIdx = r.game.activeIndex;
+          // Only set timeLeft to 0 if we are still on the SAME challenge
+          if (r.game.playlist[currentIdx] === activeGame) {
+            r.game.timeLeft = 0;
+          }
+        }
+      }, 1200);
     }
   }
 
