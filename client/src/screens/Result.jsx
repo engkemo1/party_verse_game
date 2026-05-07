@@ -174,7 +174,7 @@ export default function Result() {
       <Chat />
       
       {/* Round Result Banner Ad */}
-      <AdSense slot="RESULT_BANNER" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
+      <AdSense slot="8328203300" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
     </div>
   );
 }

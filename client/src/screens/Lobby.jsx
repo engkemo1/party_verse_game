@@ -253,7 +253,7 @@ export default function Lobby() {
       <Chat />
       
       {/* Lobby Banner Ad */}
-      <AdSense slot="LOBBY_BANNER" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
+      <AdSense slot="8328203300" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
     </>
   );
 }
