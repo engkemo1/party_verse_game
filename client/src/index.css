@@ -14,14 +14,151 @@
   
   /* Premium Glassmorphism */
   --glass-bg: rgba(21, 24, 30, 0.4);
-  --glass-border: rgba(255, 255, 255, 0.05);
   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-  --glass-blur: blur(20px);
   
   /* Theme Overrides */
   --theme-primary: var(--neon-purple);
   --theme-secondary: var(--electric-blue);
-  --theme-glow: rgba(157, 78, 221, 0.4);
+  --theme-glow: var(--theme-primary);
+  --glass-bg: rgba(255, 255, 255, 0.07);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-blur: 12px;
+}
+
+/* ──────────────────────────────────
+   Arrow Dash Styles
+   ────────────────────────────────── */
+.arrow-indicator {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-bg);
+  border: 2px solid var(--glass-border);
+  border-radius: 12px;
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.arrow-indicator--current {
+  border-color: var(--theme-primary);
+  color: var(--theme-primary);
+  transform: scale(1.2);
+  box-shadow: 0 0 20px var(--theme-primary);
+}
+
+.arrow-indicator--done {
+  background: var(--theme-secondary);
+  border-color: var(--theme-secondary);
+  color: white;
+  opacity: 0.5;
+}
+
+.arrow-controls-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.arrow-btn {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: none;
+  background: var(--glass-bg);
+  backdrop-filter: blur(5px);
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all 0.1s;
+  box-shadow: 0 4px 0 rgba(255,255,255,0.1);
+}
+
+.arrow-btn:active {
+  transform: translateY(4px);
+  box-shadow: none;
+}
+
+/* ──────────────────────────────────
+   Pattern Master Styles
+   ────────────────────────────────── */
+.pattern-reveal-grid {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.pattern-symbol {
+  font-size: 3.5rem;
+  animation: pattern-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
+
+@keyframes pattern-pop {
+  0% { transform: scale(0) rotate(-45deg); opacity: 0; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.pattern-input-display {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 30px;
+}
+
+.pattern-slot {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  background: var(--glass-bg);
+  border: 1px dashed var(--glass-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  transition: all 0.2s;
+}
+
+.pattern-slot--filled {
+  border-style: solid;
+  border-color: var(--theme-primary);
+  background: rgba(255,255,255,0.1);
+}
+
+.pattern-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.pattern-btn {
+  aspect-ratio: 1/1;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pattern-btn:hover {
+  background: rgba(255,255,255,0.15);
+  transform: scale(1.05);
+}
+
+.pattern-btn:active {
+  transform: scale(0.95);
+}
+
+/* Premium Enhancements */
+.game-screen {
+  transition: background 0.8s ease;
 }
 
 .theme--chaos { --theme-primary: var(--hot-pink); --theme-secondary: var(--gold); --theme-glow: rgba(241, 91, 181, 0.5); }

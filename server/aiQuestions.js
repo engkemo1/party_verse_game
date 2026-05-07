@@ -31,14 +31,40 @@ const FUNNY_PROMPTS = {
     "أغرب حاجة ممكن تلاقيها في محفظة اللاعب اللي فوقي هي ____.",
     "لو صحيت لقيت نفسي مكانه، أول حاجة هعملها هي ____.",
     "السر اللي مخبيه عن الكل هو إنه بيحب ____.",
-    "أكتر كلمة بيقولها وهو نايم هي ____."
+    "أكتر كلمة بيقولها وهو نايم هي ____.",
+    "لو اتعمل عنه فيلم، هيكون اسمه 'مغامرات ____'.",
+    "أكتر حاجة بتخليه يضحك بهستيريا هي ____.",
+    "لو فاز بمليون دولار، هيصرفهم كلهم على ____.",
+    "موهبته السرية اللي محدش يعرفها هي ____.",
+    "أكتر أكلة غريبة بيحبها هي ____.",
+    "لو بقى رئيس دولة، أول قرار هياخده هو ____.",
+    "الحاجة اللي دايماً بينساها هي ____.",
+    "لو سافر للمستقبل، هيجيب معاه ____.",
+    "أكتر صوت بيزعجه هو ____.",
+    "لو بقى بطل خارق، قوته هتكون ____.",
+    "الجريمة اللي ممكن يدخل السجن بسببها هي ____.",
+    "أكتر حيوان بيشبه تصرفاته هو ____.",
+    "لو كتب كتاب عن حياته، عنوانه هيكون ____."
   ],
   en: [
     "If this player was a machine, they would be a ____.",
     "The weirdest thing in the wallet of the player above is ____.",
     "If I woke up in their body, the first thing I'd do is ____.",
     "The secret they are hiding is that they love ____.",
-    "The word they repeat while sleeping is ____."
+    "The word they repeat while sleeping is ____.",
+    "If a movie was made about them, it would be called 'The Adventures of ____'.",
+    "The thing that makes them laugh hysterically is ____.",
+    "If they won a million dollars, they'd spend it all on ____.",
+    "Their secret talent that nobody knows is ____.",
+    "The weirdest food they actually like is ____.",
+    "If they became president, their first law would be ____.",
+    "The one thing they always forget is ____.",
+    "If they traveled to the future, they'd bring back ____.",
+    "The sound that annoys them the most is ____.",
+    "If they were a superhero, their power would be ____.",
+    "The crime they are most likely to be arrested for is ____.",
+    "The animal that best represents their personality is ____.",
+    "If they wrote an autobiography, the title would be ____."
   ]
 };
 
@@ -67,8 +93,19 @@ const CHAOS_EVENTS = {
   ]
 };
 
-function generateFunnyPrompt(lang) {
-  return pickRandom(FUNNY_PROMPTS[lang] || FUNNY_PROMPTS.en);
+function generateFunnyPrompt(lang, usedIds) {
+  const bank = FUNNY_PROMPTS[lang] || FUNNY_PROMPTS.en;
+  const available = bank.filter((_, i) => !usedIds.has(`${lang}_${i}`));
+  
+  if (available.length === 0) {
+    // Clear only this lang's prompts from used set
+    bank.forEach((_, i) => usedIds.delete(`${lang}_${i}`));
+    return pickRandom(bank);
+  }
+  
+  const prompt = pickRandom(available);
+  usedIds.add(`${lang}_${bank.indexOf(prompt)}`);
+  return prompt;
 }
 
 function getChaosEvent(lang) {

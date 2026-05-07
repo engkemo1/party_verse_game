@@ -90,34 +90,38 @@ export default function Game() {
       </div>
 
       <div className="game-area">
-        {(currentChallenge.type === 'CLICK_FAST' || currentChallenge.type === 'CHAOS_TAP') && <ClickGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'COLOR_GRID' && <ColorGridGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'NEON_DASH' && <NeonDashGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'REACTION_TIME' && <ReactionGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SPEED_MATH' && <SpeedMathGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'TRIVIA' && <TriviaGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'TRUE_FALSE' && <TrueFalseGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'EMOJI_GUESS' && <EmojiGuessGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'ESTIMATION' && <EstimationGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'COLOR_MATCH' && <ColorMatchGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'MEMORY_FLASH' && <MemoryFlashGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'WHACK_A_MOLE' && <WhackMoleGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'FAST_TYPE' && <FastTypeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SCRAMBLED_WORD' && <ScrambledWordGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'FIND_THE_ODD' && <FindOddGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SIMON_SAYS' && <SimonSaysGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SOCIAL_VOTE' && <SocialVoteGame room={room} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'DONT_PRESS' && <DontPressGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SPAM_STOP' && <SpamStopGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'ONE_VS_ALL' && <TriviaGame game={currentChallenge} myId={myId} sendAction={sendAction} isOneVsAll={true} />}
-        {currentChallenge.type === 'SECRET_CHOICE' && <SecretChoiceGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'FINISH_SENTENCE' && <FinishSentenceGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'FAKE_BUTTONS' && <FakeButtonsGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'REVENGE_ROUND' && <RevengeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'SUDDEN_DEATH' && <SuddenDeathGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'INVISIBLE_MAZE' && <InvisibleMazeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'BLIND_BID' && <BlindBidGame game={currentChallenge} room={room} myId={myId} sendAction={sendAction} />}
-        {currentChallenge.type === 'HEARTBEAT' && <HeartbeatGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+        <div className="game-container-inner" key={room.game.activeIndex}>
+          {(currentChallenge.type === 'CLICK_FAST' || currentChallenge.type === 'CHAOS_TAP') && <ClickGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'COLOR_GRID' && <ColorGridGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'NEON_DASH' && <NeonDashGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'REACTION_TIME' && <ReactionGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SPEED_MATH' && <SpeedMathGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'TRIVIA' && <TriviaGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'TRUE_FALSE' && <TrueFalseGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'EMOJI_GUESS' && <EmojiGuessGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'ESTIMATION' && <EstimationGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'COLOR_MATCH' && <ColorMatchGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'MEMORY_FLASH' && <MemoryFlashGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'WHACK_A_MOLE' && <WhackMoleGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'FAST_TYPE' && <FastTypeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SCRAMBLED_WORD' && <ScrambledWordGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'FIND_THE_ODD' && <FindOddGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SIMON_SAYS' && <SimonSaysGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SOCIAL_VOTE' && <SocialVoteGame room={room} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'DONT_PRESS' && <DontPressGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SPAM_STOP' && <SpamStopGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'ONE_VS_ALL' && <TriviaGame game={currentChallenge} myId={myId} sendAction={sendAction} isOneVsAll={true} />}
+          {currentChallenge.type === 'SECRET_CHOICE' && <SecretChoiceGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'FINISH_SENTENCE' && <FinishSentenceGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'FAKE_BUTTONS' && <FakeButtonsGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'REVENGE_ROUND' && <RevengeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'SUDDEN_DEATH' && <SuddenDeathGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'INVISIBLE_MAZE' && <InvisibleMazeGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'BLIND_BID' && <BlindBidGame game={currentChallenge} room={room} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'HEARTBEAT' && <HeartbeatGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'ARROW_DASH' && <ArrowDashGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+          {currentChallenge.type === 'PATTERN_MASTER' && <PatternMasterGame game={currentChallenge} myId={myId} sendAction={sendAction} />}
+        </div>
       </div>
 
       <QuickChat />
@@ -439,6 +443,79 @@ function FindOddGame({ game, myId, sendAction }) {
           {e}
         </button>
       ))}
+    </div>
+  );
+}
+
+function ArrowDashGame({ game, myId, sendAction }) {
+  const currentIdx = game.playerProgress[myId] || 0;
+  const isComplete = currentIdx === game.sequence.length;
+
+  const handleArrow = (dir) => {
+    if (isComplete) return;
+    sendAction('click', { direction: dir });
+    audioEngine.playSFX('pop');
+  };
+
+  return (
+    <div className="flex-col gap-md items-center w-full">
+      <div className="flex-row gap-sm mb-md flex-wrap justify-center">
+        {game.sequence.map((dir, i) => (
+          <div key={i} className={`arrow-indicator ${i < currentIdx ? 'arrow-indicator--done' : i === currentIdx ? 'arrow-indicator--current' : ''}`}>
+            {dir === 'UP' ? '↑' : dir === 'DOWN' ? '↓' : dir === 'LEFT' ? '←' : '→'}
+          </div>
+        ))}
+      </div>
+      <div className="arrow-controls-grid">
+        <div />
+        <button className="arrow-btn arrow-btn--up" onClick={() => handleArrow('UP')}>↑</button>
+        <div />
+        <button className="arrow-btn arrow-btn--left" onClick={() => handleArrow('LEFT')}>←</button>
+        <button className="arrow-btn arrow-btn--down" onClick={() => handleArrow('DOWN')}>↓</button>
+        <button className="arrow-btn arrow-btn--right" onClick={() => handleArrow('RIGHT')}>→</button>
+      </div>
+    </div>
+  );
+}
+
+function PatternMasterGame({ game, myId, sendAction }) {
+  const [input, setInput] = useState([]);
+  const submitted = !!game.playerAnswers[myId];
+
+  const handleSymbol = (s) => {
+    if (submitted || game.showPhase) return;
+    const nextInput = [...input, s];
+    setInput(nextInput);
+    if (nextInput.length === game.sequence.length) {
+      sendAction('answer', nextInput.join(""));
+      audioEngine.playSFX('bell');
+    } else {
+      audioEngine.playSFX('pop');
+    }
+  };
+
+  return (
+    <div className="flex-col gap-md items-center w-full">
+      {game.showPhase ? (
+        <div className="pattern-reveal-grid">
+          {game.sequence.map((s, i) => (
+            <span key={i} className="pattern-symbol" style={{ animationDelay: `${i * 0.2}s` }}>{s}</span>
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="pattern-input-display">
+            {Array.from({ length: game.sequence.length }).map((_, i) => (
+              <div key={i} className={`pattern-slot ${input[i] ? 'pattern-slot--filled' : ''}`}>{input[i] || '?'}</div>
+            ))}
+          </div>
+          <div className="pattern-buttons-grid">
+            {["⭐", "🔥", "💎", "🎯", "🍀", "🍎", "⚡", "🌈"].map(s => (
+              <button key={s} className="pattern-btn" onClick={() => handleSymbol(s)} disabled={submitted}>{s}</button>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }

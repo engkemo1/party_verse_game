@@ -94,7 +94,6 @@ function serializeRoom(room) {
       ...item,
       failed: item.failed ? Array.from(item.failed) : undefined
     })),
-    // Ensure the top-level failed is also handled if it exists (though it's usually per-item)
     failed: room.game.failed ? Array.from(room.game.failed) : undefined,
   } : null;
 
@@ -117,6 +116,7 @@ function serializeRoom(room) {
     viralHighlights: room.viralHighlights || [],
     selectedModes: room.selectedModes || [],
     isNextRoundTriggered: room.isNextRoundTriggered,
+    lastResults: room.lastResults || null, // FIX: Include last results for lobby podium
   };
 }
 
@@ -140,7 +140,7 @@ const GAME_MODES = {
     id: "CHAOS",
     label: { en: "🔥 QUICK CHAOS", ar: "🔥 فوضى سريعة" },
     desc: { en: "Speed, Reaction & Traps", ar: "سرعة، رد فعل وفخاخ" },
-    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "FIND_THE_ODD", "NEON_DASH", "SUDDEN_DEATH", "REVENGE_ROUND", "HEARTBEAT"],
+    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "NEON_DASH", "SUDDEN_DEATH", "REVENGE_ROUND", "HEARTBEAT", "ARROW_DASH"],
   },
   MIND: {
     id: "MIND",
@@ -217,11 +217,6 @@ const CHALLENGE_POOL = {
     label: { en: "COLOR MATCH", ar: "تطابق الألوان" },
     description: { en: "Tap the WORD, not the color you see!", ar: "اضغط على الكلمة، وليس اللون الذي تراه!" }
   },
-  FIND_THE_ODD: { 
-    type: "FIND_THE_ODD", duration: 10, difficultyScale: 0.8,
-    label: { en: "FIND THE ODD", ar: "ابحث عن المختلف" },
-    description: { en: "Which one doesn't belong?", ar: "أي واحد لا ينتمي للمجموعة؟" }
-  },
   MEMORY_FLASH: { 
     type: "MEMORY_FLASH", duration: 15, difficultyScale: 1.1,
     label: { en: "MEMORY TEST", ar: "اختبار الذاكرة" },
@@ -281,6 +276,16 @@ const CHALLENGE_POOL = {
     type: "HEARTBEAT", duration: 15, difficultyScale: 1.2,
     label: { en: "BLIND RHYTHM", ar: "نبض القلب" },
     description: { en: "Feel the beat! Tap exactly when the invisible pulses should happen.", ar: "اشعر بالإيقاع! اضغط بدقة متناهية في وقت النبضات المخفية." }
+  },
+  ARROW_DASH: {
+    type: "ARROW_DASH", duration: 12, difficultyScale: 1.2,
+    label: { en: "ARROW DASH", ar: "انطلاقة الأسهم" },
+    description: { en: "Tap the arrows in the correct direction!", ar: "اضغط على الأسهم في الاتجاه الصحيح!" }
+  },
+  PATTERN_MASTER: {
+    type: "PATTERN_MASTER", duration: 15, difficultyScale: 1.3,
+    label: { en: "PATTERN MASTER", ar: "سيد الأنماط" },
+    description: { en: "Repeat the sequence of symbols!", ar: "كرر تسلسل الرموز بدقة!" }
   },
 };
 
@@ -360,8 +365,8 @@ async function generateAdaptiveRound(room) {
   // Dynamic Playlist Count: 3 to 7 based on difficulty
   const challengeCount = 3 + Math.floor(baseDifficulty / 1.5);
   
-  const contentHeavyGames = ["TRIVIA", "TRUE_FALSE", "SCRAMBLED_WORD", "SPEED_MATH", "FIND_THE_ODD", "FINISH_SENTENCE", "EMOJI_GUESS", "ONE_VS_ALL", "ESTIMATION"];
-  const repetitiveGames = ["DONT_PRESS", "SPAM_STOP", "FAKE_BUTTONS", "REACTION_TIME", "WHACK_A_MOLE", "CLICK_FAST", "CHAOS_TAP", "NEON_DASH", "COLOR_GRID", "SIMON_SAYS"];
+  const contentHeavyGames = ["TRIVIA", "TRUE_FALSE", "SCRAMBLED_WORD", "SPEED_MATH", "FINISH_SENTENCE", "EMOJI_GUESS", "ONE_VS_ALL", "ESTIMATION", "PATTERN_MASTER"];
+  const repetitiveGames = ["DONT_PRESS", "SPAM_STOP", "FAKE_BUTTONS", "REACTION_TIME", "WHACK_A_MOLE", "CLICK_FAST", "CHAOS_TAP", "NEON_DASH", "SIMON_SAYS", "ARROW_DASH"];
 
   const selection = [];
   
@@ -406,9 +411,12 @@ async function generateAdaptiveRound(room) {
 
 function getUnused(bank, usedIds, lang, type = null) {
   const langBank = bank[lang] || bank.ar;
+  
+  // Filter for category variety if possible
   const available = langBank.filter((q) => !usedIds.has(q.id) && !globalUsedIds.has(q.id));
 
   if (available.length > 0) {
+    // Try to pick a category that hasn't been used in this round yet
     const q = pickRandom(available);
     usedIds.add(q.id);
     globalUsedIds.add(q.id);
@@ -424,7 +432,13 @@ function getUnused(bank, usedIds, lang, type = null) {
     return aiQ;
   }
 
-  // Last resort: reshuffle bank and clear local room memory but keep global
+  // Last resort: Clear global memory if we are out of questions!
+  // This ensures that players ALWAYS see something, but we prefer new ones.
+  if (globalUsedIds.size > langBank.length * 0.8) {
+    globalUsedIds.clear();
+    saveAIMemory();
+  }
+  
   usedIds.clear();
   return pickRandom(langBank);
 }
@@ -662,7 +676,7 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
     }
 
     case "FINISH_SENTENCE": {
-      base.prompt = generateFunnyPrompt(room.lang);
+      base.prompt = generateFunnyPrompt(room.lang, room.usedQuestionIds);
       base.playerAnswers = {};
       return base;
     }
@@ -763,6 +777,25 @@ async function createChallengeState(gameDef, room, difficulty = 1) {
       return base;
     }
 
+    case "ARROW_DASH": {
+      const directions = ["UP", "DOWN", "LEFT", "RIGHT"];
+      const count = 5 + Math.min(5, Math.floor(difficulty));
+      base.sequence = Array.from({ length: count }).map(() => pickRandom(directions));
+      base.playerProgress = {};
+      playerIds.forEach(id => base.playerProgress[id] = 0);
+      return base;
+    }
+
+    case "PATTERN_MASTER": {
+      const symbols = ["⭐", "🔥", "💎", "🎯", "🍀", "🍎", "⚡", "🌈"];
+      const seqLength = 4 + Math.min(4, Math.floor(difficulty / 1.5));
+      base.sequence = Array.from({ length: seqLength }).map(() => pickRandom(symbols));
+      base.showPhase = true;
+      base.showDuration = 3 + Math.min(2, Math.floor(difficulty / 2));
+      base.playerAnswers = {};
+      return base;
+    }
+
     case "NEON_DASH": {
       base.targets = [];
       base.clicks = {};
@@ -841,6 +874,8 @@ function calcRoundScores(room) {
     return;
   }
 
+  const multiplier = (activeChallenge.chaosEffect === "DOUBLE_POINTS" || room.game?.modifiers?.some(m => m.type === 'DOUBLE_POINTS')) ? 2 : 1;
+
   switch (activeChallenge.type) {
     case "COLOR_GRID":
     case "CLICK_FAST":
@@ -852,11 +887,14 @@ function calcRoundScores(room) {
         .map(([id, c]) => ({ id, val: c }))
         .sort((a, b) => isReverse ? a.val - b.val : b.val - a.val);
 
-      const multiplier = (activeChallenge.chaosEffect === "DOUBLE_POINTS" || game.modifiers?.some(m => m.type === 'DOUBLE_POINTS')) ? 2 : 1;
-
       ranked.forEach((entry, idx) => {
         if (entry.val > 0 && room.players[entry.id]) {
-          room.players[entry.id].score += (pointTable[idx] || 50) * multiplier;
+          // Fair scoring: Points per action + Rank Bonus
+          const pointsPerAction = activeChallenge.type === "COLOR_GRID" ? 40 : 15; // Color grid is harder than clicking
+          const basePoints = entry.val * pointsPerAction;
+          const rankBonus = [500, 300, 200, 100, 50][idx] || 0;
+          
+          room.players[entry.id].score += (basePoints + rankBonus) * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
         }
       });
@@ -913,7 +951,7 @@ function calcRoundScores(room) {
         if (room.players[entry.id]) {
           // Speed Bonus: 1st gets 800, 2nd 700, 3rd 600, etc. (min 400)
           const bonus = Math.max(400, 800 - (idx * 100));
-          room.players[entry.id].score += bonus;
+          room.players[entry.id].score += bonus * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
         }
       });
@@ -924,7 +962,7 @@ function calcRoundScores(room) {
       const correctAns = activeChallenge.correctAnswer; // The emoji NOT in sequence
       Object.entries(activeChallenge.playerAnswers || {}).forEach(([id, ans]) => {
         if (ans === correctAns && room.players[id]) {
-          room.players[id].score += 1000;
+          room.players[id].score += 1000 * multiplier;
           roundWinners.add(id);
         }
       });
@@ -933,7 +971,7 @@ function calcRoundScores(room) {
 
     case "BIG_RED_BUTTON": {
       if (activeChallenge.winnerId && room.players[activeChallenge.winnerId]) {
-        room.players[activeChallenge.winnerId].score += 1000;
+        room.players[activeChallenge.winnerId].score += 1000 * multiplier;
       }
       break;
     }
@@ -945,9 +983,9 @@ function calcRoundScores(room) {
       Object.entries(activeChallenge.playerGuesses || {}).forEach(([id, val]) => {
         const diff = Math.abs(val - correct);
         const errorPct = correct === 0 ? (val === 0 ? 0 : 1) : diff / correct;
-        if (errorPct < 0.1) room.players[id].score += 1000;
-        else if (errorPct < 0.25) room.players[id].score += 500;
-        else if (errorPct < 0.5) room.players[id].score += 200;
+        if (errorPct < 0.1) room.players[id].score += 1000 * multiplier;
+        else if (errorPct < 0.25) room.players[id].score += 500 * multiplier;
+        else if (errorPct < 0.5) room.players[id].score += 200 * multiplier;
       });
       break;
     }
@@ -1035,7 +1073,7 @@ function calcRoundScores(room) {
         .sort((a, b) => a.time - b.time);
       submissions.forEach((entry, idx) => {
         if (room.players[entry.id]) {
-          room.players[entry.id].score += Math.max(200, 600 - (idx * 100));
+          room.players[entry.id].score += Math.max(200, 600 - (idx * 100)) * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
         }
       });
@@ -1045,7 +1083,7 @@ function calcRoundScores(room) {
     case "SIMON_SAYS": {
       Object.entries(activeChallenge.playerProgress || {}).forEach(([id, prog]) => {
         if (prog === activeChallenge.sequence.length && room.players[id]) {
-          room.players[id].score += 1000;
+          room.players[id].score += 1000 * multiplier;
           roundWinners.add(id);
         }
       });
@@ -1080,8 +1118,29 @@ function calcRoundScores(room) {
         .sort((a, b) => a.time - b.time);
       solvers.forEach((entry, idx) => {
         if (room.players[entry.id]) {
-          room.players[entry.id].score += Math.max(400, 800 - (idx * 100));
+          room.players[entry.id].score += Math.max(400, 800 - (idx * 100)) * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
+        }
+      });
+      break;
+    }
+
+    case "ARROW_DASH": {
+      Object.entries(activeChallenge.playerProgress || {}).forEach(([id, prog]) => {
+        if (prog === activeChallenge.sequence.length && room.players[id]) {
+          room.players[id].score += 1000 * multiplier;
+          roundWinners.add(id);
+        }
+      });
+      break;
+    }
+
+    case "PATTERN_MASTER": {
+      const correctSeq = activeChallenge.sequence.join("");
+      Object.entries(activeChallenge.playerAnswers || {}).forEach(([id, ans]) => {
+        if (ans === correctSeq && room.players[id]) {
+          room.players[id].score += 1200 * multiplier;
+          roundWinners.add(id);
         }
       });
       break;
@@ -1270,7 +1329,7 @@ async function startNextRound(roomId) {
     currentChallenge.timeLeft = r.game.timeLeft;
 
     // Special per-tick game logic
-    if (currentChallenge.type === 'MEMORY_FLASH') {
+    if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
       const elapsed = currentChallenge.duration - r.game.timeLeft;
       if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
         currentChallenge.showPhase = false;
@@ -1585,6 +1644,21 @@ io.on("connection", (socket) => {
 
         switch (action) {
           case "click": {
+            if (activeGame.type === "ARROW_DASH") {
+              const currentIdx = activeGame.playerProgress[socket.id] || 0;
+              const expected = activeGame.sequence[currentIdx];
+              if (payload.direction === expected) {
+                activeGame.playerProgress[socket.id]++;
+                if (activeGame.playerProgress[socket.id] === activeGame.sequence.length) {
+                  // Done!
+                  io.to(roomId).emit("room_update", serializeRoom(room));
+                }
+              } else {
+                // Mistake penalty or reset?
+                activeGame.playerProgress[socket.id] = 0; // Reset progress on mistake
+              }
+              return;
+            }
             if (activeGame.type === "SPAM_STOP") {
               activeGame.failed = ensureSet(activeGame.failed);
               if (activeGame.isStopped) {
@@ -1623,6 +1697,12 @@ io.on("connection", (socket) => {
                 io.to(roomId).emit("room_update", serializeRoom(room));
               }
               break;
+            }
+            if (activeGame.type === "PATTERN_MASTER") {
+              if (activeGame.showPhase) return;
+              activeGame.playerAnswers[socket.id] = payload;
+              io.to(roomId).emit("room_update", serializeRoom(room));
+              return;
             }
             if (activeGame.playerAnswers && !activeGame.playerAnswers[socket.id]) {
               activeGame.playerAnswers[socket.id] = payload;

@@ -2,136 +2,136 @@
 
 const TRIVIA = {
   ar: [
-    { id: "t1", text: "كم شهر في السنة لديه 28 يوماً؟", answers: ["1", "6", "12", "حسب السنة"], correctIndex: 2, difficulty: 5 },
-    { id: "t2", text: "ما هو الشيء الذي يأتي مرة في الدقيقة، مرتين في اللحظة، ولا يأتي أبداً في ألف سنة؟", answers: ["حرف الميم", "الوقت", "النفس", "الثانية"], correctIndex: 0, difficulty: 5 },
-    { id: "t3", text: "إذا كنت في سباق وتجاوزت الشخص في المركز الثاني، في أي مركز تصبح؟", answers: ["الأول", "الثاني", "الثالث", "الأخير"], correctIndex: 1, difficulty: 5 },
-    { id: "t4", text: "مزارع لديه 17 خروفاً، ماتوا كلهم إلا 9. كم خروفاً بقي؟", answers: ["8", "9", "17", "0"], correctIndex: 1, difficulty: 5 },
-    { id: "t5", text: "كم كمية التراب الموجودة في حفرة عمقها 3 أمتار وعرضها 6 أمتار؟", answers: ["18 متر", "لا يوجد", "54 متر", "حسب نوع التربة"], correctIndex: 1, difficulty: 5 },
-    { id: "t6", text: "أيهما أثقل: طن من الذهب أم طن من الريش؟", answers: ["الذهب", "الريش", "متساويان", "حسب الحجم"], correctIndex: 2, difficulty: 5 },
-    { id: "t7", text: "ما هي إجابة هذا السؤال؟", answers: ["هذه", "لا، هذه", "خطأ", "صح"], correctIndex: 3, difficulty: 5 },
-    { id: "t8", text: "إذا كانت 3 قطط تصطاد 3 فئران في 3 دقائق، كم قطة نحتاج لاصطياد 100 فأر في 100 دقيقة؟", answers: ["100", "3", "33", "1"], correctIndex: 1, difficulty: 5 },
-    { id: "t9", text: "اقسم 30 على 1/2 واجمع 10. ما هي النتيجة؟", answers: ["25", "70", "40", "15"], correctIndex: 1, difficulty: 5 },
-    { id: "t10", text: "ما هو أعلى جبل في العالم قبل اكتشاف قمة إيفرست؟", answers: ["K2", "فوجي", "إيفرست", "كليمنجارو"], correctIndex: 2, difficulty: 5 },
-    { id: "t11", text: "كم عدد أرجل العنكبوت؟", answers: ["6", "8", "10", "12"], correctIndex: 1 },
-    { id: "t12", text: "ما هو الكوكب الأحمر؟", answers: ["الزهرة", "المريخ", "المشتري", "عطارد"], correctIndex: 1 },
-    { id: "t13", text: "ما هو أسرع حيوان بري؟", answers: ["الأسد", "الفهد", "النمر", "الحصان"], correctIndex: 1 },
-    { id: "t14", text: "ما هو لون الزمرد؟", answers: ["أزرق", "أحمر", "أخضر", "أصفر"], correctIndex: 2 },
-    { id: "t15", text: "كم عدد ألوان قوس قزح؟", answers: ["5", "6", "7", "8"], correctIndex: 2 },
-    { id: "t16", text: "أي لغة هي الأكثر تحدثاً في العالم؟", answers: ["الإنجليزية", "الإسبانية", "الصينية (الماندرين)", "الهندية"], correctIndex: 2 },
-    { id: "t17", text: "ما هو الرمز الكيميائي للذهب؟", answers: ["Ag", "Au", "Pb", "Fe"], correctIndex: 1 },
-    { id: "t18", text: "في أي قارة تقع مصر؟", answers: ["آسيا", "أفريقيا", "أوروبا", "أمريكا الشمالية"], correctIndex: 1 },
-    { id: "t19", text: "من رسم لوحة الموناليزا؟", answers: ["فان جوخ", "بيكاسو", "ليوناردو دا فينشي", "مايكل أنجلو"], correctIndex: 2 },
-    { id: "t20", text: "ما هو أصغر كوكب في نظامنا الشمسي؟", answers: ["المريخ", "عطارد", "الزهرة", "نبتون"], correctIndex: 1 }
+    // --- Science & Tech ---
+    { id: "sci1", category: "SCIENCE", text: "ما هو العنصر الكيميائي الأكثر وفرة في الكون؟", answers: ["الأكسجين", "الهيدروجين", "الهيليوم", "النيتروجين"], correctIndex: 1 },
+    { id: "sci2", category: "SCIENCE", text: "كم يستغرق ضوء الشمس للوصول إلى الأرض؟", answers: ["8 دقائق", "30 ثانية", "ساعة واحدة", "فوري"], correctIndex: 0 },
+    { id: "sci3", category: "SCIENCE", text: "ما هو الكوكب الذي يمتلك أكبر عدد من الأقمار؟", answers: ["المشتري", "زحل", "نبتون", "المريخ"], correctIndex: 1 },
+    { id: "sci4", category: "SCIENCE", text: "من هو مخترع المصباح الكهربائي؟", answers: ["نيكولا تسلا", "توماس إديسون", "ألكسندر جراهام بيل", "آينشتاين"], correctIndex: 1 },
+    
+    // --- Sports & Football ---
+    { id: "spt1", category: "SPORTS", text: "أي دولة فازت بكأس العالم لكرة القدم 2022؟", answers: ["فرنسا", "الأرجنتين", "البرازيل", "ألمانيا"], correctIndex: 1 },
+    { id: "spt2", category: "SPORTS", text: "من هو اللاعب الذي فاز بأكبر عدد من كرات الذهب (Ballon d'Or)؟", answers: ["كريستيانو رونالدو", "ليونيل ميسي", "بيليه", "مارادونا"], correctIndex: 1 },
+    { id: "spt3", category: "SPORTS", text: "كم عدد لاعبي فريق كرة السلة في الملعب؟", answers: ["5", "6", "7", "11"], correctIndex: 0 },
+    { id: "spt4", category: "SPORTS", text: "في أي مدينة أقيمت أول ألعاب أولمبية حديثة؟", answers: ["باريس", "أثينا", "لندن", "روما"], correctIndex: 1 },
+    
+    // --- History & Culture ---
+    { id: "his1", category: "HISTORY", text: "من هو الملك الذي بنى الهرم الأكبر في الجيزة؟", answers: ["خفرع", "منقرع", "خوفو", "رمسيس الثاني"], correctIndex: 2 },
+    { id: "his2", category: "HISTORY", text: "في أي عام انتهت الحرب العالمية الثانية؟", answers: ["1918", "1939", "1945", "1950"], correctIndex: 2 },
+    { id: "his3", category: "HISTORY", text: "من هي الملكة التي اشتهرت بجمالها وانتحرت بلدغة أفعى؟", answers: ["نفرتيتي", "كليوباترا", "شجر الدر", "بلقيس"], correctIndex: 1 },
+    { id: "his4", category: "HISTORY", text: "ما هي عاصمة الدولة الأموية؟", answers: ["بغداد", "دمشق", "القاهرة", "المدينة المنورة"], correctIndex: 1 },
+    
+    // --- Entertainment ---
+    { id: "ent1", category: "ENTERTAINMENT", text: "ما هو الفيلم الأعلى تحقيقاً للإيرادات في التاريخ? ", answers: ["تايتانيك", "أفاتار", "المنتقمون: نهاية اللعبة", "حرب النجوم"], correctIndex: 1 },
+    { id: "ent2", category: "ENTERTAINMENT", text: "من هو الممثل الذي لعب دور 'الجوكر' في فيلم The Dark Knight؟", answers: ["خواكين فينيكس", "هيث ليدجر", "جاريد ليتو", "جاك نيكلسون"], correctIndex: 1 },
+    { id: "ent3", category: "ENTERTAINMENT", text: "ما هو المسلسل الذي تدور أحداثه في عالم 'ويستروس'؟", answers: ["بريكنج باد", "صراع العروش", "سترينجر ثينجز", "ذا ويتشر"], correctIndex: 1 },
+    { id: "ent4", category: "ENTERTAINMENT", text: "من هي المغنية الملقبة بـ 'كوكب الشرق'؟", answers: ["فيروز", "أم كلثوم", "وردة", "أسمهان"], correctIndex: 1 },
+    { id: "spt5", category: "SPORTS", text: "من هو الهداف التاريخي لكأس العالم؟", answers: ["بيليه", "ميروسلاف كلوزه", "رونالدو", "ميسي"], correctIndex: 1 },
+    { id: "spt6", category: "SPORTS", text: "أي نادٍ فاز بأكبر عدد من ألقاب دوري أبطال أوروبا؟", answers: ["ميلان", "ليفربول", "ريال مدريد", "برشلونة"], correctIndex: 2 },
+    { id: "sci5", category: "SCIENCE", text: "ما هو أقرب كوكب للشمس؟", answers: ["المريخ", "الزهرة", "عطارد", "الأرض"], correctIndex: 2 },
+    { id: "sci6", category: "SCIENCE", text: "ما هو الغاز الذي تتنفسه النباتات؟", answers: ["الأكسجين", "ثاني أكسيد الكربون", "النيتروجين", "الهيدروجين"], correctIndex: 1 },
+    { id: "his5", category: "HISTORY", text: "من هو القائد الذي فتح الأندلس؟", answers: ["خالد بن الوليد", "طارق بن زياد", "صلاح الدين الأيوبي", "عمرو بن العاص"], correctIndex: 1 },
+    { id: "his6", category: "HISTORY", text: "أي حضارة بنيت الأهرامات؟", answers: ["البابلية", "الرومانية", "المصرية القديمة", "اليونانية"], correctIndex: 2 },
+    { id: "ent5", category: "ENTERTAINMENT", text: "ما هو اسم بطل سلسلة أفلام 'قراصنة الكاريبي'؟", answers: ["جاك سبارو", "آيرون مان", "جيمس بوند", "هاري بوتر"], correctIndex: 0 },
+    { id: "ent6", category: "ENTERTAINMENT", text: "من هو مؤلف سلسلة روايات هاري بوتر؟", answers: ["جورج آر آر مارتن", "جيه كيه رولينغ", "أجاثا كريستي", "ستيفن كينج"], correctIndex: 1 },
+
+    // --- Trick Questions (Originals & More) ---
+    { id: "t1", category: "TRICK", text: "كم شهر في السنة لديه 28 يوماً؟", answers: ["1", "6", "12", "حسب السنة"], correctIndex: 2, difficulty: 5 },
+    { id: "t2", category: "TRICK", text: "ما هو الشيء الذي يأتي مرة في الدقيقة، مرتين في اللحظة، ولا يأتي أبداً في ألف سنة؟", answers: ["حرف الميم", "الوقت", "النفس", "الثانية"], correctIndex: 0, difficulty: 5 },
+    { id: "t3", category: "TRICK", text: "إذا كنت في سباق وتجاوزت الشخص في المركز الثاني، في أي مركز تصبح؟", answers: ["الأول", "الثاني", "الثالث", "الأخير"], correctIndex: 1, difficulty: 5 },
+    { id: "t4", category: "TRICK", text: "مزارع لديه 17 خروفاً، ماتوا كلهم إلا 9. كم خروفاً بقي؟", answers: ["8", "9", "17", "0"], correctIndex: 1, difficulty: 5 },
+    { id: "t5", category: "TRICK", text: "كم كمية التراب الموجودة في حفرة عمقها 3 أمتار وعرضها 6 أمتار؟", answers: ["18 متر", "لا يوجد", "54 متر", "حسب نوع التربة"], correctIndex: 1, difficulty: 5 },
+    { id: "t8", category: "TRICK", text: "إذا كانت 3 قطط تصطاد 3 فئران في 3 دقائق، كم قطة نحتاج لاصطياد 100 فأر في 100 دقيقة؟", answers: ["100", "3", "33", "1"], correctIndex: 1, difficulty: 5 },
+    { id: "t9", category: "TRICK", text: "اقسم 30 على 1/2 واجمع 10. ما هي النتيجة؟", answers: ["25", "70", "40", "15"], correctIndex: 1, difficulty: 5 }
   ],
   en: [
-    { id: "t1", text: "How many months have 28 days?", answers: ["1", "6", "12", "Depends on Year"], correctIndex: 2, difficulty: 5 },
-    { id: "t2", text: "What comes once in a minute, twice in a moment, but never in a thousand years?", answers: ["The letter M", "Time", "Breath", "A second"], correctIndex: 0, difficulty: 5 },
-    { id: "t3", text: "If you pass the person in 2nd place, what place are you in?", answers: ["1st", "2nd", "3rd", "Last"], correctIndex: 1, difficulty: 5 },
-    { id: "t4", text: "A farmer has 17 sheep and all but 9 die. How many are left?", answers: ["8", "9", "17", "0"], correctIndex: 1, difficulty: 5 },
-    { id: "t5", text: "How much dirt is in a hole that is 3ft deep and 6ft wide?", answers: ["18ft", "None", "54ft", "Depends on soil"], correctIndex: 1, difficulty: 5 },
-    { id: "t6", text: "Which is heavier: a ton of gold or a ton of feathers?", answers: ["Gold", "Feathers", "Both equal", "Depends on volume"], correctIndex: 2, difficulty: 5 },
-    { id: "t7", text: "What is the answer to this question?", answers: ["This one", "No, this one", "Wrong", "Correct"], correctIndex: 3, difficulty: 5 },
-    { id: "t8", text: "If 3 cats catch 3 mice in 3 minutes, how many cats catch 100 mice in 100 minutes?", answers: ["100", "3", "33", "1"], correctIndex: 1, difficulty: 5 },
-    { id: "t9", text: "Divide 30 by 1/2 and add 10. What is the result?", answers: ["25", "70", "40", "15"], correctIndex: 1, difficulty: 5 },
-    { id: "t10", text: "What was the tallest mountain before Everest was discovered?", answers: ["K2", "Mount Fuji", "Mount Everest", "Kilimanjaro"], correctIndex: 2, difficulty: 5 },
-    { id: "t11", text: "How many legs does a spider have?", answers: ["6", "8", "10", "12"], correctIndex: 1 },
-    { id: "t12", text: "What is the red planet?", answers: ["Venus", "Mars", "Jupiter", "Mercury"], correctIndex: 1 },
-    { id: "t13", text: "What is the fastest land animal?", answers: ["Lion", "Cheetah", "Tiger", "Horse"], correctIndex: 1 },
-    { id: "t14", text: "What color is an emerald?", answers: ["Blue", "Red", "Green", "Yellow"], correctIndex: 2 },
-    { id: "t15", text: "How many colors are in a rainbow?", answers: ["5", "6", "7", "8"], correctIndex: 2 },
-    { id: "t16", text: "Which language is most spoken in the world?", answers: ["English", "Spanish", "Chinese (Mandarin)", "Hindi"], correctIndex: 2 },
-    { id: "t17", text: "What is the chemical symbol for gold?", answers: ["Ag", "Au", "Pb", "Fe"], correctIndex: 1 },
-    { id: "t18", text: "In which continent is Egypt located?", answers: ["Asia", "Africa", "Europe", "North America"], correctIndex: 1 },
-    { id: "t19", text: "Who painted the Mona Lisa?", answers: ["Van Gogh", "Picasso", "Leonardo da Vinci", "Michelangelo"], correctIndex: 2 },
-    { id: "t20", text: "What is the smallest planet in our solar system?", answers: ["Mars", "Mercury", "Venus", "Neptune"], correctIndex: 1 }
+    // --- Science & Tech ---
+    { id: "sci1", category: "SCIENCE", text: "What is the most abundant element in the universe?", answers: ["Oxygen", "Hydrogen", "Helium", "Nitrogen"], correctIndex: 1 },
+    { id: "sci2", category: "SCIENCE", text: "How long does sunlight take to reach Earth?", answers: ["8 minutes", "30 seconds", "1 hour", "Instant"], correctIndex: 0 },
+    { id: "sci3", category: "SCIENCE", text: "Which planet has the most moons?", answers: ["Jupiter", "Saturn", "Neptune", "Mars"], correctIndex: 1 },
+    { id: "sci4", category: "SCIENCE", text: "Who invented the lightbulb?", answers: ["Tesla", "Edison", "Bell", "Einstein"], correctIndex: 1 },
+
+    // --- Sports ---
+    { id: "spt1", category: "SPORTS", text: "Which country won the 2022 FIFA World Cup?", answers: ["France", "Argentina", "Brazil", "Germany"], correctIndex: 1 },
+    { id: "spt2", category: "SPORTS", text: "Who has won the most Ballon d'Or awards?", answers: ["Ronaldo", "Messi", "Pelé", "Maradona"], correctIndex: 1 },
+    { id: "spt3", category: "SPORTS", text: "How many players are on a basketball court per team?", answers: ["5", "6", "7", "11"], correctIndex: 0 },
+
+    // --- History ---
+    { id: "his1", category: "HISTORY", text: "Who built the Great Pyramid of Giza?", answers: ["Khafre", "Menkaure", "Khufu", "Ramesses II"], correctIndex: 2 },
+    { id: "his2", category: "HISTORY", text: "In what year did WWII end?", answers: ["1918", "1939", "1945", "1950"], correctIndex: 2 },
+
+    // --- Entertainment ---
+    { id: "ent1", category: "ENTERTAINMENT", text: "What is the highest-grossing film of all time?", answers: ["Titanic", "Avatar", "Avengers: Endgame", "Star Wars"], correctIndex: 1 },
+    { id: "ent2", category: "ENTERTAINMENT", text: "Who played the Joker in 'The Dark Knight'?", answers: ["Phoenix", "Heath Ledger", "Leto", "Nicholson"], correctIndex: 1 },
+    { id: "ent3", category: "ENTERTAINMENT", text: "Which show is set in the world of Westeros?", answers: ["Breaking Bad", "Game of Thrones", "Stranger Things", "The Witcher"], correctIndex: 1 },
+    { id: "spt5", category: "SPORTS", text: "Who is the all-time top scorer in FIFA World Cup history?", answers: ["Pelé", "Miroslav Klose", "Ronaldo", "Messi"], correctIndex: 1 },
+    { id: "spt6", category: "SPORTS", text: "Which club has won the most UEFA Champions League titles?", answers: ["Milan", "Liverpool", "Real Madrid", "Barcelona"], correctIndex: 2 },
+    { id: "sci5", category: "SCIENCE", text: "What is the closest planet to the Sun?", answers: ["Mars", "Venus", "Mercury", "Earth"], correctIndex: 2 },
+    { id: "sci6", category: "SCIENCE", text: "Which gas do plants absorb from the atmosphere?", answers: ["Oxygen", "Carbon Dioxide", "Nitrogen", "Hydrogen"], correctIndex: 1 },
+    { id: "his5", category: "HISTORY", text: "Who was the first President of the United States?", answers: ["Lincoln", "Washington", "Jefferson", "Roosevelt"], correctIndex: 1 },
+    { id: "his6", category: "HISTORY", text: "Which empire was ruled by Julius Caesar?", answers: ["Greek", "Roman", "Ottoman", "Persian"], correctIndex: 1 },
+    { id: "ent4", category: "ENTERTAINMENT", text: "Who is the lead character in 'Pirates of the Caribbean'?", answers: ["Jack Sparrow", "Iron Man", "James Bond", "Harry Potter"], correctIndex: 0 },
+    { id: "ent5", category: "ENTERTAINMENT", text: "Who wrote the 'Harry Potter' series?", answers: ["George R.R. Martin", "J.K. Rowling", "Agatha Christie", "Stephen King"], correctIndex: 1 },
+
+    // --- Trick Questions ---
+    { id: "t1", category: "TRICK", text: "How many months have 28 days?", answers: ["1", "6", "12", "Depends on Year"], correctIndex: 2, difficulty: 5 },
+    { id: "t2", category: "TRICK", text: "What comes once in a minute, twice in a moment, but never in a thousand years?", answers: ["The letter M", "Time", "Breath", "A second"], correctIndex: 0, difficulty: 5 },
+    { id: "t3", category: "TRICK", text: "If you pass the person in 2nd place, what place are you in?", answers: ["1st", "2nd", "3rd", "Last"], correctIndex: 1, difficulty: 5 }
   ],
 };
 
 const TRUE_FALSE = {
   ar: [
-    { id: "tf1", text: "سور الصين العظيم يُرى من القمر.", answer: false, difficulty: 5 },
-    { id: "tf2", text: "إجابة هذا السؤال هي 'خطأ'.", answer: false, difficulty: 5 },
-    { id: "tf3", text: "الضفادع لا تنام أبداً.", answer: true, difficulty: 5 },
-    { id: "tf4", text: "ذاكرة السمكة الذهبية 3 ثوانٍ فقط.", answer: false, difficulty: 5 },
-    { id: "tf5", text: "الطماطم تعتبر من الفواكه.", answer: true, difficulty: 5 },
-    { id: "tf6", text: "الفول السوداني هو نوع من المكسرات.", answer: false, difficulty: 5 },
-    { id: "tf7", text: "نابليون كان قصيراً جداً بشكل غير عادي.", answer: false, difficulty: 5 },
-    { id: "tf8", text: "يوجد أكثر من 24 ساعة في اليوم الواحد.", answer: true, difficulty: 5 },
-    { id: "tf9", text: "القلب هو أقوى عضلة في الجسم.", answer: false },
-    { id: "tf10", text: "الأخطبوط لديه ثلاثة قلوب.", answer: true },
-    { id: "tf11", text: "الموز ينمو على الأشجار.", answer: false },
-    { id: "tf12", text: "الذهب لا يصدأ.", answer: true }
+    { id: "tf1", category: "SCIENCE", text: "سور الصين العظيم يُرى من القمر.", answer: false },
+    { id: "tf3", category: "SCIENCE", text: "الضفادع لا تنام أبداً.", answer: true },
+    { id: "tf5", category: "SCIENCE", text: "الطماطم تعتبر من الفواكه.", answer: true },
+    { id: "tf10", category: "SCIENCE", text: "الأخطبوط لديه ثلاثة قلوب.", answer: true },
+    { id: "tf_spt1", category: "SPORTS", text: "هل فازت انجلترا بكأس العالم أكثر من مرة؟", answer: false },
+    { id: "tf_his1", category: "HISTORY", text: "هل كان الميدليون أول من سكن العراق؟", answer: false },
+    { id: "tf_ent1", category: "ENTERTAINMENT", text: "هل فاز فيلم تايتانيك بـ 11 جائزة أوسكار؟", answer: true }
   ],
   en: [
-    { id: "tf1", text: "The Great Wall of China is visible from the moon.", answer: false, difficulty: 5 },
-    { id: "tf2", text: "The answer to this question is False.", answer: false, difficulty: 5 },
-    { id: "tf3", text: "Bullfrogs never sleep.", answer: true, difficulty: 5 },
-    { id: "tf4", text: "Goldfish have a 3-second memory.", answer: false, difficulty: 5 },
-    { id: "tf5", text: "A tomato is a fruit.", answer: true, difficulty: 5 },
-    { id: "tf6", text: "Peanuts are a type of nut.", answer: false, difficulty: 5 },
-    { id: "tf7", text: "Napoleon was extremely short.", answer: false, difficulty: 5 },
-    { id: "tf8", text: "There are more than 24 hours in a day.", answer: true, difficulty: 5 },
-    { id: "tf9", text: "The heart is the strongest muscle.", answer: false },
-    { id: "tf10", text: "An octopus has three hearts.", answer: true },
-    { id: "tf11", text: "Bananas grow on trees.", answer: false },
-    { id: "tf12", text: "Gold does not rust.", answer: true }
+    { id: "tf1", category: "SCIENCE", text: "The Great Wall of China is visible from the moon.", answer: false },
+    { id: "tf3", category: "SCIENCE", text: "Bullfrogs never sleep.", answer: true },
+    { id: "tf5", category: "SCIENCE", text: "A tomato is a fruit.", answer: true },
+    { id: "tf10", category: "SCIENCE", text: "An octopus has three hearts.", answer: true }
   ],
 };
 
 const MIND_GAMES = {
   ar: [
-    { id: "m1", text: "لدي مفاتيح ولكن لا أقفال. لدي مساحة ولكن لا غرف. يمكنك الدخول ولكن لا يمكنك الخروج. ما أنا؟", answers: ["لوحة المفاتيح", "السجن", "الخريطة", "المكتبة"], correctIndex: 0 },
-    { id: "m2", text: "كلما زاد هذا الشيء، قلّت رؤيتك. ما هو؟", answers: ["الظلام", "الضوء", "الضباب", "المسافة"], correctIndex: 0 },
-    { id: "m3", text: "ما الشيء الذي يمكنك الإمساك به ولكن لا يمكنك رميه؟", answers: ["البرد", "الكرة", "السر", "الظل"], correctIndex: 0 },
-    { id: "m4", text: "ما الشيء الذي يملكه الجميع ولكن الآخرين يستخدمونه أكثر منك؟", answers: ["اسمك", "مالك", "هاتفك", "سيارتك"], correctIndex: 0 }
+    { id: "m1", category: "LOGIC", text: "لدي مفاتيح ولكن لا أقفال. لدي مساحة ولكن لا غرف. يمكنك الدخول ولكن لا يمكنك الخروج. ما أنا؟", answers: ["لوحة المفاتيح", "السجن", "الخريطة", "المكتبة"], correctIndex: 0 },
+    { id: "m2", category: "LOGIC", text: "كلما زاد هذا الشيء، قلّت رؤيتك. ما هو؟", answers: ["الظلام", "الضوء", "الضباب", "المسافة"], correctIndex: 0 },
+    { id: "m3", category: "LOGIC", text: "ما الشيء الذي يمكنك الإمساك به ولكن لا يمكنك رميه؟", answers: ["البرد", "الكرة", "السر", "الظل"], correctIndex: 0 },
+    { id: "m4", category: "LOGIC", text: "ما الشيء الذي يملكه الجميع ولكن الآخرين يستخدمونه أكثر منك؟", answers: ["اسمك", "مالك", "هاتفك", "سيارتك"], correctIndex: 0 }
   ],
   en: [
-    { id: "m1", text: "I have keys but no locks. I have space but no room. You can enter, but never leave. What am I?", answers: ["Keyboard", "Prison", "Map", "Library"], correctIndex: 0 },
-    { id: "m2", text: "The more of this there is, the less you see. What is it?", answers: ["Darkness", "Light", "Fog", "Distance"], correctIndex: 0 },
-    { id: "m3", text: "What can you catch but not throw?", answers: ["A cold", "A ball", "A secret", "A shadow"], correctIndex: 0 },
-    { id: "m4", text: "What belongs to you, but others use it more than you do?", answers: ["Your name", "Your money", "Your phone", "Your car"], correctIndex: 0 }
+    { id: "m1", category: "LOGIC", text: "I have keys but no locks. I have space but no room. You can enter, but never leave. What am I?", answers: ["Keyboard", "Prison", "Map", "Library"], correctIndex: 0 },
+    { id: "m2", category: "LOGIC", text: "The more of this there is, the less you see. What is it?", answers: ["Darkness", "Light", "Fog", "Distance"], correctIndex: 0 }
   ]
 };
 
 const EMOJI_GUESS = {
   ar: [
-    { id: "e1", emojis: "🍕🇮🇹", answers: ["سوشي", "بيتزا", "تاكو", "برجر"], correctIndex: 1 },
-    { id: "e2", emojis: "🦁👑", answers: ["كتاب الأدغال", "الأسد الملك", "نارنيا", "مدغشقر"], correctIndex: 1 },
-    { id: "e3", emojis: "🎥🍿", answers: ["سينما", "حديقة", "مطعم", "نادي"], correctIndex: 0 },
-    { id: "e4", emojis: "❄️🏰👸", answers: ["فروزن", "سندريلا", "موانا", "شريك"], correctIndex: 0 },
-    { id: "e5", emojis: "⚡👓👦", answers: ["هاري بوتر", "باتمان", "سوبرمان", "سبايدر مان"], correctIndex: 0 },
-    { id: "e6", emojis: "🥚🐣🐥", answers: ["دجاجة", "بيضة", "عصفور", "بطة"], correctIndex: 0 },
-    { id: "e7", emojis: "🍎📱", answers: ["أبل", "سامسونج", "هواوي", "نوكيا"], correctIndex: 0 }
+    { id: "e1", category: "FOOD", emojis: "🍕🇮🇹", answers: ["سوشي", "بيتزا", "تاكو", "برجر"], correctIndex: 1 },
+    { id: "e2", category: "MOVIES", emojis: "🦁👑", answers: ["كتاب الأدغال", "الأسد الملك", "نارنيا", "مدغشقر"], correctIndex: 1 },
+    { id: "e4", category: "MOVIES", emojis: "❄️🏰👸", answers: ["فروزن", "سندريلا", "موانا", "شريك"], correctIndex: 0 },
+    { id: "e5", category: "MOVIES", emojis: "⚡👓👦", answers: ["هاري بوتر", "باتمان", "سوبرمان", "سبايدر مان"], correctIndex: 0 }
   ],
   en: [
-    { id: "e1", emojis: "🍕🇮🇹", answers: ["Sushi", "Pizza", "Tacos", "Burger"], correctIndex: 1 },
-    { id: "e2", emojis: "🦁👑", answers: ["Jungle Book", "Lion King", "Narnia", "Madagascar"], correctIndex: 1 },
-    { id: "e3", emojis: "🎥🍿", answers: ["Cinema", "Park", "Restaurant", "Club"], correctIndex: 0 },
-    { id: "e4", emojis: "❄️🏰👸", answers: ["Frozen", "Cinderella", "Moana", "Shrek"], correctIndex: 0 },
-    { id: "e5", emojis: "⚡👓👦", answers: ["Harry Potter", "Batman", "Superman", "Spider-Man"], correctIndex: 0 },
-    { id: "e6", emojis: "🥚🐣🐥", answers: ["Chicken", "Egg", "Bird", "Duck"], correctIndex: 0 },
-    { id: "e7", emojis: "🍎📱", answers: ["Apple", "Samsung", "Huawei", "Nokia"], correctIndex: 0 }
+    { id: "e1", category: "FOOD", emojis: "🍕🇮🇹", answers: ["Sushi", "Pizza", "Tacos", "Burger"], correctIndex: 1 },
+    { id: "e2", category: "MOVIES", emojis: "🦁👑", answers: ["Jungle Book", "Lion King", "Narnia", "Madagascar"], correctIndex: 1 }
   ]
 };
 
 const ESTIMATION = {
   ar: [
-    { id: "est1", text: "كم كرة أرضية تدخل في الشمس؟", answer: 1300000 },
-    { id: "est2", text: "كم درجة في برج إيفل؟", answer: 1665 },
-    { id: "est3", text: "كم عدد عظام الإنسان البالغ؟", answer: 206 },
-    { id: "est4", text: "كم عدد أسنان الشخص البالغ؟", answer: 32 },
-    { id: "est5", text: "كم عدد القارات في العالم؟", answer: 7 },
-    { id: "est6", text: "كم عدد ولايات أمريكا؟", answer: 50 },
-    { id: "est7", text: "كم عدد مفاتيح البيانو؟", answer: 88 }
+    { id: "est1", category: "SCIENCE", text: "كم كرة أرضية تدخل في الشمس؟", answer: 1300000 },
+    { id: "est2", category: "HISTORY", text: "كم درجة في برج إيفل؟", answer: 1665 },
+    { id: "est3", category: "SCIENCE", text: "كم عدد عظام الإنسان البالغ؟", answer: 206 }
   ],
   en: [
-    { id: "est1", text: "How many Earths fit inside the Sun?", answer: 1300000 },
-    { id: "est2", text: "How many steps in the Eiffel Tower?", answer: 1665 },
-    { id: "est3", text: "How many bones in an adult human?", answer: 206 },
-    { id: "est4", text: "How many teeth in an adult human?", answer: 32 },
-    { id: "est5", text: "How many continents are there?", answer: 7 },
-    { id: "est6", text: "How many US states are there?", answer: 50 },
-    { id: "est7", text: "How many keys on a piano?", answer: 88 }
+    { id: "est1", category: "SCIENCE", text: "How many Earths fit inside the Sun?", answer: 1300000 },
+    { id: "est2", category: "HISTORY", text: "How many steps in the Eiffel Tower?", answer: 1665 }
   ]
 };
 
