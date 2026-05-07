@@ -818,7 +818,7 @@ function calcRoundScores(room) {
   const pointTable = [500, 350, 250, 200, 150, 100, 75, 50, 50, 50];
   const trick = activeChallenge.trick;
   let ranked = [];
-  const multiplier = (game.modifiers?.some(m => m.type === 'DOUBLE_POINTS') ? 2 : 1) * (game.isBonus ? 2 : 1);
+  const multiplier = ((activeChallenge.chaosEffect === "DOUBLE_POINTS" || game.modifiers?.some(m => m.type === 'DOUBLE_POINTS')) ? 2 : 1) * (game.isBonus ? 2 : 1);
 
   // Track winners for streaks
   let roundWinners = new Set();
@@ -876,7 +876,6 @@ function calcRoundScores(room) {
     return;
   }
 
-  const multiplier = (activeChallenge.chaosEffect === "DOUBLE_POINTS" || room.game?.modifiers?.some(m => m.type === 'DOUBLE_POINTS')) ? 2 : 1;
 
   switch (activeChallenge.type) {
     case "COLOR_GRID":
