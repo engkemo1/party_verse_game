@@ -116,6 +116,9 @@ export default function Home({ onShowRules }) {
       >
         {isRtl ? '📖 كيف تلعب؟' : '📖 How to Play?'}
       </button>
+
+      {/* Home Screen Banner Ad */}
+      <AdSense slot="8328203300" style={{ display: 'block', height: '90px', width: '100%', marginTop: '30px', opacity: 0.8 }} />
     </div>
   );
 }
