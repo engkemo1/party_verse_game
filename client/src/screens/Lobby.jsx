@@ -2,6 +2,8 @@ import { useMemo, useEffect, useState } from 'react';
 import { useSocket } from '../SocketContext';
 import { Chat } from '../components/Chat';
 import { audioEngine } from '../utils/audioEngine';
+import AdSense from '../components/AdSense';
+
 
 const CONFETTI_COLORS = ['#8A2BE2', '#00E5FF', '#FF007F', '#39FF14', '#FFD700', '#FF6B35'];
 
@@ -249,6 +251,10 @@ export default function Lobby() {
       </div>
 
       <Chat />
+      
+      {/* Lobby Banner Ad */}
+      <AdSense slot="LOBBY_BANNER" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
     </>
   );
 }
+

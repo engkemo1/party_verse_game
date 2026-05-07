@@ -140,19 +140,19 @@ const GAME_MODES = {
     id: "CHAOS",
     label: { en: "🔥 QUICK CHAOS", ar: "🔥 فوضى سريعة" },
     desc: { en: "Speed, Reaction & Traps", ar: "سرعة، رد فعل وفخاخ" },
-    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "NEON_DASH", "SUDDEN_DEATH", "REVENGE_ROUND", "HEARTBEAT", "ARROW_DASH"],
+    collections: ["COLOR_GRID", "REACTION_TIME", "WHACK_A_MOLE", "CHAOS_TAP", "SPAM_STOP", "NEON_DASH", "SUDDEN_DEATH", "REVENGE_ROUND", "HEARTBEAT", "ARROW_DASH", "FIND_THE_ODD"],
   },
   MIND: {
     id: "MIND",
     label: { en: "🧠 MIND GAMES", ar: "🧠 ألعاب العقل" },
     desc: { en: "Logic Traps & Memory", ar: "ألغاز خادعة وذاكرة" },
-    collections: ["TRIVIA", "TRUE_FALSE", "EMOJI_GUESS", "MEMORY_FLASH", "SCRAMBLED_WORD", "ESTIMATION", "SPEED_MATH", "FAST_TYPE", "SIMON_SAYS", "INVISIBLE_MAZE"],
+    collections: ["TRIVIA", "TRUE_FALSE", "EMOJI_GUESS", "MEMORY_FLASH", "SCRAMBLED_WORD", "ESTIMATION", "SPEED_MATH", "FAST_TYPE", "SIMON_SAYS", "INVISIBLE_MAZE", "PATTERN_MASTER", "FIND_THE_ODD"],
   },
   MADNESS: {
     id: "MADNESS",
     label: { en: "🎭 PARTY MADNESS", ar: "🎭 جنون الحفلة" },
     desc: { en: "Social Chaos & Betrayal", ar: "فوضى اجتماعية وخيانة" },
-    collections: ["SOCIAL_VOTE", "SECRET_CHOICE", "FAKE_BUTTONS", "FINISH_SENTENCE", "COLOR_MATCH", "DONT_PRESS", "ONE_VS_ALL", "BLIND_BID"],
+    collections: ["SOCIAL_VOTE", "SECRET_CHOICE", "FAKE_BUTTONS", "FINISH_SENTENCE", "COLOR_MATCH", "DONT_PRESS", "ONE_VS_ALL", "BLIND_BID", "FIND_THE_ODD"],
   }
 };
 
@@ -818,6 +818,7 @@ function calcRoundScores(room) {
   const pointTable = [500, 350, 250, 200, 150, 100, 75, 50, 50, 50];
   const trick = activeChallenge.trick;
   let ranked = [];
+  const multiplier = (game.modifiers?.some(m => m.type === 'DOUBLE_POINTS') ? 2 : 1) * (game.isBonus ? 2 : 1);
 
   // Track winners for streaks
   let roundWinners = new Set();
@@ -1042,7 +1043,7 @@ function calcRoundScores(room) {
         .sort((a, b) => b.val - a.val);
       ranked.forEach((entry, idx) => {
         if (entry.val > 0 && room.players[entry.id]) {
-          room.players[entry.id].score += pointTable[idx] || 50;
+          room.players[entry.id].score += (pointTable[idx] || 50) * multiplier;
           if (idx === 0) roundWinners.add(entry.id);
         }
       });
@@ -1062,7 +1063,7 @@ function calcRoundScores(room) {
       const minCount = Math.min(...Object.values(choiceCounts));
       Object.entries(activeChallenge.playerChoices || {}).forEach(([id, choice]) => {
         if (choiceCounts[choice] === minCount && room.players[id]) {
-          room.players[id].score += 800;
+          room.players[id].score += 800 * multiplier;
         }
       });
       break;
@@ -1244,15 +1245,11 @@ function calcRoundScores(room) {
     }
   }
 
-  // Bonus Multiplier
+  // Bonus Multiplier Highlight
   if (room.game.isBonus) {
-    Object.values(room.players).forEach(p => {
-      // In a real bonus round, we might want to double the GAINED points,
-      // but for simplicity, we'll just say the last round points are 2x
-      // This logic is called AFTER points are added, so it's a bit tricky.
-      // Let's assume we want to double the points awarded THIS round.
-      // (Requires tracking round-start scores, but let's just make base points higher)
-    });
+    room.viralHighlights.push(room.lang === 'ar' 
+      ? `💎 جولة المكافأة! جميع النقاط مضاعفة!` 
+      : `💎 BONUS ROUND! All points are DOUBLED!`);
   }
 }
 
@@ -1307,7 +1304,8 @@ async function startNextRound(roomId) {
     timeLeft: playlist[0].duration,
     type: playlist[0].type,
     label: playlist[0].label,
-    startTime: Date.now()
+    startTime: Date.now(),
+    isBonus: room.currentRound === room.totalRounds || Math.random() < 0.2
   };
 
   room.game.playlist[0].startTime = Date.now();

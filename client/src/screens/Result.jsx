@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSocket } from '../SocketContext';
 import { Chat } from '../components/Chat';
+import AdSense, { RewardedAd } from '../components/AdSense';
 
 function AnimatedScore({ value }) {
   const [display, setDisplay] = useState(0);
@@ -30,7 +31,7 @@ export default function Result() {
 
   useEffect(() => {
     if (room?.phase === 'FINAL_RESULT') {
-      const timer = setTimeout(() => setShowAd(true), 2000);
+      const timer = setTimeout(() => setShowAd(true), 1500);
       return () => clearTimeout(timer);
     }
   }, [room?.phase]);
@@ -44,19 +45,9 @@ export default function Result() {
   const rest = sorted.slice(3);
 
   if (isFinal && showAd && !adFinished) {
-    return (
-      <div className="ad-overlay">
-        <div className="ad-content">
-          <div className="ad-badge">{room.lang === 'ar' ? 'إعلان' : 'ADVERTISEMENT'}</div>
-          <h2 className="ad-title">{room.lang === 'ar' ? 'اشتراك الفوضى V2' : 'CHAOS PASS V2'}</h2>
-          <p className="ad-text">{room.lang === 'ar' ? 'احصل على شخصيات حصرية وألوان نيون!' : 'Get exclusive avatars and neon skins!'}</p>
-          <button className="btn btn--secondary" onClick={() => setAdFinished(true)}>
-            {room.lang === 'ar' ? 'إغلاق الإعلان' : 'SKIP AD'}
-          </button>
-        </div>
-      </div>
-    );
+    return <RewardedAd lang={room.lang} onComplete={() => setAdFinished(true)} />;
   }
+
 
   if (isFinal) {
     return (
@@ -181,6 +172,10 @@ export default function Result() {
       </div>
 
       <Chat />
+      
+      {/* Round Result Banner Ad */}
+      <AdSense slot="RESULT_BANNER" style={{ display: 'block', height: '90px', marginTop: '20px' }} />
     </div>
   );
 }
+

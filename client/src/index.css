@@ -1897,3 +1897,72 @@ body {
   from { opacity: 0; transform: translateY(-10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* ─── AdSense & Rewarded Ads ─── */
+.adsense-wrapper {
+  background: rgba(0,0,0,0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--glass-border);
+}
+
+.rewarded-ad-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  backdrop-filter: blur(20px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.rewarded-ad-container {
+  background: var(--charcoal);
+  border: 2px solid var(--gold);
+  border-radius: 32px;
+  width: 100%;
+  max-width: 360px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  text-align: center;
+  box-shadow: 0 0 50px rgba(254, 228, 64, 0.2);
+}
+
+.ad-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.ad-timer {
+  background: rgba(255,255,255,0.1);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-family: monospace;
+}
+
+.ad-footer p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 15px;
+}
+
+.game-rules-mini {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  opacity: 0.8;
+  text-align: center;
+  max-width: 80%;
+}
+
+

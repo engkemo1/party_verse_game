@@ -568,6 +568,12 @@ function DontPressGame({ game, myId, sendAction }) {
         {exploded ? '💥 EXPLODED!' : '💣 ...'}
       </div>
 
+      <div className="game-rules-mini mb-md">
+        {game.lang === 'ar' 
+          ? 'المخاطرة = نقاط أكثر! اضغط قبل الانفجار لتكسب، لكن لا تتأخر!' 
+          : 'Risk = More Points! Press before explosion to win, but don\'t be late!'}
+      </div>
+
       <button 
         className={`big-red-btn ${exploded ? 'big-red-btn--dead' : ''}`} 
         disabled={!!pressed || exploded} 
