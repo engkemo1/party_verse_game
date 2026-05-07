@@ -1276,7 +1276,7 @@ async function startNextRound(roomId) {
     return;
   }
 
-  const { selection, modifiers, difficulty, modeLabel } = await generateAdaptiveRound(room);
+  const { selection, modifiers, difficulty, modeId, modeLabel } = await generateAdaptiveRound(room);
 
   // Build the playlist states
   const playlist = [];
@@ -1320,126 +1320,119 @@ async function startNextRound(roomId) {
   localTimers.set(roomId, {});
   const timers = localTimers.get(roomId);
 
-  try {
-    const r = rooms[roomId];
-    if (!r || r.phase !== "PLAYING" || !r.game) {
-      clearRoomTimers(roomId);
-      return;
-    }
+  timers.tickInterval = setInterval(() => {
+    try {
+      const r = rooms[roomId];
+      if (!r || r.phase !== "PLAYING" || !r.game) {
+        clearRoomTimers(roomId);
+        return;
+      }
 
-    r.game.timeLeft--;
-    const currentChallenge = r.game.playlist[r.game.activeIndex];
-    currentChallenge.timeLeft = r.game.timeLeft;
+      r.game.timeLeft--;
+      const currentChallenge = r.game.playlist[r.game.activeIndex];
+      currentChallenge.timeLeft = r.game.timeLeft;
 
-    // Special per-tick game logic
-    if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
-      const elapsed = currentChallenge.duration - r.game.timeLeft;
-      if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
-        currentChallenge.showPhase = false;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      // Special per-tick game logic
+      if (currentChallenge.type === 'MEMORY_FLASH' || currentChallenge.type === 'PATTERN_MASTER') {
+        const elapsed = currentChallenge.duration - r.game.timeLeft;
+        if (currentChallenge.showPhase && elapsed >= currentChallenge.showDuration) {
+          currentChallenge.showPhase = false;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
       }
-    }
-    if (currentChallenge.type === 'SPAM_STOP') {
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
-        currentChallenge.isStopped = true;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      if (currentChallenge.type === 'SPAM_STOP') {
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (!currentChallenge.isStopped && elapsed >= currentChallenge.stopTime) {
+          currentChallenge.isStopped = true;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
       }
-    }
-    // REACTION_TIME: trigger GO phase after delay
-    if (currentChallenge.type === 'REACTION_TIME') {
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
-        currentChallenge.reactPhase = 'GO';
-        currentChallenge.goTime = Date.now();
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      // REACTION_TIME: trigger GO phase after delay
+      if (currentChallenge.type === 'REACTION_TIME') {
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (currentChallenge.reactPhase === 'WAIT' && elapsed >= currentChallenge.reactionDelay) {
+          currentChallenge.reactPhase = 'GO';
+          currentChallenge.goTime = Date.now();
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
       }
-    }
-    // DONT_PRESS: bomb timer
-    if (currentChallenge.type === 'DONT_PRESS') {
-      if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
-      const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
-      if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
-        currentChallenge.exploded = true;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      // DONT_PRESS: bomb timer
+      if (currentChallenge.type === 'DONT_PRESS') {
+        if (!currentChallenge.startTime) currentChallenge.startTime = Date.now();
+        const elapsed = (currentChallenge.duration - r.game.timeLeft) * 1000;
+        if (!currentChallenge.exploded && elapsed >= currentChallenge.bombTimer) {
+          currentChallenge.exploded = true;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        }
       }
-    }
 
-    if (r.game.timeLeft <= 0) {
-      calcRoundScores(r);
-      if (r.game.activeIndex < r.game.playlist.length - 1) {
-        r.game.activeIndex++;
-        const next = r.game.playlist[r.game.activeIndex];
-        next.startTime = Date.now();
-        r.game.timeLeft = next.duration;
-        r.game.type = next.type;
-        r.game.label = next.label;
-        io.to(roomId).emit("room_update", serializeRoom(r));
+      if (r.game.timeLeft <= 0) {
+        calcRoundScores(r);
+        if (r.game.activeIndex < r.game.playlist.length - 1) {
+          r.game.activeIndex++;
+          const next = r.game.playlist[r.game.activeIndex];
+          next.startTime = Date.now();
+          r.game.timeLeft = next.duration;
+          r.game.type = next.type;
+          r.game.label = next.label;
+          io.to(roomId).emit("room_update", serializeRoom(r));
+        } else {
+          clearInterval(timers.tickInterval);
+          finishRound(roomId);
+        }
       } else {
-        clearInterval(timers.tickInterval);
-        finishRound(roomId);
+        io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
       }
-    } else {
-      io.to(roomId).emit("tick", { timeLeft: r.game.timeLeft });
+    } catch (e) {
+      logger.error("LOOP", `Error in tick interval for ${roomId}: ${e.message}`);
     }
-  } catch (e) {
-    logger.error("LOOP", `Error in tick interval for ${roomId}: ${e.message}`);
-    // Don't clear timers, just log and hope it recovers next tick
+  }, 1000);
+}
+
+function finishRound(roomId) {
+  const r = rooms[roomId];
+  if (!r) return;
+
+  if (r.currentRound >= r.totalRounds) {
+    // Game truly finished — show final results
+    r.lastResults = Object.values(r.players)
+      .sort((a, b) => b.score - a.score)
+      .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
+
+    r.phase = "FINAL_RESULT";
+    r.game = null;
+    io.to(roomId).emit("room_update", serializeRoom(r));
+  } else {
+    r.phase = "ROUND_RESULT";
+    r.game = null;
+    r.isNextRoundTriggered = false;
+    io.to(roomId).emit("room_update", serializeRoom(r));
   }
+}
 
-
-
-  function finishRound(roomId) {
-    const r = rooms[roomId];
-    if (!r) return;
-
-    if (r.currentRound >= r.totalRounds) {
-      // Game truly finished
-      r.lastResults = Object.values(r.players)
-        .sort((a, b) => b.score - a.score)
-        .map(p => ({ name: p.name, score: p.score, avatar: p.avatar, color: p.color }));
-
-      // Reset for next game
-      Object.values(r.players).forEach(p => {
-        p.score = 0;
-        p.ready = (p.id === r.hostId);
-      });
-
-      r.phase = "LOBBY";
-      r.currentRound = 0;
-      r.game = null;
-      io.to(roomId).emit("room_update", serializeRoom(r));
-    } else {
-      r.phase = "ROUND_RESULT";
-      r.game = null;
-      r.isNextRoundTriggered = false;
-      io.to(roomId).emit("room_update", serializeRoom(r));
-    }
-  }
-
-  // ─── Rate Limiter (Anti-Spam) ───
-  const rateLimits = new Map();
-  function checkRateLimit(socketId) {
-    const now = Date.now();
-    if (!rateLimits.has(socketId)) {
-      rateLimits.set(socketId, { count: 1, lastTime: now });
-      return true;
-    }
-    const data = rateLimits.get(socketId);
-    if (now - data.lastTime > 1000) {
-      data.count = 1;
-      data.lastTime = now;
-      return true;
-    }
-    data.count++;
-    if (data.count > 10) return false; // Max 10 actions per second
+// ─── Rate Limiter (Anti-Spam) ───
+const rateLimits = new Map();
+function checkRateLimit(socketId) {
+  const now = Date.now();
+  if (!rateLimits.has(socketId)) {
+    rateLimits.set(socketId, { count: 1, lastTime: now });
     return true;
   }
+  const data = rateLimits.get(socketId);
+  if (now - data.lastTime > 1000) {
+    data.count = 1;
+    data.lastTime = now;
+    return true;
+  }
+  data.count++;
+  if (data.count > 10) return false; // Max 10 actions per second
+  return true;
+}
 
-  // ──────────────────────
-  // Socket Handlers
-  // ──────────────────────
-  io.on("connection", (socket) => {
+// ──────────────────────
+// Socket Handlers
+// ──────────────────────
+io.on("connection", (socket) => {
     logger.info("SOCKET", `Connected: ${socket.id}`);
 
     socket.on("create_room", async ({ playerName, lang, totalRounds }, cb) => {
@@ -2017,12 +2010,12 @@ async function startNextRound(roomId) {
     });
   });
 
-  // The "catchall" handler: for any request that doesn't
-  // match one above, send back React's index.html file.
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-  });
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
 
-  const PORT = process.env.PORT || 7860;
-  server.listen(PORT, () => logger.info("SYSTEM", `🎮 PartyVerse server on port ${PORT} — 25+ mini-games loaded!`));
-}
+const PORT = process.env.PORT || 7860;
+server.listen(PORT, () => logger.info("SYSTEM", `🎮 PartyVerse server on port ${PORT} — 25+ mini-games loaded!`));
+
